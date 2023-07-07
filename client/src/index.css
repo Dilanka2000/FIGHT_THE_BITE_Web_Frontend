@@ -1,0 +1,7 @@
+input.input-error, select.input-error{
+    border: #fc8181 2px solid!important;
+}
+
+.error{
+    color: red;
+}
