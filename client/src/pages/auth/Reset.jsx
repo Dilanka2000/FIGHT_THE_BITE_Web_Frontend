@@ -1,48 +1,52 @@
 import "./reset.css";
-import resetImage from "../../../assets/background/reset-password.svg";
+import resetImage from "../../assets/background/reset-password.svg";
 import { useFormik } from "formik";
 import { Toaster, toast } from "react-hot-toast";
-import { resetSchema } from "../../../helper/validate";
-import { resetPassword } from "../../../helper/helper";
-import { useAuthStore } from "../../../store/store";
+import { resetSchema } from "../../helper/validate";
+import { resetPassword } from "../../helper/helper";
+import { useAuthStore } from "../../store/store";
 import { Navigate, useNavigate } from "react-router-dom";
-import useFetch from "../../../hooks/fetch-hook";
-import PageNotFound from "../../PageNotFound";
+import useFetch from "../../hooks/fetch-hook";
+import PageNotFound from "../PageNotFound";
 // import { useState } from "react";
 
 export default function Reset() {
-
-    const { username } = useAuthStore(state => state.auth);
+    const { username } = useAuthStore((state) => state.auth);
     const navigate = useNavigate();
     const [{ status, serverError }] = useFetch("createResetSession");
 
     const formik = useFormik({
         initialValues: {
-            password: '',
-            confirmPassword: ''
+            password: "",
+            confirmPassword: "",
         },
         validationSchema: resetSchema,
         validateOnBlur: false,
         validateOnChange: false,
         onSubmit: async (values) => {
-            let resetPromise = resetPassword({ username, password: values.password });
+            let resetPromise = resetPassword({
+                username,
+                password: values.password,
+            });
 
             toast.promise(resetPromise, {
                 loading: "Updating...",
                 success: <b>Reset Successfully...!</b>,
-                error: <b>Could not Reset! Try again..</b>
+                error: <b>Could not Reset! Try again..</b>,
             });
 
-            resetPromise.then(function () { navigate('/login') });
+            resetPromise.then(function () {
+                navigate("/login");
+            });
         },
     });
 
-    if (serverError) return <PageNotFound />
-    if(status && status !== 201) return <Navigate to={'/login'} replace={true}></Navigate>
+    if (serverError) return <PageNotFound />;
+    if (status && status !== 201)
+        return <Navigate to={"/login"} replace={true}></Navigate>;
 
     return (
         <div className="reset">
-
             <Toaster position="top-center" reverseOrder={false}></Toaster>
 
             <img src={resetImage} alt="Reset 4to" />
@@ -64,7 +68,9 @@ export default function Reset() {
                         {...formik.getFieldProps("confirmPassword")}
                         type="password"
                         placeholder="Enter passwor again"
-                        className={formik.errors.confirmPassword ? "input-error" : ""}
+                        className={
+                            formik.errors.confirmPassword ? "input-error" : ""
+                        }
                     />
                     {formik.errors.confirmPassword && (
                         <p className="error">{formik.errors.confirmPassword}</p>

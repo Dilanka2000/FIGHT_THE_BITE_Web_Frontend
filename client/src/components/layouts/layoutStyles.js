@@ -9,9 +9,8 @@ export const SLayout = styled.div`
 export const BSection = styled.section`
     display: block;
     width: 100%;
-    /* margin: ${v.smSpacing}; */
-`
+`;
 
 export const SMain = styled.main`
-    padding: ${v.lgSpacing};
-`
+    padding: ${v.smSpacing} ${v.xlSpacing};
+`;

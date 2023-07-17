@@ -7,10 +7,10 @@ import { AuthorizeUser } from "./middleware/auth";
 // Import all components
 import HomePage from "./pages/user/HomePage";
 import LandingPage from "./pages/home/LandingPage";
-import LogIn from "./pages/auth/login/LogIn";
-import Register from "./pages/auth/register/Register";
-import Recovery from "./pages/auth/reset/Recovery";
-import Reset from "./pages/auth/reset/Reset";
+import LogIn from "./pages/auth/LogIn";
+import Register from "./pages/auth/Register";
+import Recovery from "./pages/auth/Recovery";
+import Reset from "./pages/auth/Reset";
 import PageNotFound from "./pages/PageNotFound";
 import AdminHomePage from "./pages/admin/AdminHomePage";
 import VillageOfficers from "./pages/admin/VillageOfficers";
@@ -29,7 +29,11 @@ const router = createBrowserRouter([
     },
     {
         path: "/home",
-        element: <AuthorizeUser><HomePage /></AuthorizeUser>
+        element: (
+            <AuthorizeUser>
+                <HomePage />
+            </AuthorizeUser>
+        ),
     },
     {
         path: "/login",
@@ -52,41 +56,39 @@ const router = createBrowserRouter([
         element: <PageNotFound />,
     },
 
-
     // ======================= Admin Routes ========================
     {
         path: "/admin",
-        element: <AdminHomePage />
+        element: <AdminHomePage />,
     },
     {
         path: "/admin/village-officers",
-        element: <VillageOfficers />
+        element: <VillageOfficers />,
     },
     {
         path: "/admin/phis",
-        element: <PHIs />
+        element: <PHIs />,
     },
     {
         path: "/admin/view-map",
-        element: <ViewMap />
+        element: <ViewMap />,
     },
     {
         path: "/admin/campaigns",
-        element: <Campaigns />
+        element: <Campaigns />,
     },
     {
         path: "/admin/announcements",
-        element: <Announcement />
+        element: <Announcement />,
     },
     {
         path: "/admin/organizations",
-        element: <Organizations />
+        element: <Organizations />,
     },
     {
         path: "/admin/view-reports",
-        element: <Reports />
+        element: <Reports />,
     },
-
 ]);
 
 export default function Routes() {

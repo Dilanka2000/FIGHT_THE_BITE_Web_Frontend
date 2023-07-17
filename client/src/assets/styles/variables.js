@@ -7,7 +7,7 @@ export const v = {
     lgSpacing: `24px`,
     xlSpacing: `32px`,
     xxlSpacing: `48px`,
-    borderRadius: `50px 0 0 50px`,
+    borderRadius: `10px`,
 };
 
 export const btnReset = css`

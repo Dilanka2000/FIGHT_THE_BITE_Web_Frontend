@@ -8,6 +8,7 @@ export const SidebarSection = styled.div`
     width: ${v.sidebarWidth};
     background: ${({ theme }) => theme.bg};
     padding: ${v.lgSpacing} 0 ${v.lgSpacing} ${v.lgSpacing};
+    color: ${({ theme }) => theme.text};
 
     position: relative;
 `;
@@ -31,7 +32,7 @@ export const DividerLine = styled.div`
 
 export const LinkContainer = styled.div`
     background: ${({ theme, $isActive }) => (!$isActive ? "" : theme.primary)};
-    border-radius: ${v.borderRadius};
+    border-radius: 50px 0 0 50px;
 
     :hover {
         background: ${({ theme }) => theme.primary};
@@ -46,7 +47,7 @@ export const NavigateLink = styled(Link)`
     color: inherit;
     font-size: 16px;
     padding: calc(${v.smSpacing} - 2px) 0;
-    border-radius: ${v.borderRadius};
+    border-radius: 50px 0 0 50px;
     margin: 8px 0;
 `;
 
