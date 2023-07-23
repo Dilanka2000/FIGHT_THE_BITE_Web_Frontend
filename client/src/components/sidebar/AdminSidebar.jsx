@@ -64,17 +64,17 @@ export default function AdminSidebar() {
 const linksArray = [
     {
         label: "Dashboard",
-        icon: <i className="fa-solid fa-user"></i>,
+        icon: <i className="fa-solid fa-house-user"></i>,
         to: "/admin",
     },
     {
         label: "Village Officers",
-        icon: <i className="fa-solid fa-user"></i>,
+        icon: <i className="fa-solid fa-user-tie"></i>,
         to: "/admin/village-officers",
     },
     {
-        label: "PHIs",
-        icon: <i className="fa-solid fa-user"></i>,
+        label: "PHI",
+        icon: <i className="fa-solid fa-user-nurse"></i>,
         to: "/admin/phis",
     },
     {
@@ -84,17 +84,17 @@ const linksArray = [
     },
     {
         label: "Campaigns",
-        icon: <i className="fa-solid fa-user"></i>,
+        icon: <i className="fa-solid fa-person-digging"></i>,
         to: "/admin/campaigns",
     },
     {
         label: "Announcement",
-        icon: <i className="fa-solid fa-bullhorn"></i>,
+        icon: <i className="fa-solid fa-volume-high"></i>,
         to: "/admin/announcements",
     },
     {
         label: "Organization",
-        icon: <i className="fa-solid fa-user"></i>,
+        icon: <i className="fa-solid fa-people-line"></i>,
         to: "/admin/organizations",
     },
     {

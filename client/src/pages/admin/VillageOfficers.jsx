@@ -1,36 +1,16 @@
 import React, { useState } from "react";
 import AdminLayout from "../../components/layouts/AdminLayout";
 import EmpHeader from "../../components/header/EmpHeader";
-import { AddButton, BottomContainer, BottomLeft, BottomRight, Contact, DeleteButton, ImageAndText, MainContainer, SearchBar, Slider, SliderObject, TableContainer, TopContainer, UpdateButton } from "./z-adminStyle";
+import { AddButton, Contact, DeleteButton, ImageAndText, MainContainerBG, SearchBar, TableContainer, TopContainer, UpdateButton } from "./z-adminStyle";
+import BottomSlider from "../../components/slider/BottomSlider";
 
 
 export default function VillageOfficers() {
 
+    const sliderValue = 5;
     const [index, setIndex] = useState(0);
-    const [slideNo, setSlideNo] = useState(1);
     const length = data.length;
-    const x = index + 5 > length ? length : index + 5;
-
-    function next() {
-        setSlideNo(index >= 5 && index < (parseInt(length / 5)*5)-5 ? slideNo + 1 : slideNo);
-        setIndex(index + 5 > length ? index : index + 5);
-    }
-    function previous() {
-        setSlideNo(index < parseInt(length / 5) * 5 && index > 5 ? slideNo - 1 : slideNo );
-        setIndex(index - 5 < 0 ? 0 : index - 5);
-    }
-
-    function slider1() {
-        setIndex(slideNo * 5 - 5);
-        setSlideNo(slideNo !== 1 ? slideNo - 1 : slideNo);
-    }
-    function slider2() {
-        setIndex(slideNo * 5);
-    }
-    function slider3() {
-        setIndex(slideNo * 5 + 5);
-        setSlideNo(slideNo + 2 !== Math.ceil(length / 5) ? slideNo + 1 : slideNo);
-    }
+    const x = index + sliderValue > length ? length : index + sliderValue;
 
     const getDataContent = data => {
         let content = [];
@@ -75,7 +55,7 @@ export default function VillageOfficers() {
                 </SearchBar>
             </TopContainer>
 
-            <MainContainer>
+            <MainContainerBG>
                 <TableContainer>
                     <table>
                         <thead>
@@ -91,48 +71,9 @@ export default function VillageOfficers() {
                     </table>
                 </TableContainer>
 
-                <BottomContainer>
-                    <BottomLeft>
-                        Showing{" "}
-                        <span>
-                            {index + 1} - {x}
-                        </span>{" "}
-                        from <span>{length}</span>
-                    </BottomLeft>
-                    <BottomRight>
-                        <i
-                            className="fa-solid fa-caret-left"
-                            onClick={previous}
-                        ></i>
-                        <Slider>
-                            <SliderObject
-                                $isActive={slideNo * 5 - 5 === index}
-                                onClick={slider1}
-                            >
-                                {slideNo}
-                            </SliderObject>
-                            <SliderObject
-                                $isActive={slideNo * 5 === index}
-                                onClick={slider2}
-                            >
-                                {slideNo + 1}
-                            </SliderObject>
-                            {length > 10 && (
-                                <SliderObject
-                                    $isActive={slideNo * 5 + 5 === index}
-                                    onClick={slider3}
-                                >
-                                    {slideNo + 2}
-                                </SliderObject>
-                            )}
-                        </Slider>
-                        <i
-                            className="fa-solid fa-caret-right"
-                            onClick={next}
-                        ></i>
-                    </BottomRight>
-                </BottomContainer>
-            </MainContainer>
+                <BottomSlider length={length} index={index} setIndex={setIndex} x={x} sliderValue={sliderValue}/>
+
+            </MainContainerBG>
         </AdminLayout>
     );
 }

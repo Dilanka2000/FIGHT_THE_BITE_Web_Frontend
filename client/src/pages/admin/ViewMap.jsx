@@ -1,11 +1,21 @@
 import React from "react";
 import AdminLayout from "../../components/layouts/AdminLayout";
-import { Heading } from "./z-adminStyle";
+import EmpHeader from "../../components/header/EmpHeader";
+import { DivisionContainer, MapContainer, MapMAinContainer } from "./z-adminStyle";
+import Map from "../../components/map/Map"
+import packageInfo from "../../store/Data/sriLanka.json";
 
 export default function ViewMap() {
     return (
         <AdminLayout>
-            <Heading>Map</Heading>
+            <EmpHeader pageName={"View Map"} />
+
+            <MapMAinContainer>
+                <MapContainer>
+                    <Map mapData={packageInfo.features} />
+                </MapContainer>
+                <DivisionContainer></DivisionContainer>
+            </MapMAinContainer>
         </AdminLayout>
     );
 }

@@ -9,6 +9,7 @@ export const SLayout = styled.div`
 export const BSection = styled.section`
     display: block;
     width: 100%;
+    margin-left: ${v.sidebarWidth};
 `;
 
 export const SMain = styled.main`

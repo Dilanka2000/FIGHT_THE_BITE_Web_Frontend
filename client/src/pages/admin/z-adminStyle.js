@@ -40,17 +40,20 @@ export const SearchBar = styled.div`
 
     input:focus {
         outline: none;
+        color: ${({ theme }) => theme.textMain};
     }
 `;
 
-export const MainContainer = styled.div`
+export const MainContainerBG = styled.div`
     background: ${({ theme }) => theme.bg};
     border-radius: 10px;
+`;
+export const MainContainer = styled.div`
 `;
 
 export const TableContainer = styled.div`
     width: 100%;
-    height: 600px;
+    height: 620px;
     padding-top: 30px;
     display: flex;
     flex-direction: column;
@@ -82,6 +85,9 @@ export const TableContainer = styled.div`
     td {
         text-align: center;
         font-size: 14px;
+    }
+    button{
+        margin: 0 ${v.smSpacing};
     }
 
     tbody > tr:hover {
@@ -120,7 +126,8 @@ export const Contact = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        background: ${({ theme }) => theme.bg2};
+        background: #fdeded;
+        cursor: pointer;
     }
 
     i {
@@ -130,6 +137,11 @@ export const Contact = styled.div`
     }
 `;
 
+export const ButtonContainer = styled.div`
+    display: flex;
+    gap: ${v.mdSpacing};
+`
+
 export const DeleteButton = styled.button`
     width: 125px;
     height: 40px;
@@ -137,7 +149,6 @@ export const DeleteButton = styled.button`
     background: ${({ theme }) => theme.primary};
     color: white;
     border: none;
-    margin: 0 ${v.mdSpacing};
     cursor: pointer;
 `;
 
@@ -151,55 +162,92 @@ export const UpdateButton = styled.button`
     cursor: pointer;
 `;
 
-export const BottomContainer = styled.div`
+
+// ==================================================================================================
+// ==================================================================================================
+
+export const ListContainer = styled.div`
     width: 100%;
-    height: 130px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: ${v.mdSpacing} ${v.xxlSpacing};
+    flex-wrap: wrap;
+    gap: ${v.xlSpacing};
+    
 `;
 
-export const BottomLeft = styled.div`
-    font-size: 14px;
-    color: ${({ theme }) => theme.text};
-
-    span {
-        color: ${({ theme }) => theme.textMain};
-        font-weight: 600;
-    }
-`;
-
-export const BottomRight = styled.div`
+export const ListItem = styled.div`
+    width: 365px;
+    height: 294px;
+    background: ${({ theme }) => theme.bg};
+    border-radius: 10px;
     display: flex;
-    align-items: center;
-    color: ${({ theme }) => theme.text};
-    margin-right: ${v.mdSpacing};
-
-    i {
-        font-size: 40px;
-        cursor: pointer;
-    }
-`;
-
-export const Slider = styled.div`
-    height: 100%;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin: 0 ${v.smSpacing};
-`;
-
-export const SliderObject = styled.div`
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    border: 2px solid ${({ theme, $isActive }) => (!$isActive ? theme.text : theme.primary)};
-    background: ${({ theme, $isActive }) => (!$isActive ? theme.bg : theme.primary)};
-    color: ${({ theme, $isActive }) => (!$isActive ? theme.text : theme.bg)};
-    font-weight: 800;
-    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
+
+    img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+`;
+
+export const ProfileImage = styled.div`
+    width: 100px;
+    height: 100px;
+    margin-bottom: ${v.mdSpacing};
+`
+
+export const ProfileName = styled.div`
+    font-size: 18px;
+    font-weight: 800;
+`
+
+export const ProfileContact = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: ${v.mdSpacing};
+
+    div {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        margin-left: ${v.mdSpacing};
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #fdeded;
+        cursor: pointer;
+    }
+
+    i {
+        color: ${({ theme }) => theme.primary};
+        font-size: 16px;
+        font-weight: 500;
+    }
+`;
+
+
+
+// ====================================== Map ==========================================
+// =====================================================================================
+
+export const MapMAinContainer = styled.div`
+    margin-top: ${v.lgSpacing};
+    display: flex;
+    justify-content: space-between;
+`
+export const MapContainer = styled.div`
+    width: 68%;
+    background: ${({ theme }) => theme.bg};
+    border-radius: ${v.borderRadius};
+    height: 800px;
+`;
+
+export const DivisionContainer = styled.div`
+    width: 30%;
+    background: ${({ theme }) => theme.bg};
+    border-radius: ${v.borderRadius};
+    height: 800px;
 `;

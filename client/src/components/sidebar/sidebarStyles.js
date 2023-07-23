@@ -10,7 +10,7 @@ export const SidebarSection = styled.div`
     padding: ${v.lgSpacing} 0 ${v.lgSpacing} ${v.lgSpacing};
     color: ${({ theme }) => theme.text};
 
-    position: relative;
+    position: fixed;
 `;
 
 export const SLogo = styled.div`
