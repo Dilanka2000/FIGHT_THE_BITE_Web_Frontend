@@ -2,98 +2,27 @@ import { styled } from "styled-components";
 import { v } from "../../assets/styles/variables";
 
 
-export const Heading = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 70px;
-`;
-
-export const TopContainer = styled.div`
-    margin: ${v.lgSpacing} 0 ${v.xlSpacing} 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-`;
-
-export const AddButton = styled.button`
-    width: 207px;
+export const SelectButton = styled.div`
+    min-width: 207px;
     height: 50px;
+    padding: 0 ${v.lgSpacing};
     border-radius: 25px;
-    background: ${({ theme }) => theme.primary};
-    color: white;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-`;
-
-export const SearchBar = styled.div`
-    input {
-        width: 824px;
-        height: 50px;
-        background: ${({ theme }) => theme.bg};
-        border: none;
-        border-radius: 25px;
-        box-shadow: 10px 10px 10px 0 rgba(0, 0, 0, 0.02);
-        padding: 0 ${v.xlSpacing};
-    }
-
-    input:focus {
-        outline: none;
-        color: ${({ theme }) => theme.textMain};
-    }
-`;
-
-export const MainContainerBG = styled.div`
-    background: ${({ theme }) => theme.bg};
-    border-radius: 10px;
-`;
-export const MainContainer = styled.div`
-`;
-
-export const TableContainer = styled.div`
-    width: 100%;
-    height: 620px;
-    padding-top: 30px;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: ${({ theme }) => theme.bg};
+    font-size: 16px;
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        border-spacing: 0;
-        border-radius: 10px;
-    }
-    td:first-child {
-        width: 370px;
-    }
-    td:last-child {
-        width: 400px;
-    }
-    th {
-        padding-bottom: ${v.lgSpacing};
-        font-size: 16px;
-    }
-    tr {
-        border-left: 5px solid ${({ theme }) => theme.bg};
-        border-right: 5px solid ${({ theme }) => theme.bg};
-    }
-    tbody > tr {
-        height: 100px;
-        border-top: 1px solid ${({ theme }) => theme.bg3};
-    }
-    td {
-        text-align: center;
-        font-size: 14px;
-    }
-    button{
-        margin: 0 ${v.smSpacing};
-    }
-
-    tbody > tr:hover {
-        border-left: 5px solid ${({ theme }) => theme.primary};
+    i {
+        color: ${({ theme }) => theme.primary};
+        font-size: 30px;
+        margin-left: ${v.lgSpacing};
+        cursor: pointer;
     }
 `;
+
+// ================================ Village Officer ================================
+// 888888888888888888888888888888888888888888888888888888888888888888888888888888888
 
 export const ImageAndText = styled.div`
     display: flex;
@@ -137,60 +66,10 @@ export const Contact = styled.div`
     }
 `;
 
-export const ButtonContainer = styled.div`
-    display: flex;
-    gap: ${v.mdSpacing};
-`
-
-export const DeleteButton = styled.button`
-    width: 125px;
-    height: 40px;
-    border-radius: 20px;
-    background: ${({ theme }) => theme.primary};
-    color: white;
-    border: none;
-    cursor: pointer;
-`;
-
-export const UpdateButton = styled.button`
-    width: 125px;
-    height: 40px;
-    border-radius: 20px;
-    background: #fcc43e;
-    color: white;
-    border: none;
-    cursor: pointer;
-`;
 
 
-// ==================================================================================================
-// ==================================================================================================
-
-export const ListContainer = styled.div`
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: ${v.xlSpacing};
-    
-`;
-
-export const ListItem = styled.div`
-    width: 365px;
-    height: 294px;
-    background: ${({ theme }) => theme.bg};
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    img {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        object-fit: cover;
-    }
-`;
+// ====================================== PHI ======================================
+// 888888888888888888888888888888888888888888888888888888888888888888888888888888888
 
 export const ProfileImage = styled.div`
     width: 100px;
@@ -230,14 +109,9 @@ export const ProfileContact = styled.div`
 
 
 
-// ====================================== Map ==========================================
-// =====================================================================================
+// ====================================== Map ======================================
+// 888888888888888888888888888888888888888888888888888888888888888888888888888888888
 
-export const MapMAinContainer = styled.div`
-    margin-top: ${v.lgSpacing};
-    display: flex;
-    justify-content: space-between;
-`
 export const MapContainer = styled.div`
     width: 68%;
     background: ${({ theme }) => theme.bg};
@@ -250,4 +124,67 @@ export const DivisionContainer = styled.div`
     background: ${({ theme }) => theme.bg};
     border-radius: ${v.borderRadius};
     height: 800px;
+`;
+
+
+
+// =================================== Campaigns ===================================
+// 888888888888888888888888888888888888888888888888888888888888888888888888888888888
+
+export const CalenderContainer = styled.div`
+    width: 70%;
+    padding: ${v.lgSpacing} ${v.xlSpacing} ${v.mdSpacing} ${v.xlSpacing};
+    background: ${({ theme }) => theme.bg};
+    border-radius: ${v.borderRadius};
+    /* height: 800px; */
+`;
+
+export const DeatailConainer = styled.div`
+    width: 28%;
+    /* background: ${({ theme }) => theme.bg}; */
+    border-radius: ${v.borderRadius};
+    /* height: 800px; */
+`;
+
+
+
+// ================================= Announcement ==================================
+// 888888888888888888888888888888888888888888888888888888888888888888888888888888888
+
+export const Title = styled.div`
+    font-size: 24px;
+    font-weight: 800;
+    padding-top: ${v.lgSpacing};
+    padding-left: ${v.xxlSpacing};
+    padding-bottom: ${v.xlSpacing};
+    margin-top: ${v.lgSpacing};
+`
+
+export const TableTitle = styled.div`
+    font-size: 16px;
+    font-weight: 800;
+    width: 450px;
+`
+
+export const DotContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+export const ReceiverDot = styled.div`
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: ${({ $color }) => $color};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 800;
+    color: ${({ theme }) => theme.bg};
+`;
+
+export const ReceiverDot0 = styled(ReceiverDot)`
+    margin-left: -10px;
 `;

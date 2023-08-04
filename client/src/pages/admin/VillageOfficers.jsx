@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import AdminLayout from "../../components/layouts/AdminLayout";
 import EmpHeader from "../../components/header/EmpHeader";
-import { AddButton, Contact, DeleteButton, ImageAndText, MainContainerBG, SearchBar, TableContainer, TopContainer, UpdateButton } from "./z-adminStyle";
+import { AddButton, DeleteButton, MainContainerBG, SearchBar, TableContainer, TopContainer, UpdateButton } from "../../assets/styles/globalStyls";
+import { Contact, ImageAndText } from "./z-adminStyle";
 import BottomSlider from "../../components/slider/BottomSlider";
 
 
