@@ -23,23 +23,30 @@ export default function LogIn() {
         validationSchema: loginSchema,
         validateOnBlur: false,
         validateOnChange: false,
-        onSubmit: async (values) => {
+        onSubmit: async (values, onSubmitProps) => {
             let loginPromise = await login(values);
             if (loginPromise === "Username not Found") {
                 setInvalidEmail(loginPromise);
-                setInvalidPassword('');
+                setInvalidPassword("");
             }
             if (loginPromise === "Password does not match") {
                 setInvalidPassword(loginPromise);
-                setInvalidEmail('');
+                setInvalidEmail("");
                 setUsername(values.username);
             }
 
             if (loginPromise.data.msg === "Login Successfully...!") {
                 let { token } = loginPromise.data;
-                localStorage.setItem('token', token);
+                localStorage.setItem("token", token);
                 setUsername(values.username);
-                navigate("/home");
+                onSubmitProps.resetForm();
+
+                if (loginPromise.data.role === "user") {
+                    navigate("/home");
+                }
+                if (loginPromise.data.role === "admin") {
+                    navigate("/admin");
+                }
             }
             console.log(loginPromise);
         },

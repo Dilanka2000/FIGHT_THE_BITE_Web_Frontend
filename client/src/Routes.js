@@ -2,7 +2,7 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // auth middleware
-import { AuthorizeUser } from "./middleware/auth";
+import { AuthorizeAdmin, AuthorizeUser } from "./middleware/auth";
 
 // Import all components
 import HomePage from "./pages/user/HomePage";
@@ -59,7 +59,11 @@ const router = createBrowserRouter([
     // ======================= Admin Routes ========================
     {
         path: "/admin",
-        element: <AdminHomePage />,
+        element: (
+            <AuthorizeAdmin>
+                <AdminHomePage />
+            </AuthorizeAdmin>
+        ),
     },
     {
         path: "/admin/village-officers",

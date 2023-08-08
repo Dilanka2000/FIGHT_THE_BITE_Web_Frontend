@@ -54,6 +54,19 @@ export const SearchBar = styled.div`
     }
 `;
 
+export const ProfileImage = styled.div`
+    width: 100px;
+    height: 100px;
+    margin-bottom: ${v.mdSpacing};
+
+    img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+`;
+
 // ==================== Main container Stylings ====================
 // 88888888888888888888888888888888888888888888888888888888888888888
 export const MainContainerBG = styled.div`
@@ -202,6 +215,16 @@ export const DeleteButton = styled.button`
     cursor: pointer;
 `;
 
+export const CancleButton = styled.button`
+    width: 125px;
+    height: 40px;
+    border-radius: 20px;
+    background: ${({ theme }) => theme.bg3};
+    border: 1px solid ${({ theme }) => theme.primary};
+    color: ${({ theme }) => theme.primary};
+    cursor: pointer;
+`;
+
 export const UpdateButton = styled.button`
     width: 125px;
     height: 40px;
@@ -241,10 +264,88 @@ export const ListItem = styled.div`
     justify-content: center;
     align-items: center;
 
-    img {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        object-fit: cover;
+    
+`;
+
+
+// ========================== Popup Modal ==========================
+// 88888888888888888888888888888888888888888888888888888888888888888
+export const Modal = styled.div`
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+`;
+
+export const Overlay = styled(Modal)`
+    background: rgba(49, 49, 49, 0.5);
+`;
+
+export const ModalContent = styled.div`
+    position: absolute;
+    background: ${({ theme }) => theme.bg};
+    min-width: 500px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: ${v.borderRadius};
+`;
+
+export const ModalTitle = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: ${({ theme }) => theme.primary};
+    border-radius: 10px 10px 0 0;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    padding: ${v.smSpacing} ${v.lgSpacing};
+
+    i {
+        cursor: pointer;
+    }
+`;
+
+export const ModalFormContainer = styled.div`
+    padding: ${v.xxlSpacing};
+
+    button{
+        margin-top: ${v.lgSpacing};
+    }
+`
+
+export const FormTextInput = styled.div`
+    display: flex;
+    gap: ${v.smSpacing};
+    margin-bottom: ${v.mdSpacing};
+    align-items: center;
+
+    label {
+        width: 200px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    input {
+        width: 350px;
+        height: 35px;
+        border-radius: 5px;
+        border: 1px solid ${({ theme }) => theme.text};
+        padding: 0 ${v.lgSpacing};
+        color: ${({ theme }) => theme.text};
+        font-size: 14px;
+        ${({ $error }) => ($error ? "border: 2px solid #fc8181" : "")};
+    }
+    input:focus {
+        outline: none;
+    }
+    p {
+        font-size: 12px;
+        font-weight: 500;
+        color: red;
     }
 `;

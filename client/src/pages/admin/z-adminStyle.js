@@ -71,12 +71,6 @@ export const Contact = styled.div`
 // ====================================== PHI ======================================
 // 888888888888888888888888888888888888888888888888888888888888888888888888888888888
 
-export const ProfileImage = styled.div`
-    width: 100px;
-    height: 100px;
-    margin-bottom: ${v.mdSpacing};
-`
-
 export const ProfileName = styled.div`
     font-size: 18px;
     font-weight: 800;
