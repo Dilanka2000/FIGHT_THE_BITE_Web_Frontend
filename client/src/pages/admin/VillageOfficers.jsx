@@ -1,31 +1,67 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AdminLayout from "../../components/layouts/AdminLayout";
 import EmpHeader from "../../components/header/EmpHeader";
-import { AddButton, Contact, DeleteButton, ImageAndText, MainContainerBG, SearchBar, TableContainer, TopContainer, UpdateButton } from "./z-adminStyle";
+import { AddButton, DeleteButton, MainContainerBG, Modal, ModalContent, SearchBar, TableContainer, TopContainer, UpdateButton } from "../../assets/styles/globalStyls";
+import { Contact, ImageAndText } from "./z-adminStyle";
 import BottomSlider from "../../components/slider/BottomSlider";
+import RegisterSuccess from "../../components/popup/RegisterSuccess";
+import useFetch from "../../hooks/fetch-hook";
+import PageNotFound from "../PageNotFound";
+import VillageOfficerAddAndUpdate from "./popup/VillageOfficerAddAndUpdate";
+import UpdateSuccess from "../../components/popup/UpdateSuccess";
+import DeleteUser from "../../components/popup/DeleteUser";
 
 
 export default function VillageOfficers() {
 
+    const [{ apiData, serverError, isLoading }] = useFetch("getUsers/GN");
+    
     const sliderValue = 5;
     const [index, setIndex] = useState(0);
-    const length = data.length;
+    let length = 0;
+    if(!isLoading){length = apiData.length;}
     const x = index + sliderValue > length ? length : index + sliderValue;
-
+    
+    const [eventData, setEventData] = useState('');
+    const [addModal, setAddModal] = useState(false);
+    const [updateModal, setUpdateModal] = useState(false);
+    const [deleteModal, setDeleteModal] = useState(false);
+    const [registerSuccess, setRegisterSuccess] = useState(false);
+    const [updateSuccess, setUpdateSuccess] = useState(false);
+    
+    
+    useEffect(() => {
+        if (registerSuccess) {
+            window.location.reload();
+            const slideIntaval = setInterval(() => {
+                setRegisterSuccess(false);
+            }, 2000);
+            return () => clearInterval(slideIntaval);
+        }
+        else if (updateSuccess) {
+            window.location.reload();
+            const slideIntaval = setInterval(() => {
+                setUpdateSuccess(false);
+            }, 2000);
+            return () => clearInterval(slideIntaval);
+        }
+        
+    }, [registerSuccess, updateSuccess]);
+    
     const getDataContent = data => {
         let content = [];
         for (let i = index; i < x; i++) {
             const item = data[i];
             content.push(
-                <tr key={item.DviNumber}>
+                <tr key={item._id}>
                     <td>
                         <ImageAndText>
                             <div></div>
                             <span>{item.name}</span>
                         </ImageAndText>
                     </td>
-                    <td>{item.division}</td>
-                    <td>{item.DviNumber}</td>
+                    <td>{item.gsDivision}</td>
+                    <td>{item.divisionNumber}</td>
                     <td>
                         <Contact>
                             {item.contact}
@@ -35,21 +71,38 @@ export default function VillageOfficers() {
                         </Contact>
                     </td>
                     <td>
-                        <DeleteButton>Delete</DeleteButton>
-                        <UpdateButton>Update</UpdateButton>
+                        <DeleteButton onClick={() => {
+                            setEventData(item);
+                            setDeleteModal(true)
+                        }}>Delete</DeleteButton>
+                        <UpdateButton onClick={() => {
+                            setEventData(item);
+                            setUpdateModal(true);
+                            setAddModal(false);
+                        }}>
+                            Update
+                        </UpdateButton>
                     </td>
                 </tr>
             );
         }
         return content;
     }
-
+    
+    if (serverError) return <PageNotFound />;
     return (
         <AdminLayout>
             <EmpHeader pageName={"Village Officers"} />
 
             <TopContainer>
-                <AddButton>Add new</AddButton>
+                <AddButton
+                    onClick={() => {
+                        setAddModal(true);
+                        setUpdateModal(false);
+                    }}
+                >
+                    Add new
+                </AddButton>
                 <SearchBar>
                     <input type="text" placeholder="Search here..." />
                 </SearchBar>
@@ -67,149 +120,62 @@ export default function VillageOfficers() {
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>{getDataContent(data)}</tbody>
+                        <tbody>{getDataContent(apiData)}</tbody>
                     </table>
                 </TableContainer>
 
-                <BottomSlider length={length} index={index} setIndex={setIndex} x={x} sliderValue={sliderValue}/>
-
+                <BottomSlider
+                    length={length}
+                    index={index}
+                    setIndex={setIndex}
+                    x={x}
+                    sliderValue={sliderValue}
+                />
             </MainContainerBG>
+
+            {/* ======================= Add & Update village officer ========================= */}
+            {/* 888888888888888888888888888888888888888888888888888888888888888888888888888888 */}
+            <VillageOfficerAddAndUpdate
+                addModal={addModal}
+                updateModal={updateModal}
+                setAddModal={setAddModal}
+                setUpdateModal={setUpdateModal}
+                eventData={eventData}
+                setEventData={setEventData}
+                setRegisterSuccess={setRegisterSuccess}
+                setUpdateSuccess={setUpdateSuccess}
+            />
+
+            {registerSuccess && (
+                <Modal>
+                    <ModalContent>
+                        <RegisterSuccess />
+                    </ModalContent>
+                </Modal>
+            )}
+
+            {updateSuccess && (
+                <Modal>
+                    <ModalContent>
+                        <UpdateSuccess />
+                    </ModalContent>
+                </Modal>
+            )}
+
+            {/* ========================== Delete village officer ============================ */}
+            {/* 888888888888888888888888888888888888888888888888888888888888888888888888888888 */}
+            {deleteModal && <DeleteUser
+                eventData={eventData}
+                setEventData={setEventData}
+                setDeleteModal={setDeleteModal}
+            />}
+            {/* {deleteSuccess && (
+                <Modal>
+                    <ModalContent>
+                        <UpdateSuccess />
+                    </ModalContent>
+                </Modal>
+            )} */}
         </AdminLayout>
     );
 }
-
-
-const data = [
-    {
-        name: "Sunil Perera",
-        division: "Ramboda",
-        DviNumber: 10,
-        contact: "0714523258"
-    },
-    {
-        name: "Kalum Chandana",
-        division: "Tangalle",
-        DviNumber: 11,
-        contact: "0714523258"
-    },
-    {
-        name: "Sampath Sreemal",
-        division: "Padalangala",
-        DviNumber: 12,
-        contact: "0714523258"
-    },
-    {
-        name: "Dasith Chalaka",
-        division: "Daulagala",
-        DviNumber: 13,
-        contact: "0714523258"
-    },
-    {
-        name: "Nilum Dakshina",
-        division: "Weeraketiya",
-        DviNumber: 14,
-        contact: "0714523258"
-    },
-    {
-        name: "Sandun Perera",
-        division: "Ramboda",
-        DviNumber: 15,
-        contact: "0714523258"
-    },
-    {
-        name: "Nadun Viduranga",
-        division: "Ramboda",
-        DviNumber: 16,
-        contact: "0714523258"
-    },
-    {
-        name: "Janith Heshara",
-        division: "Ramboda",
-        DviNumber: 17,
-        contact: "0714523258"
-    },
-    {
-        name: "Dilanka Hesara",
-        division: "Ramboda",
-        DviNumber: 18,
-        contact: "0714523258"
-    },
-    {
-        name: "Janith Heshara",
-        division: "Ramboda",
-        DviNumber: 19,
-        contact: "0714523258"
-    },
-    {
-        name: "Dilanka Hesara",
-        division: "Ramboda",
-        DviNumber: 20,
-        contact: "0714523258"
-    },
-    {
-        name: "Sunil Perera",
-        division: "Ramboda",
-        DviNumber: 21,
-        contact: "0714523258"
-    },
-    {
-        name: "Kalum Chandana",
-        division: "Tangalle",
-        DviNumber: 22,
-        contact: "0714523258"
-    },
-    {
-        name: "Sampath Sreemal",
-        division: "Padalangala",
-        DviNumber: 23,
-        contact: "0714523258"
-    },
-    {
-        name: "Dasith Chalaka",
-        division: "Daulagala",
-        DviNumber: 24,
-        contact: "0714523258"
-    },
-    {
-        name: "Nilum Dakshina",
-        division: "Weeraketiya",
-        DviNumber: 25,
-        contact: "0714523258"
-    },
-    {
-        name: "Sandun Perera",
-        division: "Ramboda",
-        DviNumber: 26,
-        contact: "0714523258"
-    },
-    {
-        name: "Nadun Viduranga",
-        division: "Ramboda",
-        DviNumber: 27,
-        contact: "0714523258"
-    },
-    {
-        name: "Janith Heshara",
-        division: "Ramboda",
-        DviNumber: 28,
-        contact: "0714523258"
-    },
-    {
-        name: "Dilanka Hesara",
-        division: "Ramboda",
-        DviNumber: 29,
-        contact: "0714523258"
-    },
-    {
-        name: "Janith Heshara",
-        division: "Ramboda",
-        DviNumber: 30,
-        contact: "0714523258"
-    },
-    {
-        name: "Dilanka Hesara",
-        division: "Ramboda",
-        DviNumber: 31,
-        contact: "0714523258"
-    },
-]
