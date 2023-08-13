@@ -1,8 +1,7 @@
 import React from "react";
 import AdminLayout from "../../components/layouts/AdminLayout";
 import EmpHeader from "../../components/header/EmpHeader";
-import { SearchBar, TopContainer, MainContainer, TableContainerScroll } from "../../assets/styles/globalStyls";
-import { Contact } from "./z-adminStyle";
+import { SearchBar, TopContainer, MainContainer, TableContainerScroll, Contact } from "../../assets/styles/globalStyls";
 
 export default function Organizations() {
     return (

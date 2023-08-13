@@ -21,6 +21,14 @@ import Reports from "./pages/admin/Reports";
 import PHIs from "./pages/admin/PHIs";
 import ViewMap from "./pages/admin/ViewMap";
 
+//--------------------------------------------------gramasewaka-----------------------------------------------------------
+import GsHomePage from "./pages/gramasewaka/GsHomePage";
+import GsVillagers from "./pages/gramasewaka/GsVillagers";
+import GsPatients from "./pages/gramasewaka/GsPatients";
+import GsOrganizations from "./pages/gramasewaka/GsOrganizations";
+import GsCampaigns from "./pages/gramasewaka/GsCampaigns";
+import GsAnnouncements from "./pages/gramasewaka/GsAnnouncements";
+
 // Root Routes
 const router = createBrowserRouter([
     {
@@ -67,31 +75,86 @@ const router = createBrowserRouter([
     },
     {
         path: "/admin/village-officers",
-        element: <VillageOfficers />,
+        element: (
+            <AuthorizeAdmin>
+                <VillageOfficers />
+            </AuthorizeAdmin>
+        ),
     },
     {
         path: "/admin/phis",
-        element: <PHIs />,
+        element: (
+            <AuthorizeAdmin>
+                <PHIs />
+            </AuthorizeAdmin>
+        ),
     },
     {
         path: "/admin/view-map",
-        element: <ViewMap />,
+        element: (
+            <AuthorizeAdmin>
+                <ViewMap />
+            </AuthorizeAdmin>
+        ),
     },
     {
         path: "/admin/campaigns",
-        element: <Campaigns />,
+        element: (
+            <AuthorizeAdmin>
+                <Campaigns />
+            </AuthorizeAdmin>
+        ),
     },
     {
         path: "/admin/announcements",
-        element: <Announcement />,
+        element: (
+            <AuthorizeAdmin>
+                <Announcement />
+            </AuthorizeAdmin>
+        ),
     },
     {
         path: "/admin/organizations",
-        element: <Organizations />,
+        element: (
+            <AuthorizeAdmin>
+                <Organizations />
+            </AuthorizeAdmin>
+        ),
     },
     {
         path: "/admin/view-reports",
-        element: <Reports />,
+        element: (
+            <AuthorizeAdmin>
+                <Reports />
+            </AuthorizeAdmin>
+        ),
+    },
+
+    // -------------------------------------------Gramasewaka routing----------------------------------------------------------
+
+    {
+        path: "/gramasewaka",
+        element: <GsHomePage />,
+    },
+    {
+        path: "/gramasewaka/villagers",
+        element: <GsVillagers />,
+    },
+    {
+        path: "/gramasewaka/patients",
+        element: <GsPatients />,
+    },
+    {
+        path: "/gramasewaka/organizations",
+        element: <GsOrganizations />,
+    },
+    {
+        path: "/gramasewaka/campaigns",
+        element: <GsCampaigns />,
+    },
+    {
+        path: "/gramasewaka/announcements",
+        element: <GsAnnouncements />,
     },
 ]);
 

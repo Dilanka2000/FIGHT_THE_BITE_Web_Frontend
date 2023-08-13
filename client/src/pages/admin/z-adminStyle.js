@@ -42,30 +42,6 @@ export const ImageAndText = styled.div`
     }
 `;
 
-export const Contact = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    div {
-        width: 50px;
-        height: 50px;
-        border-radius: 25px;
-        margin-left: ${v.lgSpacing};
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #fdeded;
-        cursor: pointer;
-    }
-
-    i {
-        color: ${({ theme }) => theme.primary};
-        font-size: 18px;
-        font-weight: 500;
-    }
-`;
-
 
 
 // ====================================== PHI ======================================
@@ -125,20 +101,7 @@ export const DivisionContainer = styled.div`
 // =================================== Campaigns ===================================
 // 888888888888888888888888888888888888888888888888888888888888888888888888888888888
 
-export const CalenderContainer = styled.div`
-    width: 70%;
-    padding: ${v.lgSpacing} ${v.xlSpacing} ${v.mdSpacing} ${v.xlSpacing};
-    background: ${({ theme }) => theme.bg};
-    border-radius: ${v.borderRadius};
-    /* height: 800px; */
-`;
 
-export const DeatailConainer = styled.div`
-    width: 28%;
-    /* background: ${({ theme }) => theme.bg}; */
-    border-radius: ${v.borderRadius};
-    /* height: 800px; */
-`;
 
 
 

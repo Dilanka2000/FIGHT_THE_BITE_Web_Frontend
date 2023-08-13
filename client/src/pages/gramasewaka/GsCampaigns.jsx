@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import AdminLayout from "../../components/layouts/AdminLayout";
+import React, { useState } from 'react'
+import GramasewakaLayout from '../../components/layouts/GramasewakaLayOut';
 import EmpHeader from "../../components/header/EmpHeader";
 import { CalenderContainer, DeatailConainer, MAinFlexContainer } from "../../assets/styles/globalStyls";
 
@@ -7,10 +7,13 @@ import { getMonth } from "../../components/calender/util";
 import CalenderHeader from "../../components/calender/CalenderHeader";
 import Month from "../../components/calender/Month";
 
-export default function Campaigns() {
+
+export default function GsCampaigns() {
+
     const [currentMonth, setCurrentMonth] = useState(getMonth());
+
     return (
-        <AdminLayout>
+        <GramasewakaLayout>
             <EmpHeader pageName={"Campaigns"} />
 
             <MAinFlexContainer>
@@ -20,6 +23,6 @@ export default function Campaigns() {
                 </CalenderContainer>
                 <DeatailConainer></DeatailConainer>
             </MAinFlexContainer>
-        </AdminLayout>
+        </GramasewakaLayout>
     );
 }

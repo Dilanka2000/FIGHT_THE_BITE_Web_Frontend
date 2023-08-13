@@ -81,6 +81,20 @@ export const MAinFlexContainer = styled.div`
     justify-content: space-between;
 `;
 
+export const MainGridContainer = styled.div`
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: ${v.mdSpacing};
+`;
+
+export const RowContainer = styled.div`
+    width: 100%;
+    display: flex;
+    gap: ${v.xxlSpacing};
+    margin-bottom: ${v.mdSpacing};
+`;
+
 // ==================== Table container Stylings ====================
 // 888888888888888888888888888888888888888888888888888888888888888888
 export const TableContainer = styled.div`
@@ -196,6 +210,30 @@ export const TableContainerScroll = styled.div`
     }
 `;
 
+export const Contact = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    div {
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        margin-left: ${v.lgSpacing};
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #fdeded;
+        cursor: pointer;
+    }
+
+    i {
+        color: ${({ theme }) => theme.primary};
+        font-size: 18px;
+        font-weight: 500;
+    }
+`;
+
 // ==================== Button container Stylings ====================
 // 8888888888888888888888888888888888888888888888888888888888888888888
 export const ButtonContainer = styled.div`
@@ -265,6 +303,25 @@ export const ListItem = styled.div`
     align-items: center;
 
     
+`;
+
+
+// =========================== Calender ============================
+// 88888888888888888888888888888888888888888888888888888888888888888
+
+export const CalenderContainer = styled.div`
+    width: 70%;
+    padding: ${v.lgSpacing} ${v.xlSpacing} ${v.mdSpacing} ${v.xlSpacing};
+    background: ${({ theme }) => theme.bg};
+    border-radius: ${v.borderRadius};
+    /* height: 800px; */
+`;
+
+export const DeatailConainer = styled.div`
+    width: 28%;
+    /* background: ${({ theme }) => theme.bg}; */
+    border-radius: ${v.borderRadius};
+    /* height: 800px; */
 `;
 
 
@@ -349,3 +406,12 @@ export const FormTextInput = styled.div`
         color: red;
     }
 `;
+
+export const FormTextInputBlock = styled(FormTextInput)`
+    flex-direction: column;
+    align-items: flex-start;
+
+    label{
+        width: 100%;
+    }
+`
