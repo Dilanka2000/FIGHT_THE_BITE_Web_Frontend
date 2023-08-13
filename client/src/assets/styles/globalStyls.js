@@ -88,6 +88,13 @@ export const MainGridContainer = styled.div`
     gap: ${v.mdSpacing};
 `;
 
+export const RowContainer = styled.div`
+    width: 100%;
+    display: flex;
+    gap: ${v.xxlSpacing};
+    margin-bottom: ${v.mdSpacing};
+`;
+
 // ==================== Table container Stylings ====================
 // 888888888888888888888888888888888888888888888888888888888888888888
 export const TableContainer = styled.div`
@@ -403,4 +410,8 @@ export const FormTextInput = styled.div`
 export const FormTextInputBlock = styled(FormTextInput)`
     flex-direction: column;
     align-items: flex-start;
+
+    label{
+        width: 100%;
+    }
 `

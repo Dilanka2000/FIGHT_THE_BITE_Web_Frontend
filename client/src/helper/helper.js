@@ -76,7 +76,6 @@ export async function login({ username, password }) {
 export async function updateUser(response) {
     try {
         const token = await localStorage.getItem('token');
-        console.log(token);
         const { data: { msg } } = await axios.put('/api/updateuser', response, { headers: { "Authorization": `Bearer ${token}` } });
         return Promise.resolve(msg);
     } catch (error) {
