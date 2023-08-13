@@ -1,11 +1,11 @@
 import React from 'react'
 import AdminLayout from '../../components/layouts/AdminLayout';
-import { Heading } from './z-adminStyle';
+import EmpHeader from '../../components/header/EmpHeader';
 
 export default function Reports() {
   return (
       <AdminLayout>
-          <Heading>Reports</Heading>
+          <EmpHeader pageName={"Reports"} />
       </AdminLayout>
   );
 }

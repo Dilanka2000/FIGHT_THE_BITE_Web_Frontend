@@ -21,8 +21,8 @@ export async function getUsername() {
     const token = localStorage.getItem('token');
     if (!token) return Promise.reject("Cannot find Token");
     let decode = jwt_decode(token);
-    console.log(decode);
-    return decode;
+    // console.log(decode.username);
+    return decode.username;
 }
 
 // Get user details function
@@ -48,10 +48,10 @@ export async function registerUser(credentials) {
     try {
         const { data: { msg }, status } = await axios.post('/api/register', credentials);
 
-        let { name, email } = credentials;
+        let { name, email, password } = credentials;
         // send mail
         if (status === 201) {
-            await axios.post('/api/registerMail', { name, userEmail: email, text: msg });
+            await axios.post('/api/registerMail', { name, userEmail: email, text: msg+"\nYour Password is :- "+password });
         }
 
         return Promise.resolve(msg);
@@ -76,10 +76,22 @@ export async function login({ username, password }) {
 export async function updateUser(response) {
     try {
         const token = await localStorage.getItem('token');
-        const data = await axios.put('/api/updateuser', response, { headers: { "Authorization": `Bearer ${token}` } });
-        return Promise.resolve({ data });
+        console.log(token);
+        const { data: { msg } } = await axios.put('/api/updateuser', response, { headers: { "Authorization": `Bearer ${token}` } });
+        return Promise.resolve(msg);
     } catch (error) {
         return Promise.reject({ error: "Couldn't Update Profile" });
+    }
+}
+
+// Delete data function
+export async function deleteData({id}) {
+    try {
+        const username = await getUsername();
+        const { data: { msg } } = await axios.delete(`/api/deletedata/${id}`, { params: { username } });
+        return Promise.resolve(msg);
+    } catch (error) {
+        return Promise.reject({ error: "Couldn't Delete Data" });
     }
 }
 
