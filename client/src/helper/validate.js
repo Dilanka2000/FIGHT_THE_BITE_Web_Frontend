@@ -111,3 +111,57 @@ export const villageOfficerUpdateSchema = yup.object().shape({
         .string()
         .required("Field Required!")
 });
+
+export const orgSchema = yup.object().shape({
+  name: yup
+    .string()
+    .required("Field Required!")
+    .matches(nameRule, "Invalid name!"),
+  email: yup
+    .string()
+    .email("Invalid Email!")
+    .matches(emailRule, "Invalid Email!")
+    .required("Field Required!"),
+  gsDivision: yup.string().required("Field Required!"),
+  divisionNumber: yup.string().required("Field Required!"),
+  contact: yup.string().required("Field Required!"),
+  boardName: yup
+    .string()
+    .required("Field Required!")
+    .matches(nameRule, "Invalid name!"),
+  boardAddress: yup.string().required("Field Required!"),
+  nic: yup.string().required("Field Required!"),
+  boardPhone: yup.string().required("Field Required!"),
+  boardEmail: yup
+    .string()
+    .email("Invalid Email!")
+    .matches(emailRule, "Invalid Email!")
+    .required("Field Required!"),
+});
+
+export const orgUpdateSchema = yup.object().shape({
+  name: yup
+    .string()
+    .required("Field Required!")
+    .matches(nameRule, "Invalid name!"),
+  email: yup
+    .string()
+    .email("Invalid Email!")
+    .matches(emailRule, "Invalid Email!")
+    .required("Field Required!"),
+  gsDivision: yup.string().required("Field Required!"),
+  divisionNumber: yup.string().required("Field Required!"),
+  contact: yup.string().required("Field Required!"),
+  boardName: yup
+    .string()
+    .required("Field Required!")
+    .matches(nameRule, "Invalid name!"),
+  boardAddress: yup.string().required("Field Required!"),
+  nic: yup.string().required("Field Required!"),
+  boardPhone: yup.string().required("Field Required!"),
+  boardEmail: yup
+    .string()
+    .email("Invalid Email!")
+    .matches(emailRule, "Invalid Email!")
+    .required("Field Required!"),
+});
