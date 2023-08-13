@@ -2,7 +2,7 @@ import * as yup from "yup";
 
 const passwordRule = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[`!@#$%^&*()_+\-={};':"|,.<>?~/[\]]).{6,}$/;
 const emailRule = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
-const nameRule = /^[a-zA-Z ]{2,40}$/;
+const nameRule = /^[a-zA-Z .]{2,40}$/;
 
 
 export const loginSchema = yup.object().shape({
@@ -47,4 +47,67 @@ export const registerSchema = yup.object().shape({
         .string()
         .required("Field Required!")
         .oneOf([yup.ref('password'), null], 'Passwords not match')
+});
+
+export const villageOfficerSchema = yup.object().shape({
+    name: yup
+        .string()
+        .required("Field Required!")
+        .matches(nameRule, "Invalid name!"),
+    address: yup
+        .string()
+        .required("Field Required!"),
+    nic: yup
+        .string()
+        .required("Field Required!"),
+    contact: yup
+        .string()
+        .required("Field Required!"),
+    email: yup
+        .string()
+        .email("Invalid Email!")
+        .matches(emailRule, "Invalid Email!")
+        .required("Field Required!"),
+    gsDivision: yup
+        .string()
+        .required("Field Required!"),
+    divisionNumber: yup
+        .string()
+        .required("Field Required!"),
+    password: yup
+        .string()
+        .min(6)
+        .matches(passwordRule, "Must have upper case letter, lover case letter, numaric number and special charactor")
+        .required("Field Required!"),
+    confirmPassword: yup
+        .string()
+        .required("Field Required!")
+        .oneOf([yup.ref('password'), null], 'Passwords not match')
+});
+
+export const villageOfficerUpdateSchema = yup.object().shape({
+    name: yup
+        .string()
+        .required("Field Required!")
+        .matches(nameRule, "Invalid name!"),
+    address: yup
+        .string()
+        .required("Field Required!"),
+    nic: yup
+        .string()
+        .required("Field Required!"),
+    contact: yup
+        .string()
+        .required("Field Required!"),
+    email: yup
+        .string()
+        .email("Invalid Email!")
+        .matches(emailRule, "Invalid Email!")
+        .required("Field Required!"),
+    gsDivision: yup
+        .string()
+        .required("Field Required!"),
+    divisionNumber: yup
+        .string()
+        .required("Field Required!")
 });

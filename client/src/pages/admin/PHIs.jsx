@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import AdminLayout from '../../components/layouts/AdminLayout'
-import { AddButton, ButtonContainer, DeleteButton, ListContainer, ListItem, MainContainer, ProfileContact, ProfileImage, ProfileName, SearchBar, TopContainer, UpdateButton } from './z-adminStyle'
+import { AddButton, ButtonContainer, DeleteButton, ListContainer, ListItem, MainContainer, ProfileImage, SearchBar, TopContainer, UpdateButton } from "../../assets/styles/globalStyls";
+import { ProfileContact, ProfileName } from './z-adminStyle'
 import EmpHeader from '../../components/header/EmpHeader';
 import BottomSlider from '../../components/slider/BottomSlider';
 

@@ -10,7 +10,7 @@ export default function BottomSlider({ length, index, setIndex, x, sliderValue }
                 ? slideNo + 1
                 : slideNo
         );
-        setIndex(index + sliderValue > length ? index : index + sliderValue);
+        setIndex(index + sliderValue >= length ? index : index + sliderValue);
     }
     function previous() {
         setSlideNo(
