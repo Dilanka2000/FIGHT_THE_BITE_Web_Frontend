@@ -2,7 +2,7 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // auth middleware
-import { AuthorizeAdmin, AuthorizeUser } from "./middleware/auth";
+import { AuthorizeAdmin, AuthorizeGN, AuthorizeUser } from "./middleware/auth";
 
 // Import all components
 import HomePage from "./pages/user/HomePage";
@@ -134,27 +134,51 @@ const router = createBrowserRouter([
 
     {
         path: "/gramasewaka",
-        element: <GsHomePage />,
+        element: (
+            <AuthorizeGN>
+                <GsHomePage />
+            </AuthorizeGN>
+        ),
     },
     {
         path: "/gramasewaka/villagers",
-        element: <GsVillagers />,
+        element: (
+            <AuthorizeGN>
+                <GsVillagers />
+            </AuthorizeGN>
+        ),
     },
     {
         path: "/gramasewaka/patients",
-        element: <GsPatients />,
+        element: (
+            <AuthorizeGN>
+                <GsPatients />
+            </AuthorizeGN>
+        ),
     },
     {
         path: "/gramasewaka/organizations",
-        element: <GsOrganizations />,
+        element: (
+            <AuthorizeGN>
+                <GsOrganizations />
+            </AuthorizeGN>
+        ),
     },
     {
         path: "/gramasewaka/campaigns",
-        element: <GsCampaigns />,
+        element: (
+            <AuthorizeGN>
+                <GsCampaigns />
+            </AuthorizeGN>
+        ),
     },
     {
         path: "/gramasewaka/announcements",
-        element: <GsAnnouncements />,
+        element: (
+            <AuthorizeGN>
+                <GsAnnouncements />
+            </AuthorizeGN>
+        ),
     },
 ]);
 

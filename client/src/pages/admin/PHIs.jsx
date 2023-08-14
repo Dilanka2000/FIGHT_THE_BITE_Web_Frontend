@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import AdminLayout from '../../components/layouts/AdminLayout'
 import { AddButton, ButtonContainer, DeleteButton, ListContainer, ListItem, MainContainer, ProfileImage, SearchBar, TopContainer, UpdateButton } from "../../assets/styles/globalStyls";
 import { ProfileContact, ProfileName } from './z-adminStyle'
+import profileImg from "../../assets/images/profile.png";
 import EmpHeader from '../../components/header/EmpHeader';
 import BottomSlider from '../../components/slider/BottomSlider';
 
@@ -20,7 +21,7 @@ export default function PHIs() {
                 <ListItem key={item.DviNumber}>
                     <ProfileImage>
                         <img
-                            src="https://starsunfolded.com/wp-content/uploads/2017/07/Sai-Pallavi.jpg"
+                            src={profileImg}
                             alt="Profile"
                         />
                     </ProfileImage>

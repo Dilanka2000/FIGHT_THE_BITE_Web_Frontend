@@ -35,6 +35,10 @@ export const ImageAndText = styled.div`
         height: 50px;
         border-radius: 25px;
         background: ${({ theme }) => theme.bg2};
+
+        img{
+            width: 100%;
+        }
     }
 
     span {

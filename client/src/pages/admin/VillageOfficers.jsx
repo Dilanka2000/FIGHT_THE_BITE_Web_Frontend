@@ -7,6 +7,7 @@ import BottomSlider from "../../components/slider/BottomSlider";
 import RegisterSuccess from "../../components/popup/RegisterSuccess";
 import useFetch from "../../hooks/fetch-hook";
 import PageNotFound from "../PageNotFound";
+import profileImg from "../../assets/images/profile.png";
 import VillageOfficerAddAndUpdate from "./popup/VillageOfficerAddAndUpdate";
 import UpdateSuccess from "../../components/popup/UpdateSuccess";
 import DeleteUser from "../../components/popup/DeleteUser";
@@ -57,7 +58,9 @@ export default function VillageOfficers() {
                 <tr key={item._id}>
                     <td>
                         <ImageAndText>
-                            <div></div>
+                            <div>
+                                <img src={profileImg} alt="Profile 4to" />
+                            </div>
                             <span>{item.name}</span>
                         </ImageAndText>
                     </td>
@@ -72,15 +75,21 @@ export default function VillageOfficers() {
                         </Contact>
                     </td>
                     <td>
-                        <DeleteButton onClick={() => {
-                            setEventData(item);
-                            setDeleteModal(true)
-                        }}>Delete</DeleteButton>
-                        <UpdateButton onClick={() => {
-                            setEventData(item);
-                            setUpdateModal(true);
-                            setAddModal(false);
-                        }}>
+                        <DeleteButton
+                            onClick={() => {
+                                setEventData(item);
+                                setDeleteModal(true);
+                            }}
+                        >
+                            Delete
+                        </DeleteButton>
+                        <UpdateButton
+                            onClick={() => {
+                                setEventData(item);
+                                setUpdateModal(true);
+                                setAddModal(false);
+                            }}
+                        >
                             Update
                         </UpdateButton>
                     </td>

@@ -3,6 +3,7 @@ import { v } from "../../assets/styles/variables";
 import {
   FormTextInput,
   MainContainerBG,
+  ModalFormContainer,
 } from "../../assets/styles/globalStyls";
 
 export const Heading = styled.div`
@@ -169,7 +170,7 @@ export const InputScrollContainer = styled.div`
 
 export const FormTextInput2 = styled(FormTextInput)`
   label {
-    width: 100px;
+    width: 80px;
   }
   input {
     width: 320px;
@@ -183,7 +184,7 @@ export const SpaceDiv = styled.div`
 
 export const MainContainerBG2 = styled(MainContainerBG)`
   padding: ${v.mdSpacing};
-  border: 1px solid ${({ theme }) => theme.primary};
+  border: 1px solid ${({ theme }) => theme.bg3};
 `;
 
 export const AddAndUndu = styled.div`
@@ -203,8 +204,8 @@ export const RadioButtonContainer = styled.div`
   justify-content: center;
 
   input {
-    width: 25px;
-    margin-right: 25px;
+    width: 15px;
+    margin: 0 10px 0 25px;
   }
 `;
 
@@ -238,4 +239,5 @@ export const TextInputFieldParts = styled.div`
 `
 
 export const ModalFormContainerNew = styled(ModalFormContainer)`
-  padding: 0px 60px 60px 60px
+  padding: 0px 60px 60px 60px;
+`

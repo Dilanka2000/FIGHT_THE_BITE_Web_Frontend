@@ -130,3 +130,15 @@ export async function resetPassword({ username, password }) {
         return Promise.reject({ error });
     }
 }
+
+// Add fammily function
+export async function addFammily(credentials) {
+    try {
+        console.log(credentials);
+        const { data: { msg } } = await axios.post('/api/addfammily', credentials);
+
+        return Promise.resolve(msg);
+    } catch (error) {
+        return (error.response.data.error);
+    }
+}

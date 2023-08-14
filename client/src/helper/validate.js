@@ -165,3 +165,20 @@ export const orgUpdateSchema = yup.object().shape({
     .matches(emailRule, "Invalid Email!")
     .required("Field Required!"),
 });
+
+export const fammilySchema = yup.object().shape({
+    address: yup.string().required("Field Required!"),
+    houseHoldNo: yup.string().required("Field Required!"),
+    // members: [
+    //     {
+    //         name: yup
+    //             .string()
+    //             .required("Field Required!")
+    //             .matches(nameRule, "Invalid name!"),
+    //         nic: yup.string().required("Field Required!"),
+    //         // gender: yup
+    //         age: yup.number().required("Field Required!"),
+    //         contact: yup.string().required("Field Required!"),
+    //     },
+    // ],
+});
