@@ -15,14 +15,27 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
         gsDivision : "Boralesgamuwa",
         divisionNumber : "123AS",
         houseHoldNo : "",
-        members: [],
+        members: [{
+            name: "",
+            nic: "",
+            contact: "",
+            age: "",
+            gender: ""
+        },
+        {
+            name: "",
+            nic: "",
+            contact: "",
+            age: "",
+            gender: ""
+        }],
     };
     let initialValueForUpdate = {
         address: eventData ? eventData.address : "",
         gsDivision: eventData ? eventData.gsDivision : "",
         divisionNumber: eventData ? eventData.divisionNumber : "",
         houseHoldNo: eventData ? eventData.houseHoldNo : "",
-        members: eventData ? eventData.members : "",
+        members: eventData ? eventData.members : [],
         id: eventData ? eventData._id : "",
     };
 
@@ -64,18 +77,28 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
         for (let i = 0; i < memberCount; i++) { 
             content.push(
                 <>
-                    <MainContainerBG2>
+                    <MainContainerBG2 key={memberCount}>
                         <RowContainer>
                             <FormTextInput2>
                                 <label>Name*</label>
                                 <div>
-                                    <input type="text" />
+                                    <input
+                                        {...formik.getFieldProps(
+                                            `members[${memberCount}].name`
+                                        )}
+                                        type="text"
+                                    />
                                 </div>
                             </FormTextInput2>
                             <FormTextInput2>
                                 <label>NIC</label>
                                 <div>
-                                    <input type="text" />
+                                    <input
+                                        {...formik.getFieldProps(
+                                            `members[${memberCount}].nic`
+                                        )}
+                                        type="text"
+                                    />
                                 </div>
                             </FormTextInput2>
                         </RowContainer>
@@ -83,13 +106,23 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
                             <FormTextInput2>
                                 <label>Age*</label>
                                 <div>
-                                    <input type="text" />
+                                    <input
+                                        {...formik.getFieldProps(
+                                            `members[${memberCount}].age`
+                                        )}
+                                        type="text"
+                                    />
                                 </div>
                             </FormTextInput2>
                             <FormTextInput2>
                                 <label>Contact</label>
                                 <div>
-                                    <input type="text" />
+                                    <input
+                                        {...formik.getFieldProps(
+                                            `members[${memberCount}].contact`
+                                        )}
+                                        type="text"
+                                    />
                                 </div>
                             </FormTextInput2>
                         </RowContainer>
@@ -97,10 +130,24 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
                             <FormTextInput2>
                                 <label>Gender*</label>
                                 <RadioButtonContainer>
-                                    <input type="radio" id="male" name="gender" value="male" />
-                                    <label for="male">Male</label>
-                                    <input type="radio" id="female" name="gender" value="female" />
-                                    <label for="female">Femail</label>
+                                    <input
+                                        type="radio"
+                                        name="members[${memberCount}].gender"
+                                        value="male"
+                                        {...formik.getFieldProps(
+                                            `members[${memberCount}].gender`
+                                        )}
+                                    />
+                                    <label>Male</label>
+                                    <input
+                                        type="radio"
+                                        name="members[${memberCount}].gender"
+                                        value="female"
+                                        {...formik.getFieldProps(
+                                            `members[${memberCount}].gender`
+                                        )}
+                                    />
+                                    <label>Femail</label>
                                 </RadioButtonContainer>
                             </FormTextInput2>
                             <AddAndUndu>
@@ -166,13 +213,23 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
                                         <FormTextInputBlock>
                                             <label>House Holder Name*</label>
                                             <div>
-                                                <input type="text" />
+                                                <input
+                                                    {...formik.getFieldProps(
+                                                        "members[0].name"
+                                                    )}
+                                                    type="text"
+                                                />
                                             </div>
                                         </FormTextInputBlock>
                                         <FormTextInputBlock>
                                             <label>House Holder Age*</label>
                                             <div>
-                                                <input type="text" />
+                                                <input
+                                                    {...formik.getFieldProps(
+                                                        "members[0].age"
+                                                    )}
+                                                    type="text"
+                                                />
                                             </div>
                                         </FormTextInputBlock>
                                         <FormTextInputBlock>
@@ -180,7 +237,12 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
                                                 House Holder Contact Number*
                                             </label>
                                             <div>
-                                                <input type="text" />
+                                                <input
+                                                    {...formik.getFieldProps(
+                                                        "members[0].contact"
+                                                    )}
+                                                    type="text"
+                                                />
                                             </div>
                                         </FormTextInputBlock>
                                         <FormTextInputBlock
@@ -225,7 +287,12 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
                                         <FormTextInputBlock>
                                             <label>House Hold NIC*</label>
                                             <div>
-                                                <input type="text" />
+                                                <input
+                                                    {...formik.getFieldProps(
+                                                        "members[0].nic"
+                                                    )}
+                                                    type="text"
+                                                />
                                             </div>
                                         </FormTextInputBlock>
                                         <FormTextInputBlock>
@@ -234,19 +301,23 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
                                                 <input
                                                     type="radio"
                                                     id="male"
-                                                    name="gender"
+                                                    name="members[0].gender"
                                                     value="male"
+                                                    {...formik.getFieldProps(
+                                                        "members[0].gender"
+                                                    )}
                                                 />
-                                                <label for="male">Male</label>
+                                                <label>Male</label>
                                                 <input
                                                     type="radio"
                                                     id="female"
-                                                    name="gender"
+                                                    name="members[0].gender"
                                                     value="female"
+                                                    {...formik.getFieldProps(
+                                                        "members[0].gender"
+                                                    )}
                                                 />
-                                                <label for="female">
-                                                    Femail
-                                                </label>
+                                                <label>Femail</label>
                                             </RadioButtonContainer>
                                         </FormTextInputBlock>
                                     </MainContainer>

@@ -4,14 +4,12 @@ import { orgSchema, orgUpdateSchema } from "../../../helper/validate";
 import { registerUser, updateUser } from "../../../helper/helper";
 import {
   DeleteButton,
-  FormTextInput,
   Modal,
   ModalContent,
-  ModalFormContainer,
   ModalTitle,
   Overlay,
 } from "../../../assets/styles/globalStyls";
-import { AddButton, ModalFormContainerCenter, ModalFormContainerNew, PopUpContentHeader, TextInputField, TextInputFieldParts} from "../z-gsStyle";
+import { ModalFormContainerNew, PopUpContentHeader, TextInputField, TextInputFieldParts} from "../z-gsStyle";
 import { ButtonContainer } from "../../../components/popup/popupStyle";
 
 export default function OrganizationsAddAndUpdate({
@@ -73,11 +71,11 @@ export default function OrganizationsAddAndUpdate({
         setErrors("");
         onSubmitProps.resetForm();
       } else if (promise === "Update Successfully") {
+        setUpdateSuccess(true);
         setAddModal(false);
         setUpdateModal(false);
         setErrors("");
         onSubmitProps.resetForm();
-        setUpdateSuccess(true);
       } else {
         setErrors(promise);
       }

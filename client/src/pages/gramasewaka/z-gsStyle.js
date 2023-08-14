@@ -3,6 +3,9 @@ import { v } from "../../assets/styles/variables";
 import {
   FormTextInput,
   MainContainerBG,
+  ModalContent,
+  ModalFormContainer,
+  ModalTitle,
 } from "../../assets/styles/globalStyls";
 
 export const Heading = styled.div`
@@ -237,5 +240,100 @@ export const TextInputFieldParts = styled.div`
   display: flex;
 `
 
+// ------------------------ Villager Detail View Popup-----------------------------
+
+export const MainContainerView = styled.div`
+  display: flex;
+`;
+
 export const ModalFormContainerNew = styled(ModalFormContainer)`
-  padding: 0px 60px 60px 60px
+  padding: 0px 60px 60px 60px;
+`
+
+export const ModalContentNew = styled(ModalContent)`
+  width: 1300px
+`;
+
+export const AddVillagerPopUpBack = styled.div`
+  width: 34%;
+  background: ${({ theme }) => theme.primary};
+  padding: 75px 0px;
+  border-radius: 10px 0px 0px 10px;
+`;
+
+export const AddVillagerPopUpBackHouseHolderInfo = styled.div`
+  padding: 5px 30px 25px 60px;
+  color: ${({ theme }) => theme.bg};
+
+  h5 {
+    font-weight: 900;
+    font-size: 18px;
+  }
+
+  p {
+    font-size: 16px;
+    margin: 8px 40px;
+  }
+`;
+
+export const PopUpContentHeaderNew = styled(PopUpContentHeader)`
+  padding: 30px 0px;
+
+  div{
+    width: 29%;
+  }
+`;
+
+export const PopUpContainerHeaderNewContainer = styled.div`
+  width: 100%;
+`;
+
+export const MemberDetailsTble = styled.div`
+  width: 100%;
+  
+  table {
+    width: 100%;
+    padding: 0px 60px;
+  }
+
+  tr{
+    paddding: 2.5px;
+  }
+`;
+export const AddVillagerPopUpBackHouseHolderInfoNew = styled.div`
+  display: flex;
+  margin: 5px;
+  justify-content: center;
+
+  h5 {
+    font-weight: 900;
+    font-size: 18px;
+    width: 150px;
+    color: ${({ theme }) => theme.textMain};
+  }
+
+  p {
+    font-size: 18px;
+    color: ${({ theme }) => theme.text};
+  }
+`;
+
+export const LineInMemberDetails = styled.div`
+  width: 86%;
+  height: 1px;
+  background: ${({ theme }) => theme.text};
+  margin: 30px auto;
+`;
+
+export const ModalTitleNew = styled(ModalTitle)`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-radius: 10px 10px 0 0;
+  font-size: 25px;
+  font-weight: 600;
+  padding: 25px 25px 0px 0px;
+  color: ${({ theme }) => theme.text};
+  background: ${({ theme }) => theme.bg};
+`;
