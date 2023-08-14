@@ -29,7 +29,20 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
         gsDivision : "Boralesgamuwa",
         divisionNumber : "123AS",
         houseHoldNo : "",
-        members: [],
+        members: [{
+            name: "",
+            nic: "",
+            contact: "",
+            age: "",
+            gender: ""
+        },
+        {
+            name: "",
+            nic: "",
+            contact: "",
+            age: "",
+            gender: ""
+        }],
     };
     let initialValueForUpdate = {
         address: eventData ? eventData.address : "",
