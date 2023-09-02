@@ -2,11 +2,11 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // auth middleware
-import { AuthorizeAdmin, AuthorizeUser } from "./middleware/auth";
+import { AuthorizeAdmin, AuthorizeGN, AuthorizeUser } from "./middleware/auth";
 
 // Import all components
 import HomePage from "./pages/user/HomePage";
-import LandingPage from "./pages/home/LandingPage";
+// import LandingPage from "./pages/home/LandingPage";
 import LogIn from "./pages/auth/LogIn";
 import Register from "./pages/auth/Register";
 import Recovery from "./pages/auth/Recovery";
@@ -29,11 +29,17 @@ import GsOrganizations from "./pages/gramasewaka/GsOrganizations";
 import GsCampaigns from "./pages/gramasewaka/GsCampaigns";
 import GsAnnouncements from "./pages/gramasewaka/GsAnnouncements";
 
+//---------------------------------------------------receptionist--------------------------------------------------------
+import RcHomePage from "./pages/receptionist/RcHomePage";
+import AddNurse from "./pages/receptionist/AddNurse";
+import AddDoctor from "./pages/receptionist/AddDoctor";
+import VideoCon from "./pages/receptionist/VideoCon";
+
 // Root Routes
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <LandingPage />,
+        element: <LogIn />,
     },
     {
         path: "/home",
@@ -75,65 +81,160 @@ const router = createBrowserRouter([
     },
     {
         path: "/admin/village-officers",
-        element: <VillageOfficers />,
+        element: (
+            <AuthorizeAdmin>
+                <VillageOfficers />
+            </AuthorizeAdmin>
+        ),
     },
     {
         path: "/admin/phis",
-        element: <PHIs />,
+        element: (
+            <AuthorizeAdmin>
+                <PHIs />
+            </AuthorizeAdmin>
+        ),
     },
     {
         path: "/admin/view-map",
-        element: <ViewMap />,
+        element: (
+            <AuthorizeAdmin>
+                <ViewMap />
+            </AuthorizeAdmin>
+        ),
     },
     {
         path: "/admin/campaigns",
-        element: <Campaigns />,
+        element: (
+            <AuthorizeAdmin>
+                <Campaigns />
+            </AuthorizeAdmin>
+        ),
     },
     {
         path: "/admin/announcements",
-        element: <Announcement />,
+        element: (
+            <AuthorizeAdmin>
+                <Announcement />
+            </AuthorizeAdmin>
+        ),
     },
     {
         path: "/admin/organizations",
-        element: <Organizations />,
+        element: (
+            <AuthorizeAdmin>
+                <Organizations />
+            </AuthorizeAdmin>
+        ),
     },
     {
         path: "/admin/view-reports",
-        element: <Reports />,
+        element: (
+            <AuthorizeAdmin>
+                <Reports />
+            </AuthorizeAdmin>
+        ),
     },
 
     // -------------------------------------------Gramasewaka routing----------------------------------------------------------
 
     {
         path: "/gramasewaka",
-        element: <GsHomePage />,
-
+        element: (
+            <AuthorizeGN>
+                <GsHomePage />
+            </AuthorizeGN>
+        ),
     },
-
     {
         path: "/gramasewaka/villagers",
-        element: <GsVillagers />,
+        element: (
+            <AuthorizeGN>
+                <GsVillagers />
+            </AuthorizeGN>
+        ),
     },
-
     {
         path: "/gramasewaka/patients",
-        element: <GsPatients />,
+        element: (
+            <AuthorizeGN>
+                <GsPatients />
+            </AuthorizeGN>
+        ),
     },
-
     {
         path: "/gramasewaka/organizations",
-        element: <GsOrganizations />,
+        element: (
+            <AuthorizeGN>
+                <GsOrganizations />
+            </AuthorizeGN>
+        ),
     },
-
-
     {
         path: "/gramasewaka/campaigns",
-        element: <GsCampaigns />,
+        element: (
+            <AuthorizeGN>
+                <GsCampaigns />
+            </AuthorizeGN>
+        ),
     },
     {
         path: "/gramasewaka/announcements",
-        element: <GsAnnouncements />,
+        element: (
+            <AuthorizeGN>
+                <GsAnnouncements />
+            </AuthorizeGN>
+        ),
     },
+
+
+
+
+
+
+
+    //-------------------------------------------Receptionist routing-------------------------------------------------
+
+
+
+    {
+        path: "/receptionist",
+        element: (
+           
+                < RcHomePage/>
+            
+        ),
+    },
+
+    {
+        path: "/receptionist/addNurse",
+        element: (
+           
+                < AddNurse/>
+            
+        ),
+    },
+
+    {
+        path: "/receptionist/addDoctor",
+        element: (
+           
+                < AddDoctor/>
+            
+        ),
+    },
+
+    {
+        path: "/receptionist/videoConferencing",
+        element: (
+           
+                < VideoCon/>
+            
+        ),
+    },
+
+    
+    
 ]);
 
 export default function Routes() {
