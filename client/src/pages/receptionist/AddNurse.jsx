@@ -15,7 +15,7 @@ import DoctorAddAndUpdate from "./PopUp/NurseAddAndUpdate";
 
 export default function AddNurse() {
 
-    const [{ apiData, serverError, isLoading }] = useFetch("getUsers/GN");//gn wenuwt mkkd dnne
+    const [{ apiData, serverError, isLoading }] = useFetch("getUsers/NR");
     
     const sliderValue = 5;
     const [index, setIndex] = useState(0);
@@ -61,7 +61,7 @@ export default function AddNurse() {
                             <div>
                                 <img src={profileImg} alt="Profile 4to" />
                             </div>
-                            <span>{item.registration_Number}</span>
+                            <span>{item.registrationNumber}</span>
                         </ImageAndText>
                     </td>
                     <td>{item.name}</td>

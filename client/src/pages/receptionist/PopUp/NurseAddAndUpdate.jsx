@@ -33,25 +33,25 @@ export default function NurseAddAndUpdate({ addModal, updateModal, setAddModal, 
         validateOnBlur: false,
         validateOnChange: false,
         onSubmit: async (values, onSubmitProps) => {
-            let promise = addModal
-                ? await registerUser(values)
-                : await updateUser(values);
-            if (promise === "Register Successfully") {
-                setAddModal(false);
-                setUpdateModal(false);
-                setErrors("");
-                onSubmitProps.resetForm();
-                setRegisterSuccess(true);
-            } else if (promise === "Update Successfully") {
-                setAddModal(false);
-                setUpdateModal(false);
-                setErrors("");
-                setEventData("");
-                onSubmitProps.resetForm();
-                setUpdateSuccess(true);
-            } else {
-                setErrors(promise);
-            }
+            // let promise = addModal
+            //     ? await registerUser(values)
+            //     : await updateUser(values);
+            // if (promise === "Register Successfully") {
+            //     setAddModal(false);
+            //     setUpdateModal(false);
+            //     setErrors("");
+            //     onSubmitProps.resetForm();
+            //     setRegisterSuccess(true);
+            // } else if (promise === "Update Successfully") {
+            //     setAddModal(false);
+            //     setUpdateModal(false);
+            //     setErrors("");
+            //     setEventData("");
+            //     onSubmitProps.resetForm();
+            //     setUpdateSuccess(true);
+            // } else {
+            //     setErrors(promise);
+            // }
 
             console.log(errors);
         },
