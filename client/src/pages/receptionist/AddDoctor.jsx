@@ -11,11 +11,12 @@ import profileImg from "../../assets/images/profile.png";
 import UpdateSuccess from "../../components/popup/UpdateSuccess";
 import DeleteUser from "../../components/popup/DeleteUser";
 import DoctorAddAndUpdate from "./PopUp/DoctorAddAndUpdate";
+import { getUserByEmail } from "../../helper/helper";
 
 
 export default function AddDoctor() {
 
-    const [{ apiData, serverError, isLoading }] = useFetch("getUsers/GN");
+    const [{ apiData, serverError, isLoading }] = useFetch("getUsers/DR");     
     
     const sliderValue = 5;
     const [index, setIndex] = useState(0);
@@ -61,19 +62,19 @@ export default function AddDoctor() {
                             <div>
                                 <img src={profileImg} alt="Profile 4to" />
                             </div>
-                            <span>{item.Name}</span>
+                            <span>{item.registrationNumber}</span>
                         </ImageAndText>
                     </td>
-                    <td>{item.Email}</td>
-                    <td>{item.Ward_No}</td>
+                    <td>{item.name}</td>
+                    <td>{item.email}</td>
+                    
                     <td>
                         <Contact>
                             {item.contact}
-                            <div>
-                                <i className="fa-regular fa-envelope"></i>
-                            </div>
+                            
                         </Contact>
                     </td>
+                    <td>{item.ward_No}</td>
                     <td>
                         <DeleteButton
                             onClick={() => {
@@ -189,3 +190,4 @@ export default function AddDoctor() {
         </ReceptionistLayout>
     );
 }
+
