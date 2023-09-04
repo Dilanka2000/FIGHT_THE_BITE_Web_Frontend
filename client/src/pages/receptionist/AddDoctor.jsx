@@ -74,7 +74,7 @@ export default function AddDoctor() {
                             
                         </Contact>
                     </td>
-                    <td>{item.ward_No}</td>
+                    <td>{item.wardNo}</td>
                     <td>
                         <DeleteButton
                             onClick={() => {

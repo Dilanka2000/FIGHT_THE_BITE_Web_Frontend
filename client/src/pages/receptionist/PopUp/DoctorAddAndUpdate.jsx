@@ -10,19 +10,21 @@ export default function DoctorAddAndUpdate({ addModal, updateModal, setAddModal,
     
     let initialValueForAdd = {
         registrationNumber: "",
+        nic:"",
         name: "",
         email: "",
         contact: "",
-        ward_No: "",
+        wardNo: "",
         role: "DR",
+        password:"As@12345",
     };
     let initialValueForUpdate = {
         registrationNumber: eventData ? eventData.registration_Number : "",
-        name: eventData ? eventData.name : "",
         nic: eventData ? eventData.nic : "",
+        name: eventData ? eventData.name : "",
         email: eventData ? eventData.email : "",
         contact: eventData ? eventData.contact : "",
-        ward_No: eventData ? eventData.ward_No : "",
+        wardNo: eventData ? eventData.wardNo : "",
         role: "DR",
     };
 
@@ -35,27 +37,27 @@ export default function DoctorAddAndUpdate({ addModal, updateModal, setAddModal,
         validateOnBlur: false,
         validateOnChange: false,
         onSubmit: async (values, onSubmitProps) => {
-            // let promise = addModal
-            //     ? await registerUser(values)
-            //     : await updateUser(values);
-            // if (promise === "Register Successfully") {
-            //     setAddModal(false);
-            //     setUpdateModal(false);
-            //     setErrors("");
-            //     onSubmitProps.resetForm();
-            //     setRegisterSuccess(true);
-            // } else if (promise === "Update Successfully") {
-            //     setAddModal(false);
-            //     setUpdateModal(false);
-            //     setErrors("");
-            //     setEventData("");
-            //     onSubmitProps.resetForm();
-            //     setUpdateSuccess(true);
-            // } else {
-            //     setErrors(promise);
-            // }
+            let promise = addModal
+                ? await registerUser(values)
+                : await updateUser(values);
+            if (promise === "Register Successfully") {
+                setAddModal(false);
+                setUpdateModal(false);
+                setErrors("");
+                onSubmitProps.resetForm();
+                setRegisterSuccess(true);
+            } else if (promise === "Update Successfully") {
+                setAddModal(false);
+                setUpdateModal(false);
+                setErrors("");
+                setEventData("");
+                onSubmitProps.resetForm();
+                setUpdateSuccess(true);
+            } else {
+                setErrors(promise);
+            }
 
-            console.log(values);
+            console.log(errors);
         },
     });
 
@@ -99,6 +101,18 @@ export default function DoctorAddAndUpdate({ addModal, updateModal, setAddModal,
                                         />
                                         {formik.errors.registrationNumber && (
                                             <p>{formik.errors.registrationNumber}</p>
+                                        )}
+                                    </div>
+                                </FormTextInput>
+                                <FormTextInput $error={formik.errors.nic}>
+                                    <label>NIC*</label>
+                                    <div>
+                                        <input
+                                            {...formik.getFieldProps("nic")}
+                                            type="text"
+                                        />
+                                        {formik.errors.nic && (
+                                            <p>{formik.errors.nic}</p>
                                         )}
                                     </div>
                                 </FormTextInput>
@@ -148,18 +162,18 @@ export default function DoctorAddAndUpdate({ addModal, updateModal, setAddModal,
                                 </FormTextInput>
                                 
                                 <FormTextInput
-                                    $error={formik.errors.ward_No}
+                                    $error={formik.errors.wardNo}
                                 >
                                     <label>Ward No*</label>
                                     <div>
                                         <input
                                             {...formik.getFieldProps(
-                                                "ward_No"
+                                                "wardNo"
                                             )}
                                             type="text"
                                         />
-                                        {formik.errors.ward_No && (
-                                            <p>{formik.errors.ward_No}</p>
+                                        {formik.errors.wardNo && (
+                                            <p>{formik.errors.wardNo}</p>
                                         )}
                                     </div>
                                 </FormTextInput>

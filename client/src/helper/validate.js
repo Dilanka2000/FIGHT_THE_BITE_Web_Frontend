@@ -194,6 +194,9 @@ export const doctorSchema = yup.object().shape({
         name: yup
         .string()
         .required("Field Required!"),
+        nic: yup
+        .string()
+        .required("Field Required!"),
         email: yup
         .string()
         .email("Invalid Email!")
@@ -202,7 +205,7 @@ export const doctorSchema = yup.object().shape({
         contact: yup
         .string()
         .required("Field Required!"),
-        ward_No: yup
+        wardNo: yup
         .string()
         .required("Field Required!"),
    
@@ -219,6 +222,9 @@ export const doctorUpdateSchema = yup.object().shape({
         name: yup
         .string()
         .required("Field Required!"),
+        nic: yup
+        .string()
+        .required("Field Required!"),
         email: yup
         .string()
         .email("Invalid Email!")
@@ -227,10 +233,7 @@ export const doctorUpdateSchema = yup.object().shape({
         contact: yup
         .string()
         .required("Field Required!"),
-        contact: yup
-        .string()
-        .required("Field Required!"),
-         ward_No: yup
+         wardNo: yup
         .string()
         .required("Field Required!"),
     
@@ -243,6 +246,9 @@ export const nurseSchema = yup.object().shape({
         .string()
         .required("Field Required!"),
         name: yup
+        .string()
+        .required("Field Required!"),
+        nic: yup
         .string()
         .required("Field Required!"),
         email: yup
@@ -262,6 +268,9 @@ export const nurseSchema = yup.object().shape({
 
 export const nurseUpdateSchema = yup.object().shape({
     registrationNumber: yup
+        .string()
+        .required("Field Required!"),
+        nic: yup
         .string()
         .required("Field Required!"),
         name: yup
