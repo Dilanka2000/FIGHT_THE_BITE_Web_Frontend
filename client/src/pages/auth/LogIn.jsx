@@ -47,9 +47,6 @@ export default function LogIn() {
                 if (loginPromise.data.role === "admin") {
                     navigate("/admin");
                 }
-                if (loginPromise.data.role === "GN") {
-                    navigate("/gramasewaka");
-                }
             }
             console.log(loginPromise);
         },

@@ -6,7 +6,7 @@ import { AuthorizeAdmin, AuthorizeGN, AuthorizeUser } from "./middleware/auth";
 
 // Import all components
 import HomePage from "./pages/user/HomePage";
-import LandingPage from "./pages/home/LandingPage";
+// import LandingPage from "./pages/home/LandingPage";
 import LogIn from "./pages/auth/LogIn";
 import Register from "./pages/auth/Register";
 import Recovery from "./pages/auth/Recovery";
@@ -29,11 +29,17 @@ import GsOrganizations from "./pages/gramasewaka/GsOrganizations";
 import GsCampaigns from "./pages/gramasewaka/GsCampaigns";
 import GsAnnouncements from "./pages/gramasewaka/GsAnnouncements";
 
+//---------------------------------------------------receptionist--------------------------------------------------------
+import RcHomePage from "./pages/receptionist/RcHomePage";
+import AddNurse from "./pages/receptionist/AddNurse";
+import AddDoctor from "./pages/receptionist/AddDoctor";
+import VideoCon from "./pages/receptionist/VideoCon";
+
 // Root Routes
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <LandingPage />,
+        element: <LogIn />,
     },
     {
         path: "/home",
@@ -180,6 +186,55 @@ const router = createBrowserRouter([
             </AuthorizeGN>
         ),
     },
+
+
+
+
+
+
+
+    //-------------------------------------------Receptionist routing-------------------------------------------------
+
+
+
+    {
+        path: "/receptionist",
+        element: (
+           
+                < RcHomePage/>
+            
+        ),
+    },
+
+    {
+        path: "/receptionist/addNurse",
+        element: (
+           
+                < AddNurse/>
+            
+        ),
+    },
+
+    {
+        path: "/receptionist/addDoctor",
+        element: (
+           
+                < AddDoctor/>
+            
+        ),
+    },
+
+    {
+        path: "/receptionist/videoConferencing",
+        element: (
+           
+                < VideoCon/>
+            
+        ),
+    },
+
+    
+    
 ]);
 
 export default function Routes() {

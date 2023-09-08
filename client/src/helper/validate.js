@@ -182,3 +182,110 @@ export const fammilySchema = yup.object().shape({
     //     },
     // ],
 });
+
+
+
+//---------------------------------addUpdateDoctor---------------------------------------------------
+
+export const doctorSchema = yup.object().shape({
+    registrationNumber: yup
+        .string()
+        .required("Field Required!"),
+        name: yup
+        .string()
+        .required("Field Required!"),
+        nic: yup
+        .string()
+        .required("Field Required!"),
+        email: yup
+        .string()
+        .email("Invalid Email!")
+        .matches(emailRule, "Invalid Email!")
+        .required("Field Required!"),
+        contact: yup
+        .string()
+        .required("Field Required!"),
+        wardNo: yup
+        .string()
+        .required("Field Required!"),
+   
+    
+});
+
+
+
+
+export const doctorUpdateSchema = yup.object().shape({
+    registrationNumber: yup
+        .string()
+        .required("Field Required!"),
+        name: yup
+        .string()
+        .required("Field Required!"),
+        nic: yup
+        .string()
+        .required("Field Required!"),
+        email: yup
+        .string()
+        .email("Invalid Email!")
+        .matches(emailRule, "Invalid Email!")
+        .required("Field Required!"),
+        contact: yup
+        .string()
+        .required("Field Required!"),
+         wardNo: yup
+        .string()
+        .required("Field Required!"),
+    
+});
+
+//------------------------------------------AddUpdateNurse-------------------------------------------
+
+export const nurseSchema = yup.object().shape({
+    registrationNumber: yup
+        .string()
+        .required("Field Required!"),
+        name: yup
+        .string()
+        .required("Field Required!"),
+        nic: yup
+        .string()
+        .required("Field Required!"),
+        email: yup
+        .string()
+        .email("Invalid Email!")
+        .matches(emailRule, "Invalid Email!")
+        .required("Field Required!"),
+        contact: yup
+        .string()
+        .required("Field Required!")
+        
+    
+});
+
+
+
+
+export const nurseUpdateSchema = yup.object().shape({
+    registrationNumber: yup
+        .string()
+        .required("Field Required!"),
+        nic: yup
+        .string()
+        .required("Field Required!"),
+        name: yup
+        .string()
+        .required("Field Required!"),
+        email: yup
+        .string()
+        .email("Invalid Email!")
+        .matches(emailRule, "Invalid Email!")
+        .required("Field Required!"),
+        contact: yup
+        .string()
+        .required("Field Required!"),
+        contact: yup
+        .string()
+        .required("Field Required!")
+    
+});

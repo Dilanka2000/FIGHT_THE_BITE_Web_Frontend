@@ -1,29 +1,21 @@
 import React, { useEffect, useState } from "react";
-import AdminLayout from "../../components/layouts/AdminLayout";
+import ReceptionistLayout from "../../components/layouts/ReceptionistLayout";
 import EmpHeader from "../../components/header/EmpHeader";
-<<<<<<< HEAD
-import { AddButton, DeleteButton, MainContainerBG, Modal, ModalContent, SearchBar, TableContainer, TopContainer, UpdateButton } from "../../assets/styles/globalStyls";
-import { Contact, ImageAndText } from "./z-adminStyle";
-=======
 import { AddButton, Contact, DeleteButton, MainContainerBG, Modal, ModalContent, SearchBar, TableContainer, TopContainer, UpdateButton } from "../../assets/styles/globalStyls";
-import { ImageAndText } from "./z-adminStyle";
->>>>>>> fe87ebe850863319b776a2e785729f32924b69a1
+import { ImageAndText } from "../admin/z-adminStyle";
 import BottomSlider from "../../components/slider/BottomSlider";
 import RegisterSuccess from "../../components/popup/RegisterSuccess";
 import useFetch from "../../hooks/fetch-hook";
 import PageNotFound from "../PageNotFound";
-<<<<<<< HEAD
-=======
 import profileImg from "../../assets/images/profile.png";
->>>>>>> fe87ebe850863319b776a2e785729f32924b69a1
-import VillageOfficerAddAndUpdate from "./popup/VillageOfficerAddAndUpdate";
 import UpdateSuccess from "../../components/popup/UpdateSuccess";
 import DeleteUser from "../../components/popup/DeleteUser";
+import DoctorAddAndUpdate from "./PopUp/NurseAddAndUpdate";
 
 
-export default function VillageOfficers() {
+export default function AddNurse() {
 
-    const [{ apiData, serverError, isLoading }] = useFetch("getUsers/GN");
+    const [{ apiData, serverError, isLoading }] = useFetch("getUsers/NR");
     
     const sliderValue = 5;
     const [index, setIndex] = useState(0);
@@ -37,10 +29,7 @@ export default function VillageOfficers() {
     const [deleteModal, setDeleteModal] = useState(false);
     const [registerSuccess, setRegisterSuccess] = useState(false);
     const [updateSuccess, setUpdateSuccess] = useState(false);
-<<<<<<< HEAD
-=======
     // const [deleteSuccess, setDeleteSuccess] = useState(false);
->>>>>>> fe87ebe850863319b776a2e785729f32924b69a1
     
     
     useEffect(() => {
@@ -72,31 +61,20 @@ export default function VillageOfficers() {
                             <div>
                                 <img src={profileImg} alt="Profile 4to" />
                             </div>
-                            <span>{item.name}</span>
+                            <span>{item.registrationNumber}</span>
                         </ImageAndText>
                     </td>
-                    <td>{item.gsDivision}</td>
-                    <td>{item.divisionNumber}</td>
+                    <td>{item.name}</td>
+                    <td>{item.email}</td>
+                    
                     <td>
                         <Contact>
                             {item.contact}
-                            <div>
-                                <i className="fa-regular fa-envelope"></i>
-                            </div>
+                            
                         </Contact>
                     </td>
+                    
                     <td>
-<<<<<<< HEAD
-                        <DeleteButton onClick={() => {
-                            setEventData(item);
-                            setDeleteModal(true)
-                        }}>Delete</DeleteButton>
-                        <UpdateButton onClick={() => {
-                            setEventData(item);
-                            setUpdateModal(true);
-                            setAddModal(false);
-                        }}>
-=======
                         <DeleteButton
                             onClick={() => {
                                 setEventData(item);
@@ -112,7 +90,6 @@ export default function VillageOfficers() {
                                 setAddModal(false);
                             }}
                         >
->>>>>>> fe87ebe850863319b776a2e785729f32924b69a1
                             Update
                         </UpdateButton>
                     </td>
@@ -124,8 +101,8 @@ export default function VillageOfficers() {
     
     if (serverError) return <PageNotFound />;
     return (
-        <AdminLayout>
-            <EmpHeader pageName={"Village Officers"} />
+        <ReceptionistLayout>
+            <EmpHeader pageName={"Manage Nurse"} />
 
             <TopContainer>
                 <AddButton
@@ -146,11 +123,11 @@ export default function VillageOfficers() {
                     <table>
                         <thead>
                             <tr>
-                                <th>name</th>
-                                <th>GS Division</th>
-                                <th>Division Number</th>
+                                <th>Registration Number</th>
+                                <th>Name</th>
+                                <th>E-mail</th>
                                 <th>Contact</th>
-                                <th>Action</th>
+                                
                             </tr>
                         </thead>
                         <tbody>{getDataContent(apiData)}</tbody>
@@ -168,7 +145,7 @@ export default function VillageOfficers() {
 
             {/* ======================= Add & Update village officer ========================= */}
             {/* 888888888888888888888888888888888888888888888888888888888888888888888888888888 */}
-            <VillageOfficerAddAndUpdate
+            <DoctorAddAndUpdate
                 addModal={addModal}
                 updateModal={updateModal}
                 setAddModal={setAddModal}
@@ -209,6 +186,9 @@ export default function VillageOfficers() {
                     </ModalContent>
                 </Modal>
             )} */}
-        </AdminLayout>
+        </ReceptionistLayout>
     );
 }
+
+
+
