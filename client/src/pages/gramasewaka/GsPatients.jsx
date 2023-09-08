@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import GramasewakaLayOut from '../../components/layouts/GramasewakaLayOut'
-import { MainContainerBG, Contact, TableContainer, TableTitle } from './z-gsStyle';
+import { } from './z-gsStyle';
 import EmpHeader from '../../components/header/EmpHeader';
+import { AddButton, Contact, MainContainerBG, SearchBar, TableContainer, TopContainer } from '../../assets/styles/globalStyls';
 import BottomSlider from '../../components/slider/BottomSlider';
 
 export default function GsPatients() {
@@ -17,16 +18,13 @@ export default function GsPatients() {
             const item = data[i];
             content.push(
                 <tr key={item.Organizer}>
-                    <td><TableTitle>{item.Patientname}</TableTitle></td>
-                    <td><TableTitle>{item.address}</TableTitle></td>
+                    <td>{item.Patientname}</td>
+                    <td>{item.address}</td>
                     <td>
                         <Contact>
                             {item.contact}
                             <div>
                                 <i className="fa-regular fa-envelope"></i>
-                            </div>
-                            <div>
-                                <i class="fa-regular fa-envelope"></i>
                             </div>
                         </Contact>
                     </td>
@@ -42,8 +40,15 @@ export default function GsPatients() {
     return (
         <GramasewakaLayOut>
             <EmpHeader pageName={"Patient"} />
-            <MainContainerBG>
 
+            <TopContainer>
+                <AddButton>Add new</AddButton>
+                <SearchBar>
+                    <input type="text" placeholder="Search here..." />
+                </SearchBar>
+            </TopContainer>
+
+            <MainContainerBG>
                 <TableContainer>
                     <table>
                         <thead>
@@ -58,14 +63,14 @@ export default function GsPatients() {
                     </table>
                 </TableContainer>
 
-                <BottomSlider length={length}
+                <BottomSlider
+                    length={length}
                     index={index}
                     setIndex={setIndex}
                     x={x}
-                    sliderValue={sliderValue} />
-
+                    sliderValue={sliderValue}
+                />
             </MainContainerBG>
-
         </GramasewakaLayOut>
     );
 }
@@ -76,39 +81,46 @@ export default function GsPatients() {
 const data = [
 
     {
+        _id: 1,
         Patientname: "Kalum Chandana",
         address: "Abc",
-
+        contact: "0764412558"
     },
     {
+        _id: 2,
         Patientname: "Kalum Chandana",
         address: "Tangalle",
-
+        contact: "0764412558"
     },
     {
+        _id: 3,
         Patientname: "Kalum Chandana",
         address: "Tangalle",
-
+        contact: "0764412558"
     },
     {
+        _id: 4,
         Patientname: "Kalum Chandana",
         address: "Tangalle",
-
+        contact: "0764412558"
     },
     {
+        _id: 5,
         Patientname: "Kalum Chandana",
         address: "Tangalle",
-
+        contact: "0764412558"
     },
     {
+        _id: 6,
         Patientname: "Kalum Chandana",
         address: "Tangalle",
-
+        contact: "0764412558"
     },
     {
+        _id: 7,
         Patientname: "Kalum Chandana",
         address: "Tangalle",
-
+        contact: "0764412558"
     },
 
 

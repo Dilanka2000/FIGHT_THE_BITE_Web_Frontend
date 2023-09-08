@@ -27,4 +27,20 @@ export const AuthorizeAdmin = ({ children }) => {
     return children;
 }
 
+export const AuthorizeGN = ({ children }) => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        return <Navigate to={'/login'} replace={true}></Navigate>
+    }
+    else {
+        let decode = jwt_decode(token);
+        if (decode.role !== "GN") {
+            return <Navigate to={'/login'} replace={true}></Navigate>
+        }
+    }
+
+    return children;
+}
+
 

@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from "react";
 import AdminLayout from "../../components/layouts/AdminLayout";
 import EmpHeader from "../../components/header/EmpHeader";
+<<<<<<< HEAD
 import { AddButton, DeleteButton, MainContainerBG, Modal, ModalContent, SearchBar, TableContainer, TopContainer, UpdateButton } from "../../assets/styles/globalStyls";
 import { Contact, ImageAndText } from "./z-adminStyle";
+=======
+import { AddButton, Contact, DeleteButton, MainContainerBG, Modal, ModalContent, SearchBar, TableContainer, TopContainer, UpdateButton } from "../../assets/styles/globalStyls";
+import { ImageAndText } from "./z-adminStyle";
+>>>>>>> fe87ebe850863319b776a2e785729f32924b69a1
 import BottomSlider from "../../components/slider/BottomSlider";
 import RegisterSuccess from "../../components/popup/RegisterSuccess";
 import useFetch from "../../hooks/fetch-hook";
 import PageNotFound from "../PageNotFound";
+<<<<<<< HEAD
+=======
+import profileImg from "../../assets/images/profile.png";
+>>>>>>> fe87ebe850863319b776a2e785729f32924b69a1
 import VillageOfficerAddAndUpdate from "./popup/VillageOfficerAddAndUpdate";
 import UpdateSuccess from "../../components/popup/UpdateSuccess";
 import DeleteUser from "../../components/popup/DeleteUser";
@@ -28,6 +37,10 @@ export default function VillageOfficers() {
     const [deleteModal, setDeleteModal] = useState(false);
     const [registerSuccess, setRegisterSuccess] = useState(false);
     const [updateSuccess, setUpdateSuccess] = useState(false);
+<<<<<<< HEAD
+=======
+    // const [deleteSuccess, setDeleteSuccess] = useState(false);
+>>>>>>> fe87ebe850863319b776a2e785729f32924b69a1
     
     
     useEffect(() => {
@@ -56,7 +69,9 @@ export default function VillageOfficers() {
                 <tr key={item._id}>
                     <td>
                         <ImageAndText>
-                            <div></div>
+                            <div>
+                                <img src={profileImg} alt="Profile 4to" />
+                            </div>
                             <span>{item.name}</span>
                         </ImageAndText>
                     </td>
@@ -71,6 +86,7 @@ export default function VillageOfficers() {
                         </Contact>
                     </td>
                     <td>
+<<<<<<< HEAD
                         <DeleteButton onClick={() => {
                             setEventData(item);
                             setDeleteModal(true)
@@ -80,6 +96,23 @@ export default function VillageOfficers() {
                             setUpdateModal(true);
                             setAddModal(false);
                         }}>
+=======
+                        <DeleteButton
+                            onClick={() => {
+                                setEventData(item);
+                                setDeleteModal(true);
+                            }}
+                        >
+                            Delete
+                        </DeleteButton>
+                        <UpdateButton
+                            onClick={() => {
+                                setEventData(item);
+                                setUpdateModal(true);
+                                setAddModal(false);
+                            }}
+                        >
+>>>>>>> fe87ebe850863319b776a2e785729f32924b69a1
                             Update
                         </UpdateButton>
                     </td>

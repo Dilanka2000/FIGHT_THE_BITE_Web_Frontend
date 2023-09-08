@@ -1,104 +1,154 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import GramasewakaLayOut from '../../components/layouts/GramasewakaLayOut'
-import { MainContainerBG1, MainContainerBG2, ListName, Title, TableContainer1, ViewButton, DeleteButton, TableTitle, AddButton, SearchBar, TopContainer } from './z-gsStyle';
 import EmpHeader from '../../components/header/EmpHeader';
+import { AddButton, ButtonContainer, DeleteButton, MainContainer, MainContainerBG, MainGridContainer, Modal, ModalContent, SearchBar, TopContainer, UpdateButton } from '../../assets/styles/globalStyls';
+import { GridTableContainerScroll, GridTitle, ScrollContainer } from './z-gsStyle';
+import ViewVillagers from './popup/ViewVillagers';
+import VillagesAddAndUpdate from './popup/VillagesAddAndUpdate';
+import RegisterSuccess from '../../components/popup/RegisterSuccess';
+import UpdateSuccess from '../../components/popup/UpdateSuccess';
 // import BottomSlider from '../../components/slider/BottomSlider';
 
 
 
 export default function GsVillagers() {
 
+    const [eventData, setEventData] = useState('');
+    const [viewData, setViewData] = useState(false);
+    const [addModal, setAddModal] = useState(false);
+    const [updateModal, setUpdateModal] = useState(false);
+    // const [deleteModal, setDeleteModal] = useState(false);
+    const [registerSuccess, setRegisterSuccess] = useState(false);
+    const [updateSuccess, setUpdateSuccess] = useState(false);
 
-    const getDataContent1 = data1 => {
-        let content = [];
-        for (let i = index; i < x; i++) {
-            const item = data1[i];
-            content.push(
-                <ListName key={item.name}>
-                    <TableTitle>{item.name}</TableTitle>
-
-
-                    <ViewButton>View</ViewButton>
-
-
-                </ListName>
-            );
+    useEffect(() => {
+        if (registerSuccess) {
+            window.location.reload();
+            const slideIntaval = setInterval(() => {
+                setRegisterSuccess(false);
+            }, 2000);
+            return () => clearInterval(slideIntaval);
+        } else if (updateSuccess) {
+            window.location.reload();
+            const slideIntaval = setInterval(() => {
+                setUpdateSuccess(false);
+            }, 2000);
+            return () => clearInterval(slideIntaval);
         }
-        return content;
-    }
-
-    const sliderValue = 5;
-    const [index, setIndex] = useState(0);
-    const length = data.length;
-    const x = index + sliderValue > length ? length : index + sliderValue;
-
-
-    const getDataContent = data => {
-        let content = [];
-        for (let i = index; i < x; i++) {
-            const item = data[i];
-            content.push(
-                <tr key={item.name}>
-                    <td><TableTitle>{item.name}</TableTitle></td>
-
-                    <td>
-                        <DeleteButton>Details</DeleteButton>
-
-                    </td>
-                </tr>
-            );
-        }
-        return content;
-    }
-
-
+    }, [registerSuccess, updateSuccess]);
 
     return (
         <GramasewakaLayOut>
             <EmpHeader pageName={"Villagers"} />
 
             <TopContainer>
-                <AddButton>Add new</AddButton>
+                <AddButton
+                    onClick={() => {
+                        setAddModal(true);
+                        setUpdateModal(false);
+                    }}
+                >
+                    Add new
+                </AddButton>
                 <SearchBar>
                     <input type="text" placeholder="Search here..." />
                 </SearchBar>
             </TopContainer>
 
+            <MainGridContainer>
+                <MainContainer>
+                    <GridTitle>New login requests</GridTitle>
+                    <ScrollContainer>
+                        {data1.map(({ _id, name, gmn }) => (
+                            <div key={_id}>
+                                <p>{name}</p>
+                                <p>{gmn}</p>
+                                <UpdateButton>View</UpdateButton>
+                            </div>
+                        ))}
+                    </ScrollContainer>
+                </MainContainer>
 
+                <MainContainer>
+                    <GridTitle>Existing villagers</GridTitle>
+                    <MainContainerBG>
+                        <GridTableContainerScroll>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Household No</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {data.map((item) => (
+                                        <tr
+                                            key={item._id}
+                                            onClick={() => {
+                                                setEventData(item);
+                                                setViewData(true);
+                                            }}
+                                        >
+                                            <td>{item.name}</td>
+                                            <td>{item.gmn}</td>
+                                            <td>
+                                                <ButtonContainer>
+                                                    <DeleteButton
+                                                        onClick={() => {
+                                                            setEventData(item);
+                                                            setViewData(true);
+                                                        }}
+                                                    >
+                                                        Details
+                                                    </DeleteButton>
+                                                </ButtonContainer>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </GridTableContainerScroll>
+                    </MainContainerBG>
+                </MainContainer>
+            </MainGridContainer>
 
-            < MainContainerBG1>
-                <br />
+            {viewData && (
+                <ViewVillagers
+                    setViewData={setViewData}
+                    setEventData={setEventData}
+                    eventData={eventData}
+                />
+            )}
 
-                <Title>New login requests</Title>
+            {/* ======================= Add & Update village officer ========================= */}
+            {/* 888888888888888888888888888888888888888888888888888888888888888888888888888888 */}
+            <VillagesAddAndUpdate
+                addModal={addModal}
+                updateModal={updateModal}
+                setAddModal={setAddModal}
+                setUpdateModal={setUpdateModal}
+                eventData={eventData}
+                setEventData={setEventData}
+                setRegisterSuccess={setRegisterSuccess}
+                setUpdateSuccess={setUpdateSuccess}
+            />
 
-                <>{getDataContent1(data1)}</>
+            {registerSuccess && (
+                <Modal>
+                    <ModalContent>
+                        <RegisterSuccess />
+                    </ModalContent>
+                </Modal>
+            )}
 
-            </MainContainerBG1>
-
-            <MainContainerBG2>
-                <Title>Existing villagers</Title>
-
-                <TableContainer1>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Action</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>{getDataContent(data)}</tbody>
-                    </table>
-                </TableContainer1>
-            </MainContainerBG2>
-            {/* <BottomSlider length={length} index={index} setIndex={setIndex} x={x} sliderValue={sliderValue} /> */}
-
-
-
-
-
-
-
+            {updateSuccess && (
+                <Modal>
+                    <ModalContent>
+                        <UpdateSuccess />
+                    </ModalContent>
+                </Modal>
+            )}
         </GramasewakaLayOut>
     );
 }
@@ -106,183 +156,127 @@ export default function GsVillagers() {
 
 const data = [
     {
+        _id: 1,
         name: "Sunil Perera",
-
+        gmn: "207/A",
     },
     {
+        _id: 2,
         name: "Kalum Chandana",
-
+        gmn: "207/A",
     },
     {
+        _id: 3,
         name: "Sampath Sreemal",
-
+        gmn: "207/A",
     },
     {
+        _id: 4,
         name: "Dasith Chalaka",
-
+        gmn: "207/A",
     },
     {
+        _id: 5,
         name: "Nilum Dakshina",
-
+        gmn: "207/A",
     },
     {
+        _id: 6,
         name: "Sandun Perera",
-
+        gmn: "207/A",
     },
     {
+        _id: 7,
         name: "Nadun Viduranga",
-
+        gmn: "207/A",
     },
     {
+        _id: 8,
         name: "Janith Heshara",
-
+        gmn: "207/A",
     },
     {
+        _id: 9,
         name: "Dilanka Hesara",
-
+        gmn: "207/A",
     },
     {
+        _id: 10,
         name: "Janith Heshara",
-
+        gmn: "207/A",
     },
     {
+        _id: 11,
         name: "Dilanka Hesara",
-
+        gmn: "207/A",
     },
-    {
-        name: "Sunil Perera",
-
-    },
-    {
-        name: "Kalum Chandana",
-
-    },
-    {
-        name: "Sampath Sreemal",
-
-    },
-    {
-        name: "Dasith Chalaka",
-
-    },
-    {
-        name: "Nilum Dakshina",
-
-    },
-    {
-        name: "Sandun Perera",
-
-    },
-    {
-        name: "Nadun Viduranga",
-
-    },
-    {
-        name: "Janith Heshara",
-
-    },
-    {
-        name: "Dilanka Hesara",
-
-    },
-    {
-        name: "Janith Heshara",
-
-    },
-    {
-        name: "Dilanka Hesara",
-
-    },
-]
+];
 
 
 const data1 = [
     {
+        _id: 51,
         name: "Sunil Perera",
-
+        gmn: "207/A",
     },
     {
+        _id: 12,
         name: "Kalum Chandana",
-
+        gmn: "207/A",
     },
     {
+        _id: 13,
         name: "Sampath Sreemal",
-
+        gmn: "207/A",
     },
     {
+        _id: 14,
         name: "Dasith Chalaka",
-
+        gmn: "207/A",
     },
     {
+        _id: 15,
         name: "Nilum Dakshina",
-
+        gmn: "207/A",
     },
     {
+        _id: 16,
         name: "Sandun Perera",
-
+        gmn: "207/A",
     },
     {
+        _id: 17,
         name: "Nadun Viduranga",
-
+        gmn: "207/A",
     },
     {
+        _id: 18,
         name: "Janith Heshara",
-
+        gmn: "207/A",
     },
     {
+        _id: 19,
         name: "Dilanka Hesara",
-
+        gmn: "207/A",
     },
     {
-        name: "Janith Heshara",
-
-    },
-    {
+        _id: 110,
         name: "Dilanka Hesara",
-
+        gmn: "207/A",
     },
     {
-        name: "Sunil Perera",
-
-    },
-    {
-        name: "Kalum Chandana",
-
-    },
-    {
-        name: "Sampath Sreemal",
-
-    },
-    {
-        name: "Dasith Chalaka",
-
-    },
-    {
-        name: "Nilum Dakshina",
-
-    },
-    {
-        name: "Sandun Perera",
-
-    },
-    {
-        name: "Nadun Viduranga",
-
-    },
-    {
-        name: "Janith Heshara",
-
-    },
-    {
+        _id: 91,
         name: "Dilanka Hesara",
-
+        gmn: "207/A",
     },
     {
-        name: "Janith Heshara",
-
-    },
-    {
+        _id: 92,
         name: "Dilanka Hesara",
-
+        gmn: "207/A",
     },
-]
+    {
+        _id: 93,
+        name: "Dilanka Hesara",
+        gmn: "207/A",
+    },
+];

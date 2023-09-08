@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+<<<<<<< HEAD
 import GramasewakaLayOut from '../../components/layouts/GramasewakaLayOut'
 import { MainContainerBG, DeleteButton, UpdateButton, Contact, TableContainer, TableTitle } from './z-gsStyle';
 import EmpHeader from '../../components/header/EmpHeader';
@@ -114,3 +115,32 @@ const data = [
 
 
 ]
+=======
+import GramasewakaLayout from '../../components/layouts/GramasewakaLayOut';
+import EmpHeader from "../../components/header/EmpHeader";
+import { CalenderContainer, DeatailConainer, MAinFlexContainer } from "../../assets/styles/globalStyls";
+
+import { getMonth } from "../../components/calender/util";
+import CalenderHeader from "../../components/calender/CalenderHeader";
+import Month from "../../components/calender/Month";
+
+
+export default function GsCampaigns() {
+
+    const [currentMonth, setCurrentMonth] = useState(getMonth());
+
+    return (
+        <GramasewakaLayout>
+            <EmpHeader pageName={"Campaigns"} />
+
+            <MAinFlexContainer>
+                <CalenderContainer>
+                    <CalenderHeader />
+                    <Month month={currentMonth} />
+                </CalenderContainer>
+                <DeatailConainer></DeatailConainer>
+            </MAinFlexContainer>
+        </GramasewakaLayout>
+    );
+}
+>>>>>>> fe87ebe850863319b776a2e785729f32924b69a1

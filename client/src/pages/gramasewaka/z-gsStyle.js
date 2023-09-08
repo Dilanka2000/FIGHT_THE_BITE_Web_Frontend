@@ -1,6 +1,13 @@
 import { styled } from "styled-components";
 import { v } from "../../assets/styles/variables";
-
+import {
+    FormTextInput,
+    MainContainerBG,
+    ModalFormContainer,
+    ModalContent,
+    ModalFormContainer,
+    ModalTitle,
+} from "../../assets/styles/globalStyls";
 
 export const Heading = styled.div`
     display: flex;
@@ -9,362 +16,325 @@ export const Heading = styled.div`
     height: 70px;
 `;
 
-export const TopContainer = styled.div`
-    margin: ${v.lgSpacing} 0 ${v.xlSpacing} 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-`;
+// ==================================== Villages ===================================
+// 888888888888888888888888888888888888888888888888888888888888888888888888888888888
 
-export const AddButton = styled.button`
-    width: 207px;
-    height: 50px;
-    border-radius: 25px;
-    background: ${({ theme }) => theme.primary};
-    color: white;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-`;
-
-export const SearchBar = styled.div`
-    input {
-        width: 824px;
-        height: 50px;
-        background: ${({ theme }) => theme.bg};
-        border: none;
-        border-radius: 25px;
-        box-shadow: 10px 10px 10px 0 rgba(0, 0, 0, 0.02);
-        padding: 0 ${v.xlSpacing};
-    }
-
-    input:focus {
-        outline: none;
-        color: ${({ theme }) => theme.textMain};
-    }
-`;
-
-export const MainContainerBG = styled.div`
-    background: ${({ theme }) => theme.bg};
-    border-radius: 10px;
-`;
-export const MainContainer = styled.div`
-`;
-
-export const TableContainer = styled.div`
-    width: 100%;
-    height: 620px;
-    padding-top: 30px;
-    display: flex;
-    flex-direction: column;
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        border-spacing: 0;
-        border-radius: 10px;
-    }
-    td:first-child {
-        width: 370px;
-    }
-    td:last-child {
-        width: 400px;
-    }
-    th {
-        padding-bottom: ${v.lgSpacing};
-        font-size: 16px;
-    }
-    tr {
-        border-left: 5px solid ${({ theme }) => theme.bg};
-        border-right: 5px solid ${({ theme }) => theme.bg};
-    }
-    tbody > tr {
-        height: 100px;
-        border-top: 1px solid ${({ theme }) => theme.bg3};
-    }
-    td {
-        text-align: center;
-        font-size: 14px;
-    }
-    button{
-        margin: 0 ${v.smSpacing};
-    }
-
-    tbody > tr:hover {
-        border-left: 5px solid ${({ theme }) => theme.primary};
-    }
-`;
-
-export const ImageAndText = styled.div`
-    display: flex;
-    align-items: center;
-    padding-left: ${v.xxlSpacing};
-
-    div {
-        margin-right: ${v.lgSpacing};
-        width: 50px;
-        height: 50px;
-        border-radius: 25px;
-        background: ${({ theme }) => theme.bg2};
-    }
-
-    span {
-        font-weight: 600;
-    }
-`;
-
-export const Contact = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    div {
-        width: 50px;
-        height: 50px;
-        border-radius: 25px;
-        margin-left: ${v.lgSpacing};
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #fdeded;
-        cursor: pointer;
-    }
-
-    i {
-        color: ${({ theme }) => theme.primary};
-        font-size: 18px;
-        font-weight: 500;
-    }
-`;
-
-export const ButtonContainer = styled.div`
-    display: flex;
-    gap: ${v.mdSpacing};
-`
-
-export const DeleteButton = styled.button`
-    width: 125px;
-    height: 40px;
-    border-radius: 20px;
-    background: ${({ theme }) => theme.primary};
-    color: white;
-    border: none;
-    cursor: pointer;
-`;
-
-export const UpdateButton = styled.button`
-    width: 125px;
-    height: 40px;
-    border-radius: 20px;
-    background: #fcc43e;
-    color: white;
-    border: none;
-    cursor: pointer;
-`;
-
-
-// ==================================================================================================
-// ==================================================================================================
-
-export const ListContainer = styled.div`
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: ${v.xlSpacing};
-    
-`;
-
-export const ListItem = styled.div`
-    width: 365px;
-    height: 294px;
-    background: ${({ theme }) => theme.bg};
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    img {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        object-fit: cover;
-    }
-`;
-
-export const ProfileImage = styled.div`
-    width: 100px;
-    height: 100px;
-    margin-bottom: ${v.mdSpacing};
-`
-
-export const ProfileName = styled.div`
-    font-size: 18px;
+export const GridTitle = styled.div`
+    font-size: 20px;
     font-weight: 800;
-`
-
-export const ProfileContact = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: ${v.mdSpacing};
-
-    div {
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-        margin-left: ${v.mdSpacing};
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #fdeded;
-        cursor: pointer;
-    }
-
-    i {
-        color: ${({ theme }) => theme.primary};
-        font-size: 16px;
-        font-weight: 500;
-    }
+    padding-top: ${v.lgSpacing};
+    padding-bottom: ${v.mdSpacing};
 `;
 
-
-
-// ====================================== Map ==========================================
-// =====================================================================================
-
-export const MapMAinContainer = styled.div`
-    margin-top: ${v.lgSpacing};
-    display: flex;
-    justify-content: space-between;
-`
-export const MapContainer = styled.div`
-    width: 68%;
-    background: ${({ theme }) => theme.bg};
-    border-radius: ${v.borderRadius};
-    height: 800px;
-`;
-
-export const DivisionContainer = styled.div`
-    width: 30%;
-    background: ${({ theme }) => theme.bg};
-    border-radius: ${v.borderRadius};
-    height: 800px;
-`;
-
-
-
-
-
-
-//------------------------------gramasewaka_villager----------------------------------------------------------------
-export const Title = styled.div`
- font-size:20px;
- font-weight:800;
- background: rgb(245, 245, 245);
- 
- `
-
-export const TableTitle = styled.div`
-    font-size:16px;
-    font-weight:800;
-    `;
-
-export const ViewButton = styled.button`
-    width: 125px;
-    height: 40px;
-    border-radius: 20px;
-    background: #FCC43E;
-    color: white;
-    border: none;
-    cursor: pointer;
-`;
-export const MainContainerBG1 = styled.div`
-    
-    margin-top:10%
-    width : 50%;
-    height:200px;
-`;
-
-export const MainContainerBG2 = styled.div`
-    background: ${({ theme }) => theme.bg};
-    border-radius: 10px;
-    width : 50%;
-    margin-left:40%;
-    margin-top:-10%
-   
-`;
-
-
-export const LableList = styled.div`
-   
-   width:50%;
-`;
-export const ListName = styled.div`
-    width: 300px;
-    gap: ${v.xlSpacing};
-    background-color:white;
-    margin-top:4%;
-    height:80px;
-    display:flex;
-    
-
-    
-`;
-
-// 2 tables side by side
-export const MainTableContainer = styled.div`
-    display:flex;
-   
-`
-
-
-export const TableContainer1 = styled.div`
+export const GridTableContainerScroll = styled.div`
     width: 100%;
-    height: 620px;
-    padding-top: 30px;
+    height: 655px;
+    background: ${({ theme }) => theme.bg};
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
 
     table {
         width: 100%;
         border-collapse: collapse;
         border-spacing: 0;
         border-radius: 10px;
-        
-        
     }
-    td:first-child {
-        width: 370px;
-    }
-    td:last-child {
-        width: 400px;
+
+    thead {
+        width: 100%;
     }
     th {
-        padding-bottom: ${v.lgSpacing};
+        padding: ${v.xlSpacing} 0 35px 0;
         font-size: 16px;
+        position: sticky;
+        top: 0;
+        background: ${({ theme }) => theme.bg};
     }
     tr {
         border-left: 5px solid ${({ theme }) => theme.bg};
-        border-right: 5px solid ${({ theme }) => theme.bg};
+        border-right: 10px solid ${({ theme }) => theme.bg2};
     }
     tbody > tr {
-        height: 100px;
+        height: 80px;
         border-top: 1px solid ${({ theme }) => theme.bg3};
     }
     td {
         text-align: center;
         font-size: 14px;
     }
-    button{
+    button {
         margin: 0 ${v.smSpacing};
     }
 
     tbody > tr:hover {
         border-left: 5px solid ${({ theme }) => theme.primary};
     }
+
+    /* Define the scrollbar style */
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 15px;
+    }
+
+    /* Define the thumb style */
+    &::-webkit-scrollbar-thumb {
+        background: ${({ theme }) => theme.primary};
+        border-radius: 5px;
+    }
+
+    /* Define the track style */
+    &::-webkit-scrollbar-track:horizontal {
+        background-color: white;
+        box-shadow: inset 0 0 2px 2px gainsboro;
+    }
 `;
 
+export const ScrollContainer = styled.div`
+    width: 100%;
+    height: 655px;
+    display: flex;
+    flex-direction: column;
+    gap: ${v.lgSpacing};
+    padding-right: ${v.smSpacing};
+    overflow-y: scroll;
+
+    div {
+        width: 100%;
+        border-radius: 5px;
+        background: ${({ theme }) => theme.bg};
+        padding: ${v.lgSpacing} ${v.xxlSpacing};
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-left: 5px solid ${({ theme }) => theme.bg};
+        border-right: 5px solid ${({ theme }) => theme.bg};
+    }
+    div:hover {
+        border-left: 5px solid ${({ theme }) => theme.primary};
+    }
+    p:first-child {
+        width: 250px;
+    }
+
+    /* Define the scrollbar style */
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 15px;
+    }
+
+    /* Define the thumb style */
+    &::-webkit-scrollbar-thumb {
+        background: ${({ theme }) => theme.primary};
+        border-radius: 5px;
+    }
+
+    /* Define the track style */
+    &::-webkit-scrollbar-track:horizontal {
+        background-color: white;
+        box-shadow: inset 0 0 2px 2px gainsboro;
+    }
+`;
+
+// ============================= popup ==========================
+export const Grid40x60 = styled.div`
+    width: 70vw;
+    display: grid;
+    grid-template-columns: 0.8fr 2fr;
+    gap: ${v.xlSpacing};
+`;
+
+export const InputScrollContainer = styled.div`
+    width: 100%;
+    max-height: 600px;
+    /* border: 1px solid ${({ theme }) => theme.primary}; */
+    overflow-y: scroll;
+    padding-right: ${v.smSpacing};
+
+    /* Define the scrollbar style */
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 15px;
+    }
+
+    /* Define the thumb style */
+    &::-webkit-scrollbar-thumb {
+        background: ${({ theme }) => theme.primary};
+        border-radius: 5px;
+    }
+
+    /* Define the track style */
+    &::-webkit-scrollbar-track:horizontal {
+        background-color: white;
+        box-shadow: inset 0 0 2px 2px gainsboro;
+    }
+`;
+
+export const FormTextInput2 = styled(FormTextInput)`
+    label {
+        width: 80px;
+    }
+    input {
+        width: 320px;
+    }
+`;
+
+export const SpaceDiv = styled.div`
+    width: 100%;
+    height: 25px;
+`;
+
+export const MainContainerBG2 = styled(MainContainerBG)`
+    padding: ${v.mdSpacing};
+    border: 1px solid ${({ theme }) => theme.bg3};
+`;
+
+export const AddAndUndu = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: ${v.lgSpacing};
+
+    i {
+        font-size: 50px;
+    }
+`;
+
+export const RadioButtonContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    input {
+        width: 15px;
+        margin: 0 10px 0 25px;
+    }
+`;
 
 //----------------organizatoin----------------------------------------------
 
+export const PopUpContentHeader = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0px;
+
+    div {
+        width: 39%;
+        height: 1px;
+        background: ${({ theme }) => theme.text};
+    }
+
+    span {
+        padding: 0 20px;
+        color: ${({ theme }) => theme.text};
+    }
+`;
+
+export const TextInputField = styled(FormTextInput)`
+    display: block;
+    padding: 0px 25px;
+`;
+
+export const TextInputFieldParts = styled.div`
+    display: flex;
+`;
+
+// ------------------------ Villager Detail View Popup-----------------------------
+
+export const MainContainerView = styled.div`
+    display: flex;
+`;
+
+export const ModalFormContainerNew = styled(ModalFormContainer)`
+    padding: 0px 60px 60px 60px;
+`;
+
+export const ModalContentNew = styled(ModalContent)`
+    width: 1300px;
+`;
+
+export const AddVillagerPopUpBack = styled.div`
+    width: 34%;
+    background: ${({ theme }) => theme.primary};
+    padding: 75px 0px;
+    border-radius: 10px 0px 0px 10px;
+`;
+
+export const AddVillagerPopUpBackHouseHolderInfo = styled.div`
+    padding: 5px 30px 25px 60px;
+    color: ${({ theme }) => theme.bg};
+
+    h5 {
+        font-weight: 900;
+        font-size: 18px;
+    }
+
+    p {
+        font-size: 16px;
+        margin: 8px 40px;
+    }
+`;
+
+export const PopUpContentHeaderNew = styled(PopUpContentHeader)`
+    padding: 30px 0px;
+
+    div {
+        width: 29%;
+    }
+`;
+
+export const PopUpContainerHeaderNewContainer = styled.div`
+    width: 100%;
+`;
+
+export const MemberDetailsTble = styled.div`
+    width: 100%;
+
+    table {
+        width: 100%;
+        padding: 0px 60px;
+    }
+
+    tr {
+        padding: 2.5px;
+    }
+`;
+export const AddVillagerPopUpBackHouseHolderInfoNew = styled.div`
+    display: flex;
+    margin: 5px;
+    justify-content: center;
+
+    h5 {
+        font-weight: 900;
+        font-size: 18px;
+        width: 150px;
+        color: ${({ theme }) => theme.textMain};
+    }
+
+    p {
+        font-size: 18px;
+        color: ${({ theme }) => theme.text};
+    }
+`;
+
+export const LineInMemberDetails = styled.div`
+    width: 86%;
+    height: 1px;
+    background: ${({ theme }) => theme.text};
+    margin: 30px auto;
+`;
+
+export const ModalTitleNew = styled(ModalTitle)`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-radius: 10px 10px 0 0;
+    font-size: 25px;
+    font-weight: 600;
+    padding: 25px 25px 0px 0px;
+    color: ${({ theme }) => theme.text};
+    background: ${({ theme }) => theme.bg};
+`;
