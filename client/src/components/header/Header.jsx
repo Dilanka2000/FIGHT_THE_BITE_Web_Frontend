@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./header.css";
-import logoIcon from "../../assets/images/Logo.png"
+import logoIcon from "../../assets/images/logo-sidebar.png";
 
 export default function Header() {
-    const user = 0;
+    // const user = 0;
 
     return (
         <header className="top">
@@ -15,7 +15,7 @@ export default function Header() {
             </div>
 
             <div className="topCenter">
-                <ul className="topList">
+                {/* <ul className="topList">
                     <li className="topListItem">
                         <Link className="link" to="/">
                             HOME
@@ -31,11 +31,11 @@ export default function Header() {
                             CONTACT
                         </Link>
                     </li>
-                </ul>
+                </ul> */}
             </div>
 
             <div className="topRight">
-                {user ? (
+                {/* {user ? (
                     <ul className="topList">
                         <li className="topListItem">ABC Silva</li>
                         <li className="topListItem">
@@ -57,7 +57,7 @@ export default function Header() {
                             </Link>
                         </li>
                     </ul>
-                )}
+                )} */}
             </div>
         </header>
     );

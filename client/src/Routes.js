@@ -2,11 +2,11 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // auth middleware
-import { AuthorizeAdmin, AuthorizeUser } from "./middleware/auth";
+import { AuthorizeAdmin, AuthorizeGN, AuthorizeUser } from "./middleware/auth";
 
 // Import all components
 import HomePage from "./pages/user/HomePage";
-import LandingPage from "./pages/home/LandingPage";
+// import LandingPage from "./pages/home/LandingPage";
 import LogIn from "./pages/auth/LogIn";
 import Register from "./pages/auth/Register";
 import Recovery from "./pages/auth/Recovery";
@@ -33,7 +33,7 @@ import GsAnnouncements from "./pages/gramasewaka/GsAnnouncements";
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <LandingPage />,
+        element: <LogIn />,
     },
     {
         path: "/home",
@@ -134,27 +134,51 @@ const router = createBrowserRouter([
 
     {
         path: "/gramasewaka",
-        element: <GsHomePage />,
+        element: (
+            <AuthorizeGN>
+                <GsHomePage />
+            </AuthorizeGN>
+        ),
     },
     {
         path: "/gramasewaka/villagers",
-        element: <GsVillagers />,
+        element: (
+            <AuthorizeGN>
+                <GsVillagers />
+            </AuthorizeGN>
+        ),
     },
     {
         path: "/gramasewaka/patients",
-        element: <GsPatients />,
+        element: (
+            <AuthorizeGN>
+                <GsPatients />
+            </AuthorizeGN>
+        ),
     },
     {
         path: "/gramasewaka/organizations",
-        element: <GsOrganizations />,
+        element: (
+            <AuthorizeGN>
+                <GsOrganizations />
+            </AuthorizeGN>
+        ),
     },
     {
         path: "/gramasewaka/campaigns",
-        element: <GsCampaigns />,
+        element: (
+            <AuthorizeGN>
+                <GsCampaigns />
+            </AuthorizeGN>
+        ),
     },
     {
         path: "/gramasewaka/announcements",
-        element: <GsAnnouncements />,
+        element: (
+            <AuthorizeGN>
+                <GsAnnouncements />
+            </AuthorizeGN>
+        ),
     },
 ]);
 

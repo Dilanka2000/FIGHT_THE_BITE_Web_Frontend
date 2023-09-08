@@ -1,13 +1,12 @@
 .top{
     width: 100%;
-    height: 50px;
-    background-color: rgb(252, 161, 161);
+    height: 60px;
+    background-color: rgb(230, 230, 230);
     position: sticky;
     top: 0;
     display: flex;
     align-items: center;
     font-family: 'Josefin Sans', sans-serif;
-    border-radius: 10px;
 }
 
 .topLeft, .topRight{
@@ -27,7 +26,8 @@
 }
 
 .topIcon{
-    width: 100px;
+    /* width: 100px; */
+    height: 60px;
     margin-right: 10px;
     /* cursor: pointer; */
 }

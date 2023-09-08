@@ -7,9 +7,12 @@ import BottomSlider from "../../components/slider/BottomSlider";
 import RegisterSuccess from "../../components/popup/RegisterSuccess";
 import useFetch from "../../hooks/fetch-hook";
 import PageNotFound from "../PageNotFound";
+import profileImg from "../../assets/images/profile.png";
 import VillageOfficerAddAndUpdate from "./popup/VillageOfficerAddAndUpdate";
 import UpdateSuccess from "../../components/popup/UpdateSuccess";
 import DeleteUser from "../../components/popup/DeleteUser";
+import Loading from "../../components/popup/Loading";
+import DeleteSuccess from "../../components/popup/DeleteSuccess";
 
 
 export default function VillageOfficers() {
@@ -26,9 +29,10 @@ export default function VillageOfficers() {
     const [addModal, setAddModal] = useState(false);
     const [updateModal, setUpdateModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [registerSuccess, setRegisterSuccess] = useState(false);
     const [updateSuccess, setUpdateSuccess] = useState(false);
-    // const [deleteSuccess, setDeleteSuccess] = useState(false);
+    const [deleteSuccess, setDeleteSuccess] = useState(false);
     
     
     useEffect(() => {
@@ -46,8 +50,15 @@ export default function VillageOfficers() {
             }, 2000);
             return () => clearInterval(slideIntaval);
         }
+        else if (deleteSuccess) {
+            window.location.reload();
+            const slideIntaval = setInterval(() => {
+                setDeleteSuccess(false);
+            }, 2000);
+            return () => clearInterval(slideIntaval);
+        }
         
-    }, [registerSuccess, updateSuccess]);
+    }, [registerSuccess, updateSuccess, deleteSuccess]);
     
     const getDataContent = data => {
         let content = [];
@@ -57,7 +68,9 @@ export default function VillageOfficers() {
                 <tr key={item._id}>
                     <td>
                         <ImageAndText>
-                            <div></div>
+                            <div>
+                                <img src={profileImg} alt="Profile 4to" />
+                            </div>
                             <span>{item.name}</span>
                         </ImageAndText>
                     </td>
@@ -72,15 +85,21 @@ export default function VillageOfficers() {
                         </Contact>
                     </td>
                     <td>
-                        <DeleteButton onClick={() => {
-                            setEventData(item);
-                            setDeleteModal(true)
-                        }}>Delete</DeleteButton>
-                        <UpdateButton onClick={() => {
-                            setEventData(item);
-                            setUpdateModal(true);
-                            setAddModal(false);
-                        }}>
+                        <DeleteButton
+                            onClick={() => {
+                                setEventData(item);
+                                setDeleteModal(true);
+                            }}
+                        >
+                            Delete
+                        </DeleteButton>
+                        <UpdateButton
+                            onClick={() => {
+                                setEventData(item);
+                                setUpdateModal(true);
+                                setAddModal(false);
+                            }}
+                        >
                             Update
                         </UpdateButton>
                     </td>
@@ -125,13 +144,13 @@ export default function VillageOfficers() {
                     </table>
                 </TableContainer>
 
-                <BottomSlider
+                {length > 5 && <BottomSlider
                     length={length}
                     index={index}
                     setIndex={setIndex}
                     x={x}
                     sliderValue={sliderValue}
-                />
+                />}
             </MainContainerBG>
 
             {/* ======================= Add & Update village officer ========================= */}
@@ -145,7 +164,16 @@ export default function VillageOfficers() {
                 setEventData={setEventData}
                 setRegisterSuccess={setRegisterSuccess}
                 setUpdateSuccess={setUpdateSuccess}
+                setLoading={setLoading}
             />
+
+            {loading && (
+                <Modal>
+                    <ModalContent>
+                        <Loading />
+                    </ModalContent>
+                </Modal>
+            )}
 
             {registerSuccess && (
                 <Modal>
@@ -169,14 +197,15 @@ export default function VillageOfficers() {
                 eventData={eventData}
                 setEventData={setEventData}
                 setDeleteModal={setDeleteModal}
+                setDeleteSuccess={setDeleteSuccess}
             />}
-            {/* {deleteSuccess && (
+            {deleteSuccess && (
                 <Modal>
                     <ModalContent>
-                        <UpdateSuccess />
+                        <DeleteSuccess />
                     </ModalContent>
                 </Modal>
-            )} */}
+            )}
         </AdminLayout>
     );
 }

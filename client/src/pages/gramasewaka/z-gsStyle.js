@@ -1,7 +1,12 @@
 import { styled } from "styled-components";
 import { v } from "../../assets/styles/variables";
-import { FormTextInput, MainContainerBG } from "../../assets/styles/globalStyls";
-
+import {
+    FormTextInput,
+    MainContainerBG,
+    ModalFormContainer,
+    ModalContent,
+    ModalTitle,
+} from "../../assets/styles/globalStyls";
 
 export const Heading = styled.div`
     display: flex;
@@ -18,7 +23,7 @@ export const GridTitle = styled.div`
     font-weight: 800;
     padding-top: ${v.lgSpacing};
     padding-bottom: ${v.mdSpacing};
-`
+`;
 
 export const GridTableContainerScroll = styled.div`
     width: 100%;
@@ -167,7 +172,7 @@ export const InputScrollContainer = styled.div`
 
 export const FormTextInput2 = styled(FormTextInput)`
     label {
-        width: 100px;
+        width: 80px;
     }
     input {
         width: 320px;
@@ -181,7 +186,7 @@ export const SpaceDiv = styled.div`
 
 export const MainContainerBG2 = styled(MainContainerBG)`
     padding: ${v.mdSpacing};
-    border: 1px solid ${({ theme }) => theme.primary};
+    border: 1px solid ${({ theme }) => theme.bg3};
 `;
 
 export const AddAndUndu = styled.div`
@@ -200,8 +205,139 @@ export const RadioButtonContainer = styled.div`
     align-items: center;
     justify-content: center;
 
-    input{
-        width: 25px;
-        margin-right: 25px;
+    input {
+        width: 15px;
+        margin: 0 10px 0 25px;
     }
-`
+`;
+
+//----------------organizatoin----------------------------------------------
+
+export const PopUpContentHeader = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0px;
+
+    div {
+        width: 39%;
+        height: 1px;
+        background: ${({ theme }) => theme.text};
+    }
+
+    span {
+        padding: 0 20px;
+        color: ${({ theme }) => theme.text};
+    }
+`;
+
+export const TextInputField = styled(FormTextInput)`
+    display: block;
+    padding: 0px 25px;
+`;
+
+export const TextInputFieldParts = styled.div`
+    display: flex;
+`;
+
+// ------------------------ Villager Detail View Popup-----------------------------
+
+export const MainContainerView = styled.div`
+    display: flex;
+`;
+
+export const ModalFormContainerNew = styled(ModalFormContainer)`
+    padding: 0px 60px 60px 60px;
+`;
+
+export const ModalContentNew = styled(ModalContent)`
+    width: 1300px;
+`;
+
+export const AddVillagerPopUpBack = styled.div`
+    width: 37%;
+    background: ${({ theme }) => theme.primary};
+    padding: 75px 0px;
+    border-radius: 10px 0px 0px 10px;
+`;
+
+export const AddVillagerPopUpBackHouseHolderInfo = styled.div`
+    padding: 5px 30px 25px 60px;
+    color: ${({ theme }) => theme.bg};
+
+    h5 {
+        font-weight: 900;
+        font-size: 18px;
+    }
+
+    p {
+        font-size: 16px;
+        margin: 8px 40px;
+    }
+`;
+
+export const PopUpContentHeaderNew = styled(PopUpContentHeader)`
+    padding: 30px 0px;
+
+    div {
+        width: 33%;
+    }
+`;
+
+export const PopUpContainerHeaderNewContainer = styled.div`
+    width: 100%;
+`;
+
+export const MemberDetailsTble = styled.div`
+    width: 100%;
+
+    table {
+        width: 100%;
+        /* padding: 0px 60px; */
+    }
+
+    tr {
+        padding: 2.5px;
+    }
+
+    td{
+        width: 50%;
+    }
+`;
+export const AddVillagerPopUpBackHouseHolderInfoNew = styled.div`
+    display: flex;
+    margin: 5px 5px 5px 75px;
+    /* justify-content: center; */
+
+    h5 {
+        font-weight: 900;
+        font-size: 18px;
+        width: 150px;
+        color: ${({ theme }) => theme.textMain};
+    }
+
+    p {
+        font-size: 18px;
+        color: ${({ theme }) => theme.text};
+    }
+`;
+
+export const LineInMemberDetails = styled.div`
+    width: 86%;
+    height: 1px;
+    background: ${({ theme }) => theme.text};
+    margin: 30px auto;
+`;
+
+export const ModalTitleNew = styled(ModalTitle)`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-radius: 10px 10px 0 0;
+    font-size: 25px;
+    font-weight: 600;
+    padding: 25px 25px 0px 0px;
+    color: ${({ theme }) => theme.text};
+    background: ${({ theme }) => theme.bg};
+`;

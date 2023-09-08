@@ -23,3 +23,17 @@ export default function Campaigns() {
         </AdminLayout>
     );
 }
+
+
+// const data = [
+//     {
+//         _id: "123456789",
+//         name: "Kasun Vishwa Campaign",
+//         date: "2023-08-15",
+//         time: "8.00",
+//         location: "Maharagama",
+//         organizationid: "123",
+
+
+//     }
+// ]

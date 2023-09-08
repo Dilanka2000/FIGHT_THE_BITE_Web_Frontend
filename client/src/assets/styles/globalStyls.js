@@ -67,6 +67,25 @@ export const ProfileImage = styled.div`
     }
 `;
 
+export const DeleteProfileImage = styled.div`
+    width: 50px;
+    height: 50px;
+    margin-bottom: ${v.smSpacing};
+
+    img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+`;
+
+export const DeleteProfileName = styled.div`
+    font-size: 14px;
+    font-weight: 600;
+    color: ${({ theme }) => theme.bg};
+`;
+
 // ==================== Main container Stylings ====================
 // 88888888888888888888888888888888888888888888888888888888888888888
 export const MainContainerBG = styled.div`
@@ -301,8 +320,35 @@ export const ListItem = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+`;
 
-    
+export const DeleteListItem = styled.div`
+    width: 365px;
+    height: 294px;
+    background: ${({ theme }) => theme.bg};
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    center {
+        padding: ${v.mdSpacing};
+    }
+
+    p{
+        font-size: 14px;
+    }
+`;
+
+
+export const DeleteProfile = styled.div`
+    width: 100%;
+    background: ${({ theme }) => theme.primary};
+    border-radius: ${v.borderRadius};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: ${v.mdSpacing};
 `;
 
 
@@ -414,4 +460,5 @@ export const FormTextInputBlock = styled(FormTextInput)`
     label{
         width: 100%;
     }
-`
+`;
+

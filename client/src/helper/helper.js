@@ -21,8 +21,14 @@ export async function getUsername() {
     const token = localStorage.getItem('token');
     if (!token) return Promise.reject("Cannot find Token");
     let decode = jwt_decode(token);
-    // console.log(decode.username);
     return decode.username;
+}
+// To get userrole from Token
+export async function getUserRole() {
+    const token = localStorage.getItem('token');
+    if (!token) return Promise.reject("Cannot find Token");
+    let decode = jwt_decode(token);
+    return decode.role;
 }
 
 // Get user details function
@@ -128,5 +134,17 @@ export async function resetPassword({ username, password }) {
         return Promise.resolve({ data, status });
     } catch (error) {
         return Promise.reject({ error });
+    }
+}
+
+// Add fammily function
+export async function addFammily(credentials) {
+    try {
+        console.log(credentials);
+        const { data: { msg } } = await axios.post('/api/addfammily', credentials);
+
+        return Promise.resolve(msg);
+    } catch (error) {
+        return (error.response.data.error);
     }
 }

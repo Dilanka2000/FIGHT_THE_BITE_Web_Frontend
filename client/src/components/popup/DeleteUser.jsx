@@ -3,12 +3,15 @@ import { ButtonContainer, DeleteContainer, DeleteContainerLeft, DeleteContainerR
 import { CancleButton, DeleteButton, Modal, ModalContent, ProfileImage } from "../../assets/styles/globalStyls";
 import { deleteData } from "../../helper/helper";
 
-async function hadelDelete(id) {
+async function hadelDelete(id, setDeleteSuccess) {
     let promise = await deleteData({ id });
-    if (promise === "Delete Successfully") window.location.reload();
+    if (promise === "Delete Successfully") {
+        setDeleteSuccess(true);
+        window.location.reload();
+    }
 }
 
-export default function DeleteUser({ eventData, setEventData, setDeleteModal }) {
+export default function DeleteUser({ eventData, setEventData, setDeleteModal, setDeleteSuccess }) {
 
     return (
         <Modal>
@@ -38,7 +41,7 @@ export default function DeleteUser({ eventData, setEventData, setDeleteModal }) 
                                 setDeleteModal(false);
                             }}>Cancle</CancleButton>
                             <DeleteButton onClick={() => {
-                                hadelDelete(eventData._id);
+                                hadelDelete(eventData._id, setDeleteSuccess);
                                 setEventData("");
                                 setDeleteModal(false);
                             }}>Delete</DeleteButton>
