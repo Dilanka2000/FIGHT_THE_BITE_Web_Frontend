@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
 import AdminLayout from "../../components/layouts/AdminLayout";
 import EmpHeader from "../../components/header/EmpHeader";
-<<<<<<< HEAD
 import { AddButton, DeleteButton, MainContainerBG, Modal, ModalContent, SearchBar, TableContainer, TopContainer, UpdateButton } from "../../assets/styles/globalStyls";
 import { Contact, ImageAndText } from "./z-adminStyle";
-=======
-import { AddButton, Contact, DeleteButton, MainContainerBG, Modal, ModalContent, SearchBar, TableContainer, TopContainer, UpdateButton } from "../../assets/styles/globalStyls";
-import { ImageAndText } from "./z-adminStyle";
->>>>>>> fe87ebe850863319b776a2e785729f32924b69a1
 import BottomSlider from "../../components/slider/BottomSlider";
 import RegisterSuccess from "../../components/popup/RegisterSuccess";
 import useFetch from "../../hooks/fetch-hook";
