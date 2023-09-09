@@ -35,7 +35,7 @@ export default function OrganizationsAddAndUpdate({
     nic: "",
     boardPhone: "",
     boardEmail: "",
-    password: "123456",
+    password: "Org@12345",
     role: "ORG",
   };
   let initialValueForUpdate = {

@@ -107,7 +107,6 @@ export const PHISchema = yup.object().shape({
     name: yup
         .string()
         .required("Field Required!")
-<<<<<<< HEAD
         .matches(nameRule, "Invalid name!"),
     address: yup.string().required("Field Required!"),
     nic: yup
@@ -212,68 +211,11 @@ export const orgUpdateSchema = yup.object().shape({
         .email("Invalid Email!")
         .matches(emailRule, "Invalid Email!")
         .required("Field Required!"),
-=======
-});
-
-export const orgSchema = yup.object().shape({
-  name: yup
-    .string()
-    .required("Field Required!")
-    .matches(nameRule, "Invalid name!"),
-  email: yup
-    .string()
-    .email("Invalid Email!")
-    .matches(emailRule, "Invalid Email!")
-    .required("Field Required!"),
-  gsDivision: yup.string().required("Field Required!"),
-  divisionNumber: yup.string().required("Field Required!"),
-  contact: yup.string().required("Field Required!"),
-  boardName: yup
-    .string()
-    .required("Field Required!")
-    .matches(nameRule, "Invalid name!"),
-  boardAddress: yup.string().required("Field Required!"),
-  nic: yup.string().required("Field Required!"),
-  boardPhone: yup.string().required("Field Required!"),
-  boardEmail: yup
-    .string()
-    .email("Invalid Email!")
-    .matches(emailRule, "Invalid Email!")
-    .required("Field Required!"),
-});
-
-export const orgUpdateSchema = yup.object().shape({
-  name: yup
-    .string()
-    .required("Field Required!")
-    .matches(nameRule, "Invalid name!"),
-  email: yup
-    .string()
-    .email("Invalid Email!")
-    .matches(emailRule, "Invalid Email!")
-    .required("Field Required!"),
-  gsDivision: yup.string().required("Field Required!"),
-  divisionNumber: yup.string().required("Field Required!"),
-  contact: yup.string().required("Field Required!"),
-  boardName: yup
-    .string()
-    .required("Field Required!")
-    .matches(nameRule, "Invalid name!"),
-  boardAddress: yup.string().required("Field Required!"),
-  nic: yup.string().required("Field Required!"),
-  boardPhone: yup.string().required("Field Required!"),
-  boardEmail: yup
-    .string()
-    .email("Invalid Email!")
-    .matches(emailRule, "Invalid Email!")
-    .required("Field Required!"),
->>>>>>> 764b06a6f97a5639d48edaa22aa3b66082c9a3c2
 });
 
 export const fammilySchema = yup.object().shape({
     address: yup.string().required("Field Required!"),
     houseHoldNo: yup.string().required("Field Required!"),
-<<<<<<< HEAD
     members: yup
         .array(
             yup.object({
@@ -296,20 +238,7 @@ export const fammilySchema = yup.object().shape({
                     .matches(contactRule, "Invalid contact number!"),
             })
         )
-        .min(2),
-=======
-    // members: [
-    //     {
-    //         name: yup
-    //             .string()
-    //             .required("Field Required!")
-    //             .matches(nameRule, "Invalid name!"),
-    //         nic: yup.string().required("Field Required!"),
-    //         // gender: yup
-    //         age: yup.number().required("Field Required!"),
-    //         contact: yup.string().required("Field Required!"),
-    //     },
-    // ],
+        .min(2)
 });
 
 
@@ -412,10 +341,6 @@ export const nurseUpdateSchema = yup.object().shape({
         .required("Field Required!"),
         contact: yup
         .string()
-        .required("Field Required!"),
-        contact: yup
-        .string()
         .required("Field Required!")
     
->>>>>>> 764b06a6f97a5639d48edaa22aa3b66082c9a3c2
 });

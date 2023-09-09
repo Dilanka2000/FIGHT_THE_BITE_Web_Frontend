@@ -24,7 +24,6 @@ export const GridTitle = styled.div`
     padding-top: ${v.lgSpacing};
     padding-bottom: ${v.mdSpacing};
 `;
-`;
 
 export const GridTableContainerScroll = styled.div`
     width: 100%;
