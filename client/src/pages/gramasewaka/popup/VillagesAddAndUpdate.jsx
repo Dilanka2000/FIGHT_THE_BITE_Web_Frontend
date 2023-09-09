@@ -66,7 +66,6 @@ export default function VillagesAddAndUpdate({
         divisionNumber: eventData ? eventData.divisionNumber : "",
         houseHoldNo: eventData ? eventData.houseHoldNo : "",
         members: eventData ? eventData.members : [],
-        members: eventData ? eventData.members : [],
         id: eventData ? eventData._id : "",
     };
 
@@ -77,15 +76,13 @@ export default function VillagesAddAndUpdate({
         validateOnBlur: false,
         validateOnChange: false,
         onSubmit: async (values, onSubmitProps) => {
-            if (values.members.length > memberCount+1) {
-                while (values.members.length !== memberCount+1) {
+            if (values.members.length > memberCount + 1) {
+                while (values.members.length !== memberCount + 1) {
                     values.members.pop();
                 }
             }
             setLoading(true);
-            let promise = addModal
-                ? await addFammily(values)
-                : "";
+            let promise = addModal ? await addFammily(values) : "";
             if (promise === "Register Successfully") {
                 setLoading(false);
                 setAddModal(false);
@@ -116,10 +113,16 @@ export default function VillagesAddAndUpdate({
         for (let i = 1; i < memberCount + 1; i++) {
             content.push(
                 <React.Fragment key={i}>
-                <React.Fragment key={i}>
                     <MainContainerBG2>
                         <RowContainer>
-                            <FormTextInput2 $error={formik.errors.members && formik.errors.members[i] ? formik.errors.members[i].name : ""}>
+                            <FormTextInput2
+                                $error={
+                                    formik.errors.members &&
+                                    formik.errors.members[i]
+                                        ? formik.errors.members[i].name
+                                        : ""
+                                }
+                            >
                                 <label>Name*</label>
                                 <div>
                                     <input
@@ -128,14 +131,22 @@ export default function VillagesAddAndUpdate({
                                         )}
                                         type="text"
                                     />
-                                    {formik.errors.members && formik.errors.members[i] &&(
-                                        <p>
-                                            {formik.errors.members[i].name}
-                                        </p>
-                                    )}
+                                    {formik.errors.members &&
+                                        formik.errors.members[i] && (
+                                            <p>
+                                                {formik.errors.members[i].name}
+                                            </p>
+                                        )}
                                 </div>
                             </FormTextInput2>
-                            <FormTextInput2 $error={formik.errors.members && formik.errors.members[i] ? formik.errors.members[i].nic : ""}>
+                            <FormTextInput2
+                                $error={
+                                    formik.errors.members &&
+                                    formik.errors.members[i]
+                                        ? formik.errors.members[i].nic
+                                        : ""
+                                }
+                            >
                                 <label>NIC</label>
                                 <div>
                                     <input
@@ -144,16 +155,24 @@ export default function VillagesAddAndUpdate({
                                         )}
                                         type="text"
                                     />
-                                    {formik.errors.members && formik.errors.members[i] &&(
-                                        <p>
-                                            {formik.errors.members[i].nic}
-                                        </p>
-                                    )}
+                                    {formik.errors.members &&
+                                        formik.errors.members[i] && (
+                                            <p>
+                                                {formik.errors.members[i].nic}
+                                            </p>
+                                        )}
                                 </div>
                             </FormTextInput2>
                         </RowContainer>
                         <RowContainer>
-                            <FormTextInput2 $error={formik.errors.members && formik.errors.members[i] ? formik.errors.members[i].age : ""}>
+                            <FormTextInput2
+                                $error={
+                                    formik.errors.members &&
+                                    formik.errors.members[i]
+                                        ? formik.errors.members[i].age
+                                        : ""
+                                }
+                            >
                                 <label>Age*</label>
                                 <div>
                                     <input
@@ -162,14 +181,22 @@ export default function VillagesAddAndUpdate({
                                         )}
                                         type="text"
                                     />
-                                    {formik.errors.members && formik.errors.members[i] &&(
-                                        <p>
-                                            {formik.errors.members[i].age}
-                                        </p>
-                                    )}
+                                    {formik.errors.members &&
+                                        formik.errors.members[i] && (
+                                            <p>
+                                                {formik.errors.members[i].age}
+                                            </p>
+                                        )}
                                 </div>
                             </FormTextInput2>
-                            <FormTextInput2 $error={formik.errors.members && formik.errors.members[i] ? formik.errors.members[i].contact : ""}>
+                            <FormTextInput2
+                                $error={
+                                    formik.errors.members &&
+                                    formik.errors.members[i]
+                                        ? formik.errors.members[i].contact
+                                        : ""
+                                }
+                            >
                                 <label>Contact</label>
                                 <div>
                                     <input
@@ -178,11 +205,15 @@ export default function VillagesAddAndUpdate({
                                         )}
                                         type="text"
                                     />
-                                    {formik.errors.members && formik.errors.members[i] &&(
-                                        <p>
-                                            {formik.errors.members[i].contact}
-                                        </p>
-                                    )}
+                                    {formik.errors.members &&
+                                        formik.errors.members[i] && (
+                                            <p>
+                                                {
+                                                    formik.errors.members[i]
+                                                        .contact
+                                                }
+                                            </p>
+                                        )}
                                 </div>
                             </FormTextInput2>
                         </RowContainer>
@@ -192,7 +223,7 @@ export default function VillagesAddAndUpdate({
                                 <RadioButtonContainer>
                                     <input
                                         type="radio"
-                                        name="members[${i}].gender"
+                                        name="male"
                                         value="male"
                                         {...formik.getFieldProps(
                                             `members[${i}].gender`
@@ -201,25 +232,7 @@ export default function VillagesAddAndUpdate({
                                     <label>Male</label>
                                     <input
                                         type="radio"
-                                        name="members[${i}].gender"
-                                        value="female"
-                                        {...formik.getFieldProps(
-                                            `members[${i}].gender`
-                                        )}
-                                    />
-                                    <label>Femail</label>
-                                    <input
-                                        type="radio"
-                                        name="members[${i}].gender"
-                                        value="male"
-                                        {...formik.getFieldProps(
-                                            `members[${i}].gender`
-                                        )}
-                                    />
-                                    <label>Male</label>
-                                    <input
-                                        type="radio"
-                                        name="members[${i}].gender"
+                                        name="female"
                                         value="female"
                                         {...formik.getFieldProps(
                                             `members[${i}].gender`
@@ -230,7 +243,6 @@ export default function VillagesAddAndUpdate({
                             </FormTextInput2>
                             <AddAndUndu>
                                 {i === memberCount && i !== 1 && (
-                                {i === memberCount && i !== 1 && (
                                     <i
                                         className="fa-solid fa-circle-minus"
                                         style={{ color: "#e74646" }}
@@ -239,7 +251,6 @@ export default function VillagesAddAndUpdate({
                                         }}
                                     ></i>
                                 )}
-                                {i === memberCount && (
                                 {i === memberCount && (
                                     <i
                                         className="fa-solid fa-circle-plus"
@@ -253,7 +264,6 @@ export default function VillagesAddAndUpdate({
                         </RowContainer>
                     </MainContainerBG2>
                     <SpaceDiv />
-                </React.Fragment>
                 </React.Fragment>
             );
         }
@@ -282,7 +292,6 @@ export default function VillagesAddAndUpdate({
                                     setAddModal(false);
                                     setUpdateModal(false);
                                     setMemberCount(1);
-                                    setMemberCount(1);
                                     formik.resetForm();
                                     setErrors("");
                                     setEventData("");
@@ -293,7 +302,15 @@ export default function VillagesAddAndUpdate({
                             <form onSubmit={formik.handleSubmit}>
                                 <Grid40x60>
                                     <MainContainer>
-                                        <FormTextInputBlock $error={formik.errors.members && formik.errors.members[0] ? formik.errors.members[0].name : ""}>
+                                        <FormTextInputBlock
+                                            $error={
+                                                formik.errors.members &&
+                                                formik.errors.members[0]
+                                                    ? formik.errors.members[0]
+                                                          .name
+                                                    : ""
+                                            }
+                                        >
                                             <label>House Holder Name*</label>
                                             <div>
                                                 <input
@@ -302,14 +319,28 @@ export default function VillagesAddAndUpdate({
                                                     )}
                                                     type="text"
                                                 />
-                                                {formik.errors.members && formik.errors.members[0] &&(
-                                                    <p>
-                                                        {formik.errors.members[0].name}
-                                                    </p>
-                                                )}
+                                                {formik.errors.members &&
+                                                    formik.errors
+                                                        .members[0] && (
+                                                        <p>
+                                                            {
+                                                                formik.errors
+                                                                    .members[0]
+                                                                    .name
+                                                            }
+                                                        </p>
+                                                    )}
                                             </div>
                                         </FormTextInputBlock>
-                                        <FormTextInputBlock $error={formik.errors.members && formik.errors.members[0] ? formik.errors.members[0].age : ""}>
+                                        <FormTextInputBlock
+                                            $error={
+                                                formik.errors.members &&
+                                                formik.errors.members[0]
+                                                    ? formik.errors.members[0]
+                                                          .age
+                                                    : ""
+                                            }
+                                        >
                                             <label>House Holder Age*</label>
                                             <div>
                                                 <input
@@ -318,14 +349,28 @@ export default function VillagesAddAndUpdate({
                                                     )}
                                                     type="text"
                                                 />
-                                                {formik.errors.members && formik.errors.members[0] &&(
-                                                    <p>
-                                                        {formik.errors.members[0].age}
-                                                    </p>
-                                                )}
+                                                {formik.errors.members &&
+                                                    formik.errors
+                                                        .members[0] && (
+                                                        <p>
+                                                            {
+                                                                formik.errors
+                                                                    .members[0]
+                                                                    .age
+                                                            }
+                                                        </p>
+                                                    )}
                                             </div>
                                         </FormTextInputBlock>
-                                        <FormTextInputBlock $error={formik.errors.members && formik.errors.members[0] ? formik.errors.members[0].contact : ""}>
+                                        <FormTextInputBlock
+                                            $error={
+                                                formik.errors.members &&
+                                                formik.errors.members[0]
+                                                    ? formik.errors.members[0]
+                                                          .contact
+                                                    : ""
+                                            }
+                                        >
                                             <label>
                                                 House Holder Contact Number*
                                             </label>
@@ -336,11 +381,17 @@ export default function VillagesAddAndUpdate({
                                                     )}
                                                     type="text"
                                                 />
-                                                {formik.errors.members && formik.errors.members[0] &&(
-                                                    <p>
-                                                        {formik.errors.members[0].contact}
-                                                    </p>
-                                                )}
+                                                {formik.errors.members &&
+                                                    formik.errors
+                                                        .members[0] && (
+                                                        <p>
+                                                            {
+                                                                formik.errors
+                                                                    .members[0]
+                                                                    .contact
+                                                            }
+                                                        </p>
+                                                    )}
                                             </div>
                                         </FormTextInputBlock>
                                         <FormTextInputBlock
@@ -382,7 +433,15 @@ export default function VillagesAddAndUpdate({
                                                 )}
                                             </div>
                                         </FormTextInputBlock>
-                                        <FormTextInputBlock $error={formik.errors.members && formik.errors.members[0] ? formik.errors.members[0].nic : ""}>
+                                        <FormTextInputBlock
+                                            $error={
+                                                formik.errors.members &&
+                                                formik.errors.members[0]
+                                                    ? formik.errors.members[0]
+                                                          .nic
+                                                    : ""
+                                            }
+                                        >
                                             <label>House Hold NIC*</label>
                                             <div>
                                                 <input
@@ -391,11 +450,17 @@ export default function VillagesAddAndUpdate({
                                                     )}
                                                     type="text"
                                                 />
-                                                {formik.errors.members && formik.errors.members[0] &&(
-                                                    <p>
-                                                        {formik.errors.members[0].nic}
-                                                    </p>
-                                                )}
+                                                {formik.errors.members &&
+                                                    formik.errors
+                                                        .members[0] && (
+                                                        <p>
+                                                            {
+                                                                formik.errors
+                                                                    .members[0]
+                                                                    .nic
+                                                            }
+                                                        </p>
+                                                    )}
                                             </div>
                                         </FormTextInputBlock>
                                         <FormTextInputBlock>
@@ -405,31 +470,21 @@ export default function VillagesAddAndUpdate({
                                                     type="radio"
                                                     id="male"
                                                     name="members[0].gender"
-                                                    name="members[0].gender"
                                                     value="male"
                                                     {...formik.getFieldProps(
                                                         "members[0].gender"
                                                     )}
-                                                    {...formik.getFieldProps(
-                                                        "members[0].gender"
-                                                    )}
                                                 />
-                                                <label>Male</label>
                                                 <label>Male</label>
                                                 <input
                                                     type="radio"
                                                     id="female"
                                                     name="members[0].gender"
-                                                    name="members[0].gender"
                                                     value="female"
                                                     {...formik.getFieldProps(
                                                         "members[0].gender"
                                                     )}
-                                                    {...formik.getFieldProps(
-                                                        "members[0].gender"
-                                                    )}
                                                 />
-                                                <label>Femail</label>
                                                 <label>Femail</label>
                                             </RadioButtonContainer>
                                         </FormTextInputBlock>

@@ -62,13 +62,12 @@ export default function ReceptionistSidebar() {
 }
 
 const linksArray = [
-
-
     {
         label: "Home",
         icon: <i className="fa-solid fa-house-user"></i>,
         to: "/receptionist",
     },
+    
     {
         label: "Nurse",
         icon: <i className="fa-solid fa-user-nurse"></i>,
@@ -80,13 +79,4 @@ const linksArray = [
         icon: <i className="fa-solid fa-user-doctor"></i>,
         to: "/receptionist/addDoctor",
     },
-
-    {
-        label: "Video Conferrencing",
-        icon: <i className="fa-solid fa-chalkboard-user"></i>,
-        to: "/receptionist/videoConferencing",
-    },
-
-
-
 ];

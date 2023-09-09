@@ -1,31 +1,34 @@
-import React, { useEffect, useState } from 'react'
-import React, { useEffect, useState } from 'react'
-import GramasewakaLayOut from '../../components/layouts/GramasewakaLayOut'
-import EmpHeader from '../../components/header/EmpHeader';
-import BottomSlider from '../../components/slider/BottomSlider';
-import { AddButton, Contact, DeleteButton, MainContainerBG, Modal, ModalContent, SearchBar, TableContainer, TopContainer, UpdateButton } from '../../assets/styles/globalStyls';
-import useFetch from '../../hooks/fetch-hook';
-import PageNotFound from '../PageNotFound';
-import RegisterSuccess from '../../components/popup/RegisterSuccess';
-import DeleteUser from '../../components/popup/DeleteUser';
-import OrganizationsAddAndUpdate from './popup/OrganizationsAddAndUpdate';
-import UpdateSuccess from '../../components/popup/UpdateSuccess';
+import React, { useEffect, useState } from "react";
+import GramasewakaLayOut from "../../components/layouts/GramasewakaLayOut";
+import EmpHeader from "../../components/header/EmpHeader";
+import BottomSlider from "../../components/slider/BottomSlider";
+import {
+    AddButton,
+    Contact,
+    DeleteButton,
+    MainContainerBG,
+    Modal,
+    ModalContent,
+    SearchBar,
+    TableContainer,
+    TopContainer,
+    UpdateButton,
+} from "../../assets/styles/globalStyls";
+import useFetch from "../../hooks/fetch-hook";
+import PageNotFound from "../PageNotFound";
+import RegisterSuccess from "../../components/popup/RegisterSuccess";
+import DeleteUser from "../../components/popup/DeleteUser";
+import OrganizationsAddAndUpdate from "./popup/OrganizationsAddAndUpdate";
+import UpdateSuccess from "../../components/popup/UpdateSuccess";
 
 export default function GsOrganizations() {
-
-    const [{ apiData, serverError, isLoading }] = useFetch("getUsers/ORG");
-
     const [{ apiData, serverError, isLoading }] = useFetch("getUsers/ORG");
 
     const sliderValue = 5;
     const [index, setIndex] = useState(0);
     let length = 0;
     if (!isLoading) {
-      length = apiData.length;
-    }
-    let length = 0;
-    if (!isLoading) {
-      length = apiData.length;
+        length = apiData.length;
     }
     const x = index + sliderValue > length ? length : index + sliderValue;
 
@@ -37,66 +40,65 @@ export default function GsOrganizations() {
     const [updateSuccess, setUpdateSuccess] = useState(false);
 
     useEffect(() => {
-      if (registerSuccess) {
-        window.location.reload();
-        const slideIntaval = setInterval(() => {
-          setRegisterSuccess(false);
-        }, 2000);
-        return () => clearInterval(slideIntaval);
-      } else if (updateSuccess) {
-        window.location.reload();
-        const slideIntaval = setInterval(() => {
-          setUpdateSuccess(false);
-        }, 2000);
-        return () => clearInterval(slideIntaval);
-      }
+        if (registerSuccess) {
+            window.location.reload();
+            const slideIntaval = setInterval(() => {
+                setRegisterSuccess(false);
+            }, 2000);
+            return () => clearInterval(slideIntaval);
+        } else if (updateSuccess) {
+            window.location.reload();
+            const slideIntaval = setInterval(() => {
+                setUpdateSuccess(false);
+            }, 2000);
+            return () => clearInterval(slideIntaval);
+        }
     }, [registerSuccess, updateSuccess]);
 
-    const getDataContent = data => {
+    const getDataContent = (data) => {
         let content = [];
         for (let i = index; i < x; i++) {
             const item = data[i];
             content.push(
-              <tr key={item._id}>
-                <td>{item.name}</td>
-                <td>{item.boardName}</td>
-                {/* <td>{item.gsDivision}</td> */}
-                <td>
-                  <Contact>
-                    {item.contact}
-                    <div>
-                      <i className="fa-regular fa-envelope"></i>
-                    </div>
-                  </Contact>
-                </td>
-                <td>
-                  <DeleteButton
-                    onClick={() => {
-                      setEventData(item);
-                      setDeleteModal(true);
-                    }}
-                  >
-                    Delete
-                  </DeleteButton>
-                  <UpdateButton
-                    onClick={() => {
-                      setEventData(item);
-                      setUpdateModal(true);
-                      setAddModal(false);
-                    }}
-                  >
-                    Update
-                  </UpdateButton>
-                </td>
-              </tr>
+                <tr key={item._id}>
+                    <td>{item.name}</td>
+                    <td>{item.boardName}</td>
+                    <td>
+                        <Contact>
+                            {item.contact}
+                            <div>
+                                <i className="fa-regular fa-envelope"></i>
+                            </div>
+                        </Contact>
+                    </td>
+                    <td>
+                        <DeleteButton
+                            onClick={() => {
+                                setEventData(item);
+                                setDeleteModal(true);
+                            }}
+                        >
+                            Delete
+                        </DeleteButton>
+                        <UpdateButton
+                            onClick={() => {
+                                setEventData(item);
+                                setUpdateModal(true);
+                                setAddModal(false);
+                            }}
+                        >
+                            Update
+                        </UpdateButton>
+                    </td>
+                </tr>
             );
         }
         return content;
-    }
+    };
     if (serverError) return <PageNotFound />;
     return (
-      <GramasewakaLayOut>
-        <EmpHeader pageName={"Organizations"} />
+        <GramasewakaLayOut>
+            <EmpHeader pageName={"Organizations"} />
 
             <TopContainer>
                 <AddButton
@@ -119,7 +121,6 @@ export default function GsOrganizations() {
                             <tr>
                                 <th>Organizationname</th>
                                 <th>Organizer</th>
-                                {/* <th>Gramasewa Division</th> */}
                                 <th>Contact</th>
                                 <th>Action</th>
                             </tr>
@@ -177,55 +178,3 @@ export default function GsOrganizations() {
         </GramasewakaLayOut>
     );
 }
-
-
-
-
-// const data = [
-
-//     {
-//         _id: 11,
-//         Organizer: "Kalum Chandana",
-//         Organizationname: "Abc",
-//         contact: "0767726558"
-//     },
-//     {
-//         _id: 12,
-//         Organizer: "Kalum Chandana",
-//         Organizationname: "Tangalle",
-//         contact: "0767726558"
-//     },
-//     {
-//         _id: 13,
-//         Organizer: "Kalum Chandana",
-//         Organizationname: "Tangalle",
-//         contact: "0767726558"
-//     },
-//     {
-//         _id: 14,
-//         Organizer: "Kalum Chandana",
-//         Organizationname: "Tangalle",
-//         contact: "0767726558"
-//     },
-//     {
-//         _id: 15,
-//         Organizer: "Kalum Chandana",
-//         Organizationname: "Tangalle",
-//         contact: "0767726558"
-//     },
-//     {
-//         _id: 16,
-//         Organizer: "Kalum Chandana",
-//         Organizationname: "Tangalle",
-//         contact: "0767726558"
-//     },
-//     {
-//         _id: 17,
-//         Organizer: "Kalum Chandana",
-//         Organizationname: "Tangalle",
-//         contact: "0767726558"
-//     },
-
-
-
-// ]
