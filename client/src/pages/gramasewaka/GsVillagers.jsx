@@ -7,14 +7,20 @@ import ViewVillagers from './popup/ViewVillagers';
 import VillagesAddAndUpdate from './popup/VillagesAddAndUpdate';
 import RegisterSuccess from '../../components/popup/RegisterSuccess';
 import UpdateSuccess from '../../components/popup/UpdateSuccess';
+import useFetch from '../../hooks/fetch-hook';
+import PageNotFound from '../PageNotFound';
+import Loading from '../../components/popup/Loading';
 // import BottomSlider from '../../components/slider/BottomSlider';
 
 
 
 export default function GsVillagers() {
 
+    const [{ apiData, serverError, isLoading }] = useFetch("getFammily/123AS");
+
     const [eventData, setEventData] = useState('');
     const [viewData, setViewData] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [addModal, setAddModal] = useState(false);
     const [updateModal, setUpdateModal] = useState(false);
     // const [deleteModal, setDeleteModal] = useState(false);
@@ -37,6 +43,7 @@ export default function GsVillagers() {
         }
     }, [registerSuccess, updateSuccess]);
 
+    if (serverError) return <PageNotFound />;
     return (
         <GramasewakaLayOut>
             <EmpHeader pageName={"Villagers"} />
@@ -82,30 +89,38 @@ export default function GsVillagers() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {data.map((item) => (
-                                        <tr
-                                            key={item._id}
-                                            onClick={() => {
-                                                setEventData(item);
-                                                setViewData(true);
-                                            }}
-                                        >
-                                            <td>{item.name}</td>
-                                            <td>{item.gmn}</td>
-                                            <td>
-                                                <ButtonContainer>
-                                                    <DeleteButton
-                                                        onClick={() => {
-                                                            setEventData(item);
-                                                            setViewData(true);
-                                                        }}
-                                                    >
-                                                        Details
-                                                    </DeleteButton>
-                                                </ButtonContainer>
-                                            </td>
-                                        </tr>
-                                    ))}
+                                    {!isLoading
+                                        ? apiData.map((item) => (
+                                              <tr
+                                                  key={item._id}
+                                                  onClick={() => {
+                                                      setEventData(item);
+                                                      setViewData(true);
+                                                  }}
+                                              >
+                                                  <td>
+                                                      {item.members[0].name}
+                                                  </td>
+                                                  <td>{item.houseHoldNo}</td>
+                                                  <td>
+                                                      <ButtonContainer>
+                                                          <DeleteButton
+                                                              onClick={() => {
+                                                                  setEventData(
+                                                                      item
+                                                                  );
+                                                                  setViewData(
+                                                                      true
+                                                                  );
+                                                              }}
+                                                          >
+                                                              Details
+                                                          </DeleteButton>
+                                                      </ButtonContainer>
+                                                  </td>
+                                              </tr>
+                                          ))
+                                        : null}
                                 </tbody>
                             </table>
                         </GridTableContainerScroll>
@@ -132,7 +147,16 @@ export default function GsVillagers() {
                 setEventData={setEventData}
                 setRegisterSuccess={setRegisterSuccess}
                 setUpdateSuccess={setUpdateSuccess}
+                setLoading={setLoading}
             />
+
+            {loading && (
+                <Modal>
+                    <ModalContent>
+                        <Loading />
+                    </ModalContent>
+                </Modal>
+            )}
 
             {registerSuccess && (
                 <Modal>
@@ -154,65 +178,6 @@ export default function GsVillagers() {
 }
 
 
-const data = [
-    {
-        _id: 1,
-        name: "Sunil Perera",
-        gmn: "207/A",
-    },
-    {
-        _id: 2,
-        name: "Kalum Chandana",
-        gmn: "207/A",
-    },
-    {
-        _id: 3,
-        name: "Sampath Sreemal",
-        gmn: "207/A",
-    },
-    {
-        _id: 4,
-        name: "Dasith Chalaka",
-        gmn: "207/A",
-    },
-    {
-        _id: 5,
-        name: "Nilum Dakshina",
-        gmn: "207/A",
-    },
-    {
-        _id: 6,
-        name: "Sandun Perera",
-        gmn: "207/A",
-    },
-    {
-        _id: 7,
-        name: "Nadun Viduranga",
-        gmn: "207/A",
-    },
-    {
-        _id: 8,
-        name: "Janith Heshara",
-        gmn: "207/A",
-    },
-    {
-        _id: 9,
-        name: "Dilanka Hesara",
-        gmn: "207/A",
-    },
-    {
-        _id: 10,
-        name: "Janith Heshara",
-        gmn: "207/A",
-    },
-    {
-        _id: 11,
-        name: "Dilanka Hesara",
-        gmn: "207/A",
-    },
-];
-
-
 const data1 = [
     {
         _id: 51,
@@ -222,61 +187,6 @@ const data1 = [
     {
         _id: 12,
         name: "Kalum Chandana",
-        gmn: "207/A",
-    },
-    {
-        _id: 13,
-        name: "Sampath Sreemal",
-        gmn: "207/A",
-    },
-    {
-        _id: 14,
-        name: "Dasith Chalaka",
-        gmn: "207/A",
-    },
-    {
-        _id: 15,
-        name: "Nilum Dakshina",
-        gmn: "207/A",
-    },
-    {
-        _id: 16,
-        name: "Sandun Perera",
-        gmn: "207/A",
-    },
-    {
-        _id: 17,
-        name: "Nadun Viduranga",
-        gmn: "207/A",
-    },
-    {
-        _id: 18,
-        name: "Janith Heshara",
-        gmn: "207/A",
-    },
-    {
-        _id: 19,
-        name: "Dilanka Hesara",
-        gmn: "207/A",
-    },
-    {
-        _id: 110,
-        name: "Dilanka Hesara",
-        gmn: "207/A",
-    },
-    {
-        _id: 91,
-        name: "Dilanka Hesara",
-        gmn: "207/A",
-    },
-    {
-        _id: 92,
-        name: "Dilanka Hesara",
-        gmn: "207/A",
-    },
-    {
-        _id: 93,
-        name: "Dilanka Hesara",
-        gmn: "207/A",
-    },
+        gmn: "225/4/A",
+    }
 ];

@@ -1,23 +1,24 @@
 import React, { useState } from 'react'
 import { useFormik } from "formik";
-import { villageOfficerSchema, villageOfficerUpdateSchema } from "../../../helper/validate";
+import { PHISchema, PHIUpdateSchema } from "../../../helper/validate";
 import { registerUser, updateUser } from "../../../helper/helper";
 import { AddButton, ButtonContainer, FormTextInput, Modal, ModalContent, ModalFormContainer, ModalTitle, Overlay } from '../../../assets/styles/globalStyls';
+import { MultyInputs } from '../z-adminStyle';
+import { AddAndUndu } from '../../gramasewaka/z-gsStyle';
 
-export default function VillageOfficerAddAndUpdate({ addModal, updateModal, setAddModal, setUpdateModal, eventData, setEventData, setRegisterSuccess, setUpdateSuccess, setLoading }) {
+export default function PHIAddAndUpdate({ addModal, updateModal, setAddModal, setUpdateModal, eventData, setEventData, setRegisterSuccess, setUpdateSuccess, setLoading, memberCount, setMemberCount }) {
 
     const [errors, setErrors] = useState("");
-    
+
     let initialValueForAdd = {
         name: "",
         address: "",
         nic: "",
         contact: "",
         email: "",
-        gsDivision: "",
-        divisionNumber: "",
-        password: "As@12345",
-        role: "GN",
+        gsDivisions: [],
+        password: "PHI@123",
+        role: "PHI",
     };
     let initialValueForUpdate = {
         name: eventData ? eventData.name : "",
@@ -25,21 +26,25 @@ export default function VillageOfficerAddAndUpdate({ addModal, updateModal, setA
         nic: eventData ? eventData.nic : "",
         contact: eventData ? eventData.contact : "",
         email: eventData ? eventData.email : "",
-        gsDivision: eventData ? eventData.gsDivision : "",
-        divisionNumber: eventData ? eventData.divisionNumber : "",
+        gsDivisions: eventData ? eventData.gsDivisions : "",
         id: eventData ? eventData._id : "",
-        role: "GN",
+        role: "PHI",
     };
 
     const formik = useFormik({
         initialValues: eventData ? initialValueForUpdate : initialValueForAdd,
         validationSchema: addModal
-            ? villageOfficerSchema
-            : villageOfficerUpdateSchema,
+            ? PHISchema
+            : PHIUpdateSchema,
         enableReinitialize: true,
         validateOnBlur: false,
         validateOnChange: false,
         onSubmit: async (values, onSubmitProps) => {
+            if (values.gsDivisions.length > memberCount) {
+                while (values.gsDivisions.length !== memberCount) {
+                    values.gsDivisions.pop();
+                }
+            }
             setLoading(true);
             let promise = addModal
                 ? await registerUser(values)
@@ -65,8 +70,29 @@ export default function VillageOfficerAddAndUpdate({ addModal, updateModal, setA
             }
 
             console.log(errors);
+            setLoading(false);
         },
     });
+
+    const getMemberContent = () => {
+        let content = [];
+        for (let i = 0; i < memberCount; i++) {
+            content.push(
+                <React.Fragment key={i}>
+                    <div>
+                        <input
+                            {...formik.getFieldProps(`gsDivisions[${i}]`)}
+                            type="text"
+                        />
+                        {formik.errors.gsDivisions && (
+                            <p>{formik.errors.gsDivisions}</p>
+                        )}
+                    </div>
+                </React.Fragment>
+            );
+        }
+        return content;
+    };
 
     return (
         <>
@@ -174,38 +200,35 @@ export default function VillageOfficerAddAndUpdate({ addModal, updateModal, setA
                                     </div>
                                 </FormTextInput>
                                 <FormTextInput
-                                    $error={formik.errors.gsDivision}
+                                    $error={formik.errors.gsDivisions}
                                 >
-                                    <label>Gramasewa Division*</label>
-                                    <div>
-                                        <input
-                                            {...formik.getFieldProps(
-                                                "gsDivision"
+                                    <label>Gramasewa Divisions</label>
+                                    <MultyInputs>
+                                        {getMemberContent()}
+
+                                        <AddAndUndu>
+                                            {memberCount > 1 && (
+                                                <i
+                                                    className="fa-solid fa-circle-minus"
+                                                    style={{ color: "#e74646" }}
+                                                    onClick={() => {
+                                                        setMemberCount(
+                                                            memberCount - 1
+                                                        );
+                                                    }}
+                                                ></i>
                                             )}
-                                            type="text"
-                                        />
-                                        {formik.errors.gsDivision && (
-                                            <p>{formik.errors.gsDivision}</p>
-                                        )}
-                                    </div>
-                                </FormTextInput>
-                                <FormTextInput
-                                    $error={formik.errors.divisionNumber}
-                                >
-                                    <label>Division Number*</label>
-                                    <div>
-                                        <input
-                                            {...formik.getFieldProps(
-                                                "divisionNumber"
-                                            )}
-                                            type="text"
-                                        />
-                                        {formik.errors.divisionNumber && (
-                                            <p>
-                                                {formik.errors.divisionNumber}
-                                            </p>
-                                        )}
-                                    </div>
+                                            <i
+                                                className="fa-solid fa-circle-plus"
+                                                style={{ color: "#4cbc9a" }}
+                                                onClick={() => {
+                                                    setMemberCount(
+                                                        memberCount + 1
+                                                    );
+                                                }}
+                                            ></i>
+                                        </AddAndUndu>
+                                    </MultyInputs>
                                 </FormTextInput>
 
                                 <ButtonContainer>

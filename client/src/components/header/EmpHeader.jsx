@@ -1,4 +1,6 @@
 import React from "react";
+import jwt_decode from "jwt-decode";
+import profileImg from "../../assets/images/profile.png";
 
 import { useNavigate } from "react-router-dom";
 import {
@@ -21,6 +23,15 @@ export default function EmpHeader({ pageName }) {
         navigate("/");
     }
 
+    // To get userrole from Token
+    const token = localStorage.getItem("token");
+    if (!token) return Promise.reject("Cannot find Token");
+    let decode = jwt_decode(token);
+    let userRole;
+    if (decode.role === "admin") { userRole = "Admin" }
+    if (decode.role === "GN") { userRole = "Grama Niladhari" }
+    
+
     return (
         <Heading>
             <PageName>{pageName}</PageName>
@@ -28,10 +39,12 @@ export default function EmpHeader({ pageName }) {
                 <AccDetails>
                     <AccProfile>
                         <AccName>
-                            <div>Nabila A.</div>
-                            <p>admin</p>
+                            <div>{decode.name}</div>
+                            <p>{userRole}</p>
                         </AccName>
-                        <AccImage></AccImage>
+                        <AccImage>
+                            <img src={profileImg} alt="Profile 4to" />
+                        </AccImage>
                     </AccProfile>
                 </AccDetails>
                 <LogoutButton onClick={userLogout}>Logout</LogoutButton>

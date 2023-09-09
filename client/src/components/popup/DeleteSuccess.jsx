@@ -1,4 +1,5 @@
 import React from "react";
+import { FlashContainer } from "./popupStyle";
 
 export default function DeleteSuccess() {
     return (

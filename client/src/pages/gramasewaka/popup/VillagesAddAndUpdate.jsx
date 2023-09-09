@@ -1,48 +1,64 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import { fammilySchema } from "../../../helper/validate";
 import { addFammily } from "../../../helper/helper";
-import { AddButton, ButtonContainer, FormTextInputBlock, MainContainer, Modal, ModalContent, ModalFormContainer, ModalTitle, Overlay, RowContainer } from '../../../assets/styles/globalStyls';
-import { AddAndUndu, FormTextInput2, Grid40x60, InputScrollContainer, MainContainerBG2, RadioButtonContainer, SpaceDiv } from '../z-gsStyle';
+import {
+    AddButton,
+    ButtonContainer,
+    FormTextInputBlock,
+    MainContainer,
+    Modal,
+    ModalContent,
+    ModalFormContainer,
+    ModalTitle,
+    Overlay,
+    RowContainer,
+} from "../../../assets/styles/globalStyls";
+import {
+    AddAndUndu,
+    FormTextInput2,
+    Grid40x60,
+    InputScrollContainer,
+    MainContainerBG2,
+    RadioButtonContainer,
+    SpaceDiv,
+} from "../z-gsStyle";
 
-export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModal, setUpdateModal, eventData, setEventData, setRegisterSuccess, setUpdateSuccess }) {
-
+export default function VillagesAddAndUpdate({
+    addModal,
+    updateModal,
+    setAddModal,
+    setUpdateModal,
+    eventData,
+    setEventData,
+    setRegisterSuccess,
+    setUpdateSuccess,
+    setLoading,
+}) {
     const [errors, setErrors] = useState("");
     const [memberCount, setMemberCount] = useState(1);
 
-    const getMembers = () => {
-        let content = [];
-        for (let i = 0; i < memberCount+1; i++) {
-            content.push({
+    let initialValueForAdd = {
+        address: "",
+        gsDivision: "Boralesgamuwa",
+        divisionNumber: "123AS",
+        houseHoldNo: "",
+        members: [
+            {
                 name: "",
                 nic: "",
                 contact: "",
                 age: "",
                 gender: "",
-            });
-        }
-        return content;
-    };
-    
-    let initialValueForAdd = {
-        address : "",
-        gsDivision : "Boralesgamuwa",
-        divisionNumber : "123AS",
-        houseHoldNo : "",
-        members: [{
-            name: "",
-            nic: "",
-            contact: "",
-            age: "",
-            gender: ""
-        },
-        {
-            name: "",
-            nic: "",
-            contact: "",
-            age: "",
-            gender: ""
-        }],
+            },
+            {
+                name: "",
+                nic: "",
+                contact: "",
+                age: "",
+                gender: "",
+            },
+        ],
     };
     let initialValueForUpdate = {
         address: eventData ? eventData.address : "",
@@ -50,28 +66,35 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
         divisionNumber: eventData ? eventData.divisionNumber : "",
         houseHoldNo: eventData ? eventData.houseHoldNo : "",
         members: eventData ? eventData.members : [],
+        members: eventData ? eventData.members : [],
         id: eventData ? eventData._id : "",
     };
 
     const formik = useFormik({
         initialValues: eventData ? initialValueForUpdate : initialValueForAdd,
-        validationSchema: addModal
-            ? fammilySchema
-            : "",
+        validationSchema: addModal ? fammilySchema : "",
         enableReinitialize: true,
         validateOnBlur: false,
         validateOnChange: false,
         onSubmit: async (values, onSubmitProps) => {
+            if (values.members.length > memberCount+1) {
+                while (values.members.length !== memberCount+1) {
+                    values.members.pop();
+                }
+            }
+            setLoading(true);
             let promise = addModal
                 ? await addFammily(values)
                 : "";
             if (promise === "Register Successfully") {
+                setLoading(false);
                 setAddModal(false);
                 setUpdateModal(false);
                 setErrors("");
                 onSubmitProps.resetForm();
                 setRegisterSuccess(true);
             } else if (promise === "Update Successfully") {
+                setLoading(false);
                 setAddModal(false);
                 setUpdateModal(false);
                 setErrors("");
@@ -79,21 +102,24 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
                 onSubmitProps.resetForm();
                 setUpdateSuccess(true);
             } else {
+                setLoading(false);
                 setErrors(promise);
             }
 
-            console.log(promise);
+            console.log(errors);
+            setLoading(false);
         },
     });
 
     const getMemberContent = () => {
         let content = [];
-        for (let i = 1; i < memberCount+1; i++) { 
+        for (let i = 1; i < memberCount + 1; i++) {
             content.push(
+                <React.Fragment key={i}>
                 <React.Fragment key={i}>
                     <MainContainerBG2>
                         <RowContainer>
-                            <FormTextInput2>
+                            <FormTextInput2 $error={formik.errors.members && formik.errors.members[i] ? formik.errors.members[i].name : ""}>
                                 <label>Name*</label>
                                 <div>
                                     <input
@@ -102,9 +128,14 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
                                         )}
                                         type="text"
                                     />
+                                    {formik.errors.members && formik.errors.members[i] &&(
+                                        <p>
+                                            {formik.errors.members[i].name}
+                                        </p>
+                                    )}
                                 </div>
                             </FormTextInput2>
-                            <FormTextInput2>
+                            <FormTextInput2 $error={formik.errors.members && formik.errors.members[i] ? formik.errors.members[i].nic : ""}>
                                 <label>NIC</label>
                                 <div>
                                     <input
@@ -113,11 +144,16 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
                                         )}
                                         type="text"
                                     />
+                                    {formik.errors.members && formik.errors.members[i] &&(
+                                        <p>
+                                            {formik.errors.members[i].nic}
+                                        </p>
+                                    )}
                                 </div>
                             </FormTextInput2>
                         </RowContainer>
                         <RowContainer>
-                            <FormTextInput2>
+                            <FormTextInput2 $error={formik.errors.members && formik.errors.members[i] ? formik.errors.members[i].age : ""}>
                                 <label>Age*</label>
                                 <div>
                                     <input
@@ -126,9 +162,14 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
                                         )}
                                         type="text"
                                     />
+                                    {formik.errors.members && formik.errors.members[i] &&(
+                                        <p>
+                                            {formik.errors.members[i].age}
+                                        </p>
+                                    )}
                                 </div>
                             </FormTextInput2>
-                            <FormTextInput2>
+                            <FormTextInput2 $error={formik.errors.members && formik.errors.members[i] ? formik.errors.members[i].contact : ""}>
                                 <label>Contact</label>
                                 <div>
                                     <input
@@ -137,6 +178,11 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
                                         )}
                                         type="text"
                                     />
+                                    {formik.errors.members && formik.errors.members[i] &&(
+                                        <p>
+                                            {formik.errors.members[i].contact}
+                                        </p>
+                                    )}
                                 </div>
                             </FormTextInput2>
                         </RowContainer>
@@ -162,9 +208,28 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
                                         )}
                                     />
                                     <label>Femail</label>
+                                    <input
+                                        type="radio"
+                                        name="members[${i}].gender"
+                                        value="male"
+                                        {...formik.getFieldProps(
+                                            `members[${i}].gender`
+                                        )}
+                                    />
+                                    <label>Male</label>
+                                    <input
+                                        type="radio"
+                                        name="members[${i}].gender"
+                                        value="female"
+                                        {...formik.getFieldProps(
+                                            `members[${i}].gender`
+                                        )}
+                                    />
+                                    <label>Femail</label>
                                 </RadioButtonContainer>
                             </FormTextInput2>
                             <AddAndUndu>
+                                {i === memberCount && i !== 1 && (
                                 {i === memberCount && i !== 1 && (
                                     <i
                                         className="fa-solid fa-circle-minus"
@@ -174,6 +239,7 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
                                         }}
                                     ></i>
                                 )}
+                                {i === memberCount && (
                                 {i === memberCount && (
                                     <i
                                         className="fa-solid fa-circle-plus"
@@ -188,10 +254,11 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
                     </MainContainerBG2>
                     <SpaceDiv />
                 </React.Fragment>
+                </React.Fragment>
             );
         }
         return content;
-    }
+    };
 
     return (
         <>
@@ -215,6 +282,7 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
                                     setAddModal(false);
                                     setUpdateModal(false);
                                     setMemberCount(1);
+                                    setMemberCount(1);
                                     formik.resetForm();
                                     setErrors("");
                                     setEventData("");
@@ -225,7 +293,7 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
                             <form onSubmit={formik.handleSubmit}>
                                 <Grid40x60>
                                     <MainContainer>
-                                        <FormTextInputBlock>
+                                        <FormTextInputBlock $error={formik.errors.members && formik.errors.members[0] ? formik.errors.members[0].name : ""}>
                                             <label>House Holder Name*</label>
                                             <div>
                                                 <input
@@ -234,9 +302,14 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
                                                     )}
                                                     type="text"
                                                 />
+                                                {formik.errors.members && formik.errors.members[0] &&(
+                                                    <p>
+                                                        {formik.errors.members[0].name}
+                                                    </p>
+                                                )}
                                             </div>
                                         </FormTextInputBlock>
-                                        <FormTextInputBlock>
+                                        <FormTextInputBlock $error={formik.errors.members && formik.errors.members[0] ? formik.errors.members[0].age : ""}>
                                             <label>House Holder Age*</label>
                                             <div>
                                                 <input
@@ -245,9 +318,14 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
                                                     )}
                                                     type="text"
                                                 />
+                                                {formik.errors.members && formik.errors.members[0] &&(
+                                                    <p>
+                                                        {formik.errors.members[0].age}
+                                                    </p>
+                                                )}
                                             </div>
                                         </FormTextInputBlock>
-                                        <FormTextInputBlock>
+                                        <FormTextInputBlock $error={formik.errors.members && formik.errors.members[0] ? formik.errors.members[0].contact : ""}>
                                             <label>
                                                 House Holder Contact Number*
                                             </label>
@@ -258,6 +336,11 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
                                                     )}
                                                     type="text"
                                                 />
+                                                {formik.errors.members && formik.errors.members[0] &&(
+                                                    <p>
+                                                        {formik.errors.members[0].contact}
+                                                    </p>
+                                                )}
                                             </div>
                                         </FormTextInputBlock>
                                         <FormTextInputBlock
@@ -299,7 +382,7 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
                                                 )}
                                             </div>
                                         </FormTextInputBlock>
-                                        <FormTextInputBlock>
+                                        <FormTextInputBlock $error={formik.errors.members && formik.errors.members[0] ? formik.errors.members[0].nic : ""}>
                                             <label>House Hold NIC*</label>
                                             <div>
                                                 <input
@@ -308,6 +391,11 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
                                                     )}
                                                     type="text"
                                                 />
+                                                {formik.errors.members && formik.errors.members[0] &&(
+                                                    <p>
+                                                        {formik.errors.members[0].nic}
+                                                    </p>
+                                                )}
                                             </div>
                                         </FormTextInputBlock>
                                         <FormTextInputBlock>
@@ -317,21 +405,31 @@ export default function VillagesAddAndUpdate({ addModal, updateModal, setAddModa
                                                     type="radio"
                                                     id="male"
                                                     name="members[0].gender"
+                                                    name="members[0].gender"
                                                     value="male"
+                                                    {...formik.getFieldProps(
+                                                        "members[0].gender"
+                                                    )}
                                                     {...formik.getFieldProps(
                                                         "members[0].gender"
                                                     )}
                                                 />
                                                 <label>Male</label>
+                                                <label>Male</label>
                                                 <input
                                                     type="radio"
                                                     id="female"
+                                                    name="members[0].gender"
                                                     name="members[0].gender"
                                                     value="female"
                                                     {...formik.getFieldProps(
                                                         "members[0].gender"
                                                     )}
+                                                    {...formik.getFieldProps(
+                                                        "members[0].gender"
+                                                    )}
                                                 />
+                                                <label>Femail</label>
                                                 <label>Femail</label>
                                             </RadioButtonContainer>
                                         </FormTextInputBlock>

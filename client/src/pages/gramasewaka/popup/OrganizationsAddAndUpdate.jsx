@@ -35,7 +35,7 @@ export default function OrganizationsAddAndUpdate({
     nic: "",
     boardPhone: "",
     boardEmail: "",
-    password: "org123",
+    password: "123456",
     role: "ORG",
   };
   let initialValueForUpdate = {
@@ -65,7 +65,6 @@ export default function OrganizationsAddAndUpdate({
         : await updateUser(values);
       if (promise === "Register Successfully") {
         setRegisterSuccess(true);
-        console.log("hutto");
         setAddModal(false);
         setUpdateModal(false);
         setErrors("");
@@ -85,202 +84,271 @@ export default function OrganizationsAddAndUpdate({
   });
 
   return (
-    <>
-      {(addModal || updateModal) && (
-        <Modal>
-          <Overlay
-            onClick={() => {
-              setAddModal(false);
-              setUpdateModal(false);
-              // formik.resetForm();
-              setErrors("");
-              setEventData("");
-            }}
-          />
-          <ModalContent>
-            <ModalTitle>
-              {addModal && <div>Add new Gramasewaka</div>}
-              {updateModal && <div>Update Gramasewaka</div>}
-              <i
-                className="fa-solid fa-circle-xmark"
-                onClick={() => {
-                  setAddModal(false);
-                  setUpdateModal(false);
-                  formik.resetForm();
-                  setErrors("");
-                  setEventData("");
-                }}
-              ></i>
-            </ModalTitle>
+      <>
+          {(addModal || updateModal) && (
+              <Modal>
+                  <Overlay
+                      onClick={() => {
+                          setAddModal(false);
+                          setUpdateModal(false);
+                          // formik.resetForm();
+                          setErrors("");
+                          setEventData("");
+                      }}
+                  />
+                  <ModalContent>
+                      <ModalTitle>
+                          {addModal && <div>Add new Organization</div>}
+                          {updateModal && <div>Update Organization</div>}
+                          <i
+                              className="fa-solid fa-circle-xmark"
+                              onClick={() => {
+                                  setAddModal(false);
+                                  setUpdateModal(false);
+                                  formik.resetForm();
+                                  setErrors("");
+                                  setEventData("");
+                              }}
+                          ></i>
+                      </ModalTitle>
 
-            <ModalFormContainerNew>
-              <form onSubmit={formik.handleSubmit}>
-                <PopUpContentHeader>
-                  <div></div>
-                  <span>Organization Details</span>
-                  <div></div>
-                </PopUpContentHeader>
-                <TextInputFieldParts>
-                  <div>
-                    <TextInputField $error={formik.errors.name}>
-                      <label>Organization Name</label>
-                      <div>
-                        <input
-                          {...formik.getFieldProps("name")}
-                          type="text"
-                        />
-                        {formik.errors.name && (
-                          <p>{formik.errors.name}</p>
-                        )}
-                      </div>
-                    </TextInputField>
-                    <TextInputField
-                      $error={formik.errors.email || errors.email}
-                    >
-                      <label>E-mail</label>
-                      <div>
-                        <input
-                          {...formik.getFieldProps("email")}
-                          type="text"
-                        />
-                        {(formik.errors.email && (
-                          <p>{formik.errors.email}</p>
-                        )) ||
-                          (errors.email && <p>{errors.email}</p>)}
-                      </div>
-                    </TextInputField>
-                  </div>
-                  <div>
-                    <TextInputField $error={formik.errors.gsDivision}>
-                      <label>Gramasewa Division*</label>
-                      <div>
-                        <input
-                          {...formik.getFieldProps("gsDivision")}
-                          type="text"
-                        />
-                        {formik.errors.gsDivision && (
-                          <p>{formik.errors.gsDivision}</p>
-                        )}
-                      </div>
-                    </TextInputField>
-                    <TextInputField $error={formik.errors.divisionNumber}>
-                      <label>Division Number*</label>
-                      <div>
-                        <input
-                          {...formik.getFieldProps("divisionNumber")}
-                          type="text"
-                        />
-                        {formik.errors.divisionNumber && (
-                          <p>{formik.errors.divisionNumber}</p>
-                        )}
-                      </div>
-                    </TextInputField>
-                  </div>
-                  <div>
-                    <TextInputField
-                      $error={formik.errors.contact || errors.contact}
-                    >
-                      <label>Phone Number*</label>
-                      <div>
-                        <input
-                          {...formik.getFieldProps("contact")}
-                          type="text"
-                        />
-                        {(formik.errors.contact && (
-                          <p>{formik.errors.contact}</p>
-                        )) ||
-                          (errors.contact && <p>{errors.contact}</p>)}
-                      </div>
-                    </TextInputField>
-                  </div>
-                </TextInputFieldParts>
+                      <ModalFormContainerNew>
+                          <form onSubmit={formik.handleSubmit}>
+                              <PopUpContentHeader>
+                                  <div></div>
+                                  <span>Organization Details</span>
+                                  <div></div>
+                              </PopUpContentHeader>
+                              <TextInputFieldParts>
+                                  <div>
+                                      <TextInputField
+                                          $error={formik.errors.name}
+                                      >
+                                          <label>Organization Name</label>
+                                          <div>
+                                              <input
+                                                  {...formik.getFieldProps(
+                                                      "name"
+                                                  )}
+                                                  type="text"
+                                              />
+                                              {formik.errors.name && (
+                                                  <p>{formik.errors.name}</p>
+                                              )}
+                                          </div>
+                                      </TextInputField>
+                                      <TextInputField
+                                          $error={
+                                              formik.errors.email ||
+                                              errors.email
+                                          }
+                                      >
+                                          <label>E-mail</label>
+                                          <div>
+                                              <input
+                                                  {...formik.getFieldProps(
+                                                      "email"
+                                                  )}
+                                                  type="text"
+                                              />
+                                              {(formik.errors.email && (
+                                                  <p>{formik.errors.email}</p>
+                                              )) ||
+                                                  (errors.email && (
+                                                      <p>{errors.email}</p>
+                                                  ))}
+                                          </div>
+                                      </TextInputField>
+                                  </div>
+                                  <div>
+                                      <TextInputField
+                                          $error={formik.errors.gsDivision}
+                                      >
+                                          <label>Gramasewa Division*</label>
+                                          <div>
+                                              <input
+                                                  {...formik.getFieldProps(
+                                                      "gsDivision"
+                                                  )}
+                                                  type="text"
+                                              />
+                                              {formik.errors.gsDivision && (
+                                                  <p>
+                                                      {formik.errors.gsDivision}
+                                                  </p>
+                                              )}
+                                          </div>
+                                      </TextInputField>
+                                      <TextInputField
+                                          $error={formik.errors.divisionNumber}
+                                      >
+                                          <label>Division Number*</label>
+                                          <div>
+                                              <input
+                                                  {...formik.getFieldProps(
+                                                      "divisionNumber"
+                                                  )}
+                                                  type="text"
+                                              />
+                                              {formik.errors.divisionNumber && (
+                                                  <p>
+                                                      {
+                                                          formik.errors
+                                                              .divisionNumber
+                                                      }
+                                                  </p>
+                                              )}
+                                          </div>
+                                      </TextInputField>
+                                  </div>
+                                  <div>
+                                      <TextInputField
+                                          $error={
+                                              formik.errors.contact ||
+                                              errors.contact
+                                          }
+                                      >
+                                          <label>Phone Number*</label>
+                                          <div>
+                                              <input
+                                                  {...formik.getFieldProps(
+                                                      "contact"
+                                                  )}
+                                                  type="text"
+                                              />
+                                              {(formik.errors.contact && (
+                                                  <p>{formik.errors.contact}</p>
+                                              )) ||
+                                                  (errors.contact && (
+                                                      <p>{errors.contact}</p>
+                                                  ))}
+                                          </div>
+                                      </TextInputField>
+                                  </div>
+                              </TextInputFieldParts>
 
-                <PopUpContentHeader>
-                  <div></div>
-                  <span>Board Person Details</span>
-                  <div></div>
-                </PopUpContentHeader>
+                              <PopUpContentHeader>
+                                  <div></div>
+                                  <span>Board Person Details</span>
+                                  <div></div>
+                              </PopUpContentHeader>
 
-                <TextInputFieldParts>
-                  <div>
-                    <TextInputField $error={formik.errors.boardName}>
-                      <label>Name</label>
-                      <div>
-                        <input
-                          {...formik.getFieldProps("boardName")}
-                          type="text"
-                        />
-                        {formik.errors.boardName && (
-                          <p>{formik.errors.boardName}</p>
-                        )}
-                      </div>
-                    </TextInputField>
-                    <TextInputField $error={formik.errors.boardAddress}>
-                      <label>Address</label>
-                      <div>
-                        <input
-                          {...formik.getFieldProps("boardAddress")}
-                          type="text"
-                        />
-                        {formik.errors.boardAddress && (
-                          <p>{formik.errors.boardAddress}</p>
-                        )}
-                      </div>
-                    </TextInputField>
-                  </div>
-                  <div>
-                    <TextInputField $error={formik.errors.nic}>
-                      <label>NIC Number</label>
-                      <div>
-                        <input
-                          {...formik.getFieldProps("nic")}
-                          type="text"
-                        />
-                        {formik.errors.nic && (
-                          <p>{formik.errors.nic}</p>
-                        )}
-                      </div>
-                    </TextInputField>
-                    <TextInputField $error={formik.errors.boardPhone}>
-                      <label>Phone Number</label>
-                      <div>
-                        <input
-                          {...formik.getFieldProps("boardPhone")}
-                          type="text"
-                        />
-                        {formik.errors.boardPhone && (
-                          <p>{formik.errors.boardPhone}</p>
-                        )}
-                      </div>
-                    </TextInputField>
-                  </div>
-                  <div>
-                    <TextInputField $error={formik.errors.boardEmail}>
-                      <label>E-mail</label>
-                      <div>
-                        <input
-                          {...formik.getFieldProps("boardEmail")}
-                          type="text"
-                        />
-                        {formik.errors.boardEmail && (
-                          <p>{formik.errors.boardEmail}</p>
-                        )}
-                      </div>
-                    </TextInputField>
-                  </div>
-                </TextInputFieldParts>
+                              <TextInputFieldParts>
+                                  <div>
+                                      <TextInputField
+                                          $error={formik.errors.boardName}
+                                      >
+                                          <label>Name</label>
+                                          <div>
+                                              <input
+                                                  {...formik.getFieldProps(
+                                                      "boardName"
+                                                  )}
+                                                  type="text"
+                                              />
+                                              {formik.errors.boardName && (
+                                                  <p>
+                                                      {formik.errors.boardName}
+                                                  </p>
+                                              )}
+                                          </div>
+                                      </TextInputField>
+                                      <TextInputField
+                                          $error={formik.errors.boardAddress}
+                                      >
+                                          <label>Address</label>
+                                          <div>
+                                              <input
+                                                  {...formik.getFieldProps(
+                                                      "boardAddress"
+                                                  )}
+                                                  type="text"
+                                              />
+                                              {formik.errors.boardAddress && (
+                                                  <p>
+                                                      {
+                                                          formik.errors
+                                                              .boardAddress
+                                                      }
+                                                  </p>
+                                              )}
+                                          </div>
+                                      </TextInputField>
+                                  </div>
+                                  <div>
+                                      <TextInputField
+                                          $error={
+                                              formik.errors.nic || errors.nic
+                                          }
+                                      >
+                                          <label>NIC Number</label>
+                                          <div>
+                                              <input
+                                                  {...formik.getFieldProps(
+                                                      "nic"
+                                                  )}
+                                                  type="text"
+                                              />
+                                              {(formik.errors.nic && (
+                                                  <p>{formik.errors.nic}</p>
+                                              )) ||
+                                                  (errors.nic && (
+                                                      <p>{errors.nic}</p>
+                                                  ))}
+                                          </div>
+                                      </TextInputField>
+                                      <TextInputField
+                                          $error={formik.errors.boardPhone}
+                                      >
+                                          <label>Phone Number</label>
+                                          <div>
+                                              <input
+                                                  {...formik.getFieldProps(
+                                                      "boardPhone"
+                                                  )}
+                                                  type="text"
+                                              />
+                                              {formik.errors.boardPhone && (
+                                                  <p>
+                                                      {formik.errors.boardPhone}
+                                                  </p>
+                                              )}
+                                          </div>
+                                      </TextInputField>
+                                  </div>
+                                  <div>
+                                      <TextInputField
+                                          $error={formik.errors.boardEmail}
+                                      >
+                                          <label>E-mail</label>
+                                          <div>
+                                              <input
+                                                  {...formik.getFieldProps(
+                                                      "boardEmail"
+                                                  )}
+                                                  type="text"
+                                              />
+                                              {formik.errors.boardEmail && (
+                                                  <p>
+                                                      {formik.errors.boardEmail}
+                                                  </p>
+                                              )}
+                                          </div>
+                                      </TextInputField>
+                                  </div>
+                              </TextInputFieldParts>
 
-                <ButtonContainer>
-                  <DeleteButton type="submit">
-                    {addModal && "Add"}
-                    {updateModal && "Update"}
-                  </DeleteButton>
-                </ButtonContainer>
-              </form>
-            </ModalFormContainerNew>
-          </ModalContent>
-        </Modal>
-      )}
-    </>
+                              <ButtonContainer>
+                                  <DeleteButton type="submit">
+                                      {addModal && "Add"}
+                                      {updateModal && "Update"}
+                                  </DeleteButton>
+                              </ButtonContainer>
+                          </form>
+                      </ModalFormContainerNew>
+                  </ModalContent>
+              </Modal>
+          )}
+      </>
   );
 }

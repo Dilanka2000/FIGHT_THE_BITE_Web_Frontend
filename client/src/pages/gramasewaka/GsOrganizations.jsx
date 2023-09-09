@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import GramasewakaLayOut from '../../components/layouts/GramasewakaLayOut'
 import EmpHeader from '../../components/header/EmpHeader';
 import BottomSlider from '../../components/slider/BottomSlider';
@@ -8,13 +9,20 @@ import PageNotFound from '../PageNotFound';
 import RegisterSuccess from '../../components/popup/RegisterSuccess';
 import DeleteUser from '../../components/popup/DeleteUser';
 import OrganizationsAddAndUpdate from './popup/OrganizationsAddAndUpdate';
+import UpdateSuccess from '../../components/popup/UpdateSuccess';
 
 export default function GsOrganizations() {
 
     const [{ apiData, serverError, isLoading }] = useFetch("getUsers/ORG");
 
+    const [{ apiData, serverError, isLoading }] = useFetch("getUsers/ORG");
+
     const sliderValue = 5;
     const [index, setIndex] = useState(0);
+    let length = 0;
+    if (!isLoading) {
+      length = apiData.length;
+    }
     let length = 0;
     if (!isLoading) {
       length = apiData.length;
@@ -52,7 +60,7 @@ export default function GsOrganizations() {
               <tr key={item._id}>
                 <td>{item.name}</td>
                 <td>{item.boardName}</td>
-                <td>{item.gsDivision}</td>
+                {/* <td>{item.gsDivision}</td> */}
                 <td>
                   <Contact>
                     {item.contact}
@@ -90,76 +98,83 @@ export default function GsOrganizations() {
       <GramasewakaLayOut>
         <EmpHeader pageName={"Organizations"} />
 
-        <TopContainer>
-          <AddButton
-            onClick={() => {
-              setAddModal(true);
-              setUpdateModal(false);
-            }}
-          >
-            Add new
-          </AddButton>
-          <SearchBar>
-            <input type="text" placeholder="Search here..." />
-          </SearchBar>
-        </TopContainer>
+            <TopContainer>
+                <AddButton
+                    onClick={() => {
+                        setAddModal(true);
+                        setUpdateModal(false);
+                    }}
+                >
+                    Add new
+                </AddButton>
+                <SearchBar>
+                    <input type="text" placeholder="Search here..." />
+                </SearchBar>
+            </TopContainer>
 
-        <MainContainerBG>
-          <TableContainer>
-            <table>
-              <thead>
-                <tr>
-                  <th>Organizationname</th>
-                  <th>Organizer</th>
-                  <th>Gramasewa Division</th>
-                  <th>Contact</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>{getDataContent(apiData)}</tbody>
-            </table>
-          </TableContainer>
+            <MainContainerBG>
+                <TableContainer>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Organizationname</th>
+                                <th>Organizer</th>
+                                {/* <th>Gramasewa Division</th> */}
+                                <th>Contact</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>{getDataContent(apiData)}</tbody>
+                    </table>
+                </TableContainer>
 
-          <BottomSlider
-            length={length}
-            index={index}
-            setIndex={setIndex}
-            x={x}
-            sliderValue={sliderValue}
-          />
-        </MainContainerBG>
+                <BottomSlider
+                    length={length}
+                    index={index}
+                    setIndex={setIndex}
+                    x={x}
+                    sliderValue={sliderValue}
+                />
+            </MainContainerBG>
 
-        {/* ======================= Add & Update organizations ========================= */}
-        {/* 888888888888888888888888888888888888888888888888888888888888888888888888888888 */}
+            {/* ======================= Add & Update organizations ========================= */}
+            {/* 888888888888888888888888888888888888888888888888888888888888888888888888888888 */}
 
-        <OrganizationsAddAndUpdate
-          addModal={addModal}
-          updateModal={updateModal}
-          setAddModal={setAddModal}
-          setUpdateModal={setUpdateModal}
-          eventData={eventData}
-          setEventData={setEventData}
-          setRegisterSuccess={setRegisterSuccess}
-          setUpdateSuccess={setUpdateSuccess}
-        />
-        {registerSuccess && (
-          <Modal>
-            <ModalContent>
-              <RegisterSuccess />
-            </ModalContent>
-          </Modal>
-        )}
+            <OrganizationsAddAndUpdate
+                addModal={addModal}
+                updateModal={updateModal}
+                setAddModal={setAddModal}
+                setUpdateModal={setUpdateModal}
+                eventData={eventData}
+                setEventData={setEventData}
+                setRegisterSuccess={setRegisterSuccess}
+                setUpdateSuccess={setUpdateSuccess}
+            />
+            {registerSuccess && (
+                <Modal>
+                    <ModalContent>
+                        <RegisterSuccess />
+                    </ModalContent>
+                </Modal>
+            )}
+            {updateSuccess && (
+                <Modal>
+                    <ModalContent>
+                        <UpdateSuccess />
+                    </ModalContent>
+                </Modal>
+            )}
 
-        {/* ========================== Delete organization ============================ */}
-        {/* 888888888888888888888888888888888888888888888888888888888888888888888888888888 */}
-        {deleteModal && (
-          <DeleteUser
-            eventData={eventData}
-            setEventData={setEventData}
-            setDeleteModal={setDeleteModal}
-          />
-        )}
-      </GramasewakaLayOut>
+            {/* ========================== Delete organization ============================ */}
+            {/* 888888888888888888888888888888888888888888888888888888888888888888888888888888 */}
+            {deleteModal && (
+                <DeleteUser
+                    eventData={eventData}
+                    setEventData={setEventData}
+                    setDeleteModal={setDeleteModal}
+                />
+            )}
+        </GramasewakaLayOut>
     );
 }
 
