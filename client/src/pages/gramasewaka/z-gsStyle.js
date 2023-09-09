@@ -24,6 +24,7 @@ export const GridTitle = styled.div`
     padding-top: ${v.lgSpacing};
     padding-bottom: ${v.mdSpacing};
 `;
+`;
 
 export const GridTableContainerScroll = styled.div`
     width: 100%;
@@ -173,6 +174,7 @@ export const InputScrollContainer = styled.div`
 export const FormTextInput2 = styled(FormTextInput)`
     label {
         width: 80px;
+        width: 80px;
     }
     input {
         width: 320px;
@@ -186,6 +188,7 @@ export const SpaceDiv = styled.div`
 
 export const MainContainerBG2 = styled(MainContainerBG)`
     padding: ${v.mdSpacing};
+    border: 1px solid ${({ theme }) => theme.bg3};
     border: 1px solid ${({ theme }) => theme.bg3};
 `;
 

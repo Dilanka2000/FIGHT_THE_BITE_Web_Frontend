@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import GramasewakaLayOut from '../../components/layouts/GramasewakaLayOut'
 import EmpHeader from '../../components/header/EmpHeader';
 import BottomSlider from '../../components/slider/BottomSlider';
@@ -14,8 +15,14 @@ export default function GsOrganizations() {
 
     const [{ apiData, serverError, isLoading }] = useFetch("getUsers/ORG");
 
+    const [{ apiData, serverError, isLoading }] = useFetch("getUsers/ORG");
+
     const sliderValue = 5;
     const [index, setIndex] = useState(0);
+    let length = 0;
+    if (!isLoading) {
+      length = apiData.length;
+    }
     let length = 0;
     if (!isLoading) {
       length = apiData.length;
@@ -88,8 +95,8 @@ export default function GsOrganizations() {
     }
     if (serverError) return <PageNotFound />;
     return (
-        <GramasewakaLayOut>
-            <EmpHeader pageName={"Organizations"} />
+      <GramasewakaLayOut>
+        <EmpHeader pageName={"Organizations"} />
 
             <TopContainer>
                 <AddButton

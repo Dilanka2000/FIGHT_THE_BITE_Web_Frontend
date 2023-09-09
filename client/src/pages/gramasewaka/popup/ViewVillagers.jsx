@@ -5,13 +5,13 @@ import { AddVillagerPopUpBack, AddVillagerPopUpBackHouseHolderInfo, AddVillagerP
 export default function ViewVillagers({ setViewData, eventData, setEventData }) {
   console.log(eventData)
     return (
-        <Modal>
-            <Overlay
-                onClick={() => {
-                    setViewData(false);
-                    setEventData("");
-                }}
-            />
+      <Modal>
+        <Overlay
+          onClick={() => {
+            setViewData(false);
+            setEventData("");
+          }}
+        />
 
             <ModalContentNew>
                 <MainContainerView>

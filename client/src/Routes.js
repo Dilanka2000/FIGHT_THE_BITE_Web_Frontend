@@ -29,6 +29,12 @@ import GsOrganizations from "./pages/gramasewaka/GsOrganizations";
 import GsCampaigns from "./pages/gramasewaka/GsCampaigns";
 import GsAnnouncements from "./pages/gramasewaka/GsAnnouncements";
 
+//---------------------------------------------------receptionist--------------------------------------------------------
+import RcHomePage from "./pages/receptionist/RcHomePage";
+import AddNurse from "./pages/receptionist/AddNurse";
+import AddDoctor from "./pages/receptionist/AddDoctor";
+import VideoCon from "./pages/receptionist/VideoCon";
+
 // Root Routes
 const router = createBrowserRouter([
     {
@@ -180,6 +186,55 @@ const router = createBrowserRouter([
             </AuthorizeGN>
         ),
     },
+
+
+
+
+
+
+
+    //-------------------------------------------Receptionist routing-------------------------------------------------
+
+
+
+    {
+        path: "/receptionist",
+        element: (
+           
+                < RcHomePage/>
+            
+        ),
+    },
+
+    {
+        path: "/receptionist/addNurse",
+        element: (
+           
+                < AddNurse/>
+            
+        ),
+    },
+
+    {
+        path: "/receptionist/addDoctor",
+        element: (
+           
+                < AddDoctor/>
+            
+        ),
+    },
+
+    {
+        path: "/receptionist/videoConferencing",
+        element: (
+           
+                < VideoCon/>
+            
+        ),
+    },
+
+    
+    
 ]);
 
 export default function Routes() {

@@ -66,6 +66,7 @@ export default function VillagesAddAndUpdate({
         divisionNumber: eventData ? eventData.divisionNumber : "",
         houseHoldNo: eventData ? eventData.houseHoldNo : "",
         members: eventData ? eventData.members : [],
+        members: eventData ? eventData.members : [],
         id: eventData ? eventData._id : "",
     };
 
@@ -114,6 +115,7 @@ export default function VillagesAddAndUpdate({
         let content = [];
         for (let i = 1; i < memberCount + 1; i++) {
             content.push(
+                <React.Fragment key={i}>
                 <React.Fragment key={i}>
                     <MainContainerBG2>
                         <RowContainer>
@@ -206,9 +208,28 @@ export default function VillagesAddAndUpdate({
                                         )}
                                     />
                                     <label>Femail</label>
+                                    <input
+                                        type="radio"
+                                        name="members[${i}].gender"
+                                        value="male"
+                                        {...formik.getFieldProps(
+                                            `members[${i}].gender`
+                                        )}
+                                    />
+                                    <label>Male</label>
+                                    <input
+                                        type="radio"
+                                        name="members[${i}].gender"
+                                        value="female"
+                                        {...formik.getFieldProps(
+                                            `members[${i}].gender`
+                                        )}
+                                    />
+                                    <label>Femail</label>
                                 </RadioButtonContainer>
                             </FormTextInput2>
                             <AddAndUndu>
+                                {i === memberCount && i !== 1 && (
                                 {i === memberCount && i !== 1 && (
                                     <i
                                         className="fa-solid fa-circle-minus"
@@ -218,6 +239,7 @@ export default function VillagesAddAndUpdate({
                                         }}
                                     ></i>
                                 )}
+                                {i === memberCount && (
                                 {i === memberCount && (
                                     <i
                                         className="fa-solid fa-circle-plus"
@@ -231,6 +253,7 @@ export default function VillagesAddAndUpdate({
                         </RowContainer>
                     </MainContainerBG2>
                     <SpaceDiv />
+                </React.Fragment>
                 </React.Fragment>
             );
         }
@@ -258,6 +281,7 @@ export default function VillagesAddAndUpdate({
                                 onClick={() => {
                                     setAddModal(false);
                                     setUpdateModal(false);
+                                    setMemberCount(1);
                                     setMemberCount(1);
                                     formik.resetForm();
                                     setErrors("");
@@ -381,21 +405,31 @@ export default function VillagesAddAndUpdate({
                                                     type="radio"
                                                     id="male"
                                                     name="members[0].gender"
+                                                    name="members[0].gender"
                                                     value="male"
+                                                    {...formik.getFieldProps(
+                                                        "members[0].gender"
+                                                    )}
                                                     {...formik.getFieldProps(
                                                         "members[0].gender"
                                                     )}
                                                 />
                                                 <label>Male</label>
+                                                <label>Male</label>
                                                 <input
                                                     type="radio"
                                                     id="female"
+                                                    name="members[0].gender"
                                                     name="members[0].gender"
                                                     value="female"
                                                     {...formik.getFieldProps(
                                                         "members[0].gender"
                                                     )}
+                                                    {...formik.getFieldProps(
+                                                        "members[0].gender"
+                                                    )}
                                                 />
+                                                <label>Femail</label>
                                                 <label>Femail</label>
                                             </RadioButtonContainer>
                                         </FormTextInputBlock>
