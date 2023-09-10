@@ -341,9 +341,7 @@ export const nurseUpdateSchema = yup.object().shape({
         .required("Field Required!"),
         contact: yup
         .string()
-        .required("Field Required!"),
-        contact: yup
-        .string()
         .required("Field Required!")
     
 });
+
