@@ -10,7 +10,9 @@ import PageNotFound from "../PageNotFound";
 import profileImg from "../../assets/images/profile.png";
 import UpdateSuccess from "../../components/popup/UpdateSuccess";
 import DeleteUser from "../../components/popup/DeleteUser";
-import DoctorAddAndUpdate from "./PopUp/NurseAddAndUpdate";
+import NurseAddAndUpdate from "./PopUp/NurseAddAndUpdate";
+import DeleteSuccess from "../../components/popup/DeleteSuccess";
+import Loading from "../../components/popup/Loading";
 
 
 export default function AddNurse() {
@@ -29,7 +31,8 @@ export default function AddNurse() {
     const [deleteModal, setDeleteModal] = useState(false);
     const [registerSuccess, setRegisterSuccess] = useState(false);
     const [updateSuccess, setUpdateSuccess] = useState(false);
-    // const [deleteSuccess, setDeleteSuccess] = useState(false);
+    const [deleteSuccess, setDeleteSuccess] = useState(false);
+    const [loading, setLoading] = useState(false);
     
     
     useEffect(() => {
@@ -46,9 +49,15 @@ export default function AddNurse() {
                 setUpdateSuccess(false);
             }, 2000);
             return () => clearInterval(slideIntaval);
+        }else if (deleteSuccess) {
+            window.location.reload();
+            const slideIntaval = setInterval(() => {
+                setDeleteSuccess(false);
+            }, 2000);
+            return () => clearInterval(slideIntaval);
         }
         
-    }, [registerSuccess, updateSuccess]);
+    }, [registerSuccess, updateSuccess, deleteSuccess]);
     
     const getDataContent = data => {
         let content = [];
@@ -64,8 +73,10 @@ export default function AddNurse() {
                             <span>{item.registrationNumber}</span>
                         </ImageAndText>
                     </td>
+                    <td>{item.nic}</td>
                     <td>{item.name}</td>
                     <td>{item.email}</td>
+                    
                     
                     <td>
                         <Contact>
@@ -124,9 +135,12 @@ export default function AddNurse() {
                         <thead>
                             <tr>
                                 <th>Registration Number</th>
+                                <th>NIC</th>
                                 <th>Name</th>
                                 <th>E-mail</th>
                                 <th>Contact</th>
+                                
+                                
                                 
                             </tr>
                         </thead>
@@ -143,9 +157,9 @@ export default function AddNurse() {
                 />
             </MainContainerBG>
 
-            {/* ======================= Add & Update village officer ========================= */}
+            {/* ======================= Add & Update Nurse ========================= */}
             {/* 888888888888888888888888888888888888888888888888888888888888888888888888888888 */}
-            <DoctorAddAndUpdate
+            <NurseAddAndUpdate
                 addModal={addModal}
                 updateModal={updateModal}
                 setAddModal={setAddModal}
@@ -154,6 +168,7 @@ export default function AddNurse() {
                 setEventData={setEventData}
                 setRegisterSuccess={setRegisterSuccess}
                 setUpdateSuccess={setUpdateSuccess}
+                setLoading={setLoading}
             />
 
             {registerSuccess && (
@@ -172,20 +187,29 @@ export default function AddNurse() {
                 </Modal>
             )}
 
-            {/* ========================== Delete village officer ============================ */}
+            {loading && (
+                <Modal>
+                    <ModalContent>
+                        <Loading />
+                    </ModalContent>
+                </Modal>
+            )}
+
+            {/* ========================== Delete Nurse ============================ */}
             {/* 888888888888888888888888888888888888888888888888888888888888888888888888888888 */}
             {deleteModal && <DeleteUser
                 eventData={eventData}
                 setEventData={setEventData}
                 setDeleteModal={setDeleteModal}
+                setDeleteSuccess={setDeleteSuccess}
             />}
-            {/* {deleteSuccess && (
+            {deleteSuccess && (
                 <Modal>
                     <ModalContent>
-                        <UpdateSuccess />
+                        <DeleteSuccess />
                     </ModalContent>
                 </Modal>
-            )} */}
+            )}
         </ReceptionistLayout>
     );
 }

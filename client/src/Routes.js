@@ -2,7 +2,7 @@ import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // auth middleware
-import { AuthorizeAdmin, AuthorizeGN, AuthorizeUser } from "./middleware/auth";
+import { AuthorizeAdmin, AuthorizeGN, AuthorizeRCEP, AuthorizeUser } from "./middleware/auth";
 
 // Import all components
 import HomePage from "./pages/user/HomePage";
@@ -33,7 +33,6 @@ import GsAnnouncements from "./pages/gramasewaka/GsAnnouncements";
 import RcHomePage from "./pages/receptionist/RcHomePage";
 import AddNurse from "./pages/receptionist/AddNurse";
 import AddDoctor from "./pages/receptionist/AddDoctor";
-import VideoCon from "./pages/receptionist/VideoCon";
 
 // Root Routes
 const router = createBrowserRouter([
@@ -200,36 +199,27 @@ const router = createBrowserRouter([
     {
         path: "/receptionist",
         element: (
-           
+            <AuthorizeRCEP>
                 < RcHomePage/>
-            
+            </AuthorizeRCEP>
         ),
     },
 
     {
         path: "/receptionist/addNurse",
         element: (
-           
-                < AddNurse/>
-            
+            <AuthorizeRCEP>
+               < AddNurse/>
+            </AuthorizeRCEP>
         ),
     },
 
     {
         path: "/receptionist/addDoctor",
         element: (
-           
-                < AddDoctor/>
-            
-        ),
-    },
-
-    {
-        path: "/receptionist/videoConferencing",
-        element: (
-           
-                < VideoCon/>
-            
+            <AuthorizeRCEP>
+               < AddDoctor/>
+            </AuthorizeRCEP>
         ),
     },
 

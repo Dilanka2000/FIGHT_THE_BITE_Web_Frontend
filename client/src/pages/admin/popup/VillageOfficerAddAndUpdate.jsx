@@ -4,7 +4,7 @@ import { villageOfficerSchema, villageOfficerUpdateSchema } from "../../../helpe
 import { registerUser, updateUser } from "../../../helper/helper";
 import { AddButton, ButtonContainer, FormTextInput, Modal, ModalContent, ModalFormContainer, ModalTitle, Overlay } from '../../../assets/styles/globalStyls';
 
-export default function VillageOfficerAddAndUpdate({ addModal, updateModal, setAddModal, setUpdateModal, eventData, setEventData, setRegisterSuccess, setUpdateSuccess }) {
+export default function VillageOfficerAddAndUpdate({ addModal, updateModal, setAddModal, setUpdateModal, eventData, setEventData, setRegisterSuccess, setUpdateSuccess, setLoading }) {
 
     const [errors, setErrors] = useState("");
     
@@ -16,8 +16,7 @@ export default function VillageOfficerAddAndUpdate({ addModal, updateModal, setA
         email: "",
         gsDivision: "",
         divisionNumber: "",
-        password: "",
-        confirmPassword: "",
+        password: "As@12345",
         role: "GN",
     };
     let initialValueForUpdate = {
@@ -41,16 +40,19 @@ export default function VillageOfficerAddAndUpdate({ addModal, updateModal, setA
         validateOnBlur: false,
         validateOnChange: false,
         onSubmit: async (values, onSubmitProps) => {
+            setLoading(true);
             let promise = addModal
                 ? await registerUser(values)
                 : await updateUser(values);
             if (promise === "Register Successfully") {
+                setLoading(false);
                 setAddModal(false);
                 setUpdateModal(false);
                 setErrors("");
                 onSubmitProps.resetForm();
                 setRegisterSuccess(true);
             } else if (promise === "Update Successfully") {
+                setLoading(false);
                 setAddModal(false);
                 setUpdateModal(false);
                 setErrors("");
@@ -58,6 +60,7 @@ export default function VillageOfficerAddAndUpdate({ addModal, updateModal, setA
                 onSubmitProps.resetForm();
                 setUpdateSuccess(true);
             } else {
+                setLoading(false);
                 setErrors(promise);
             }
 
@@ -204,48 +207,6 @@ export default function VillageOfficerAddAndUpdate({ addModal, updateModal, setA
                                         )}
                                     </div>
                                 </FormTextInput>
-
-                                {addModal && (
-                                    <FormTextInput
-                                        $error={formik.errors.password}
-                                    >
-                                        <label>Password*</label>
-                                        <div>
-                                            <input
-                                                {...formik.getFieldProps(
-                                                    "password"
-                                                )}
-                                                type="password"
-                                            />
-                                            {formik.errors.password && (
-                                                <p>{formik.errors.password}</p>
-                                            )}
-                                        </div>
-                                    </FormTextInput>
-                                )}
-                                {addModal && (
-                                    <FormTextInput
-                                        $error={formik.errors.confirmPassword}
-                                    >
-                                        <label>Confirm Password*</label>
-                                        <div>
-                                            <input
-                                                {...formik.getFieldProps(
-                                                    "confirmPassword"
-                                                )}
-                                                type="password"
-                                            />
-                                            {formik.errors.confirmPassword && (
-                                                <p>
-                                                    {
-                                                        formik.errors
-                                                            .confirmPassword
-                                                    }
-                                                </p>
-                                            )}
-                                        </div>
-                                    </FormTextInput>
-                                )}
 
                                 <ButtonContainer>
                                     <AddButton type="submit">

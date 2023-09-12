@@ -1,44 +1,50 @@
 import React, { useState } from 'react'
 import { useFormik } from "formik";
-import { doctorSchema, doctorUpdateSchema } from "../../../helper/validate";
+import { PHISchema, PHIUpdateSchema } from "../../../helper/validate";
 import { registerUser, updateUser } from "../../../helper/helper";
 import { AddButton, ButtonContainer, FormTextInput, Modal, ModalContent, ModalFormContainer, ModalTitle, Overlay } from '../../../assets/styles/globalStyls';
+import { MultyInputs } from '../z-adminStyle';
+import { AddAndUndu } from '../../gramasewaka/z-gsStyle';
 
-export default function DoctorAddAndUpdate({ addModal, updateModal, setAddModal, setUpdateModal, eventData, setEventData, setRegisterSuccess, setUpdateSuccess, setLoading }) {
+export default function PHIAddAndUpdate({ addModal, updateModal, setAddModal, setUpdateModal, eventData, setEventData, setRegisterSuccess, setUpdateSuccess, setLoading, memberCount, setMemberCount }) {
 
     const [errors, setErrors] = useState("");
-    
+
     let initialValueForAdd = {
-        registrationNumber: "",
-        nic:"",
         name: "",
-        email: "",
+        address: "",
+        nic: "",
         contact: "",
-        wardNo: "",
-        divisionNumber: "",
-        role: "DR",
-        password:"As@12345",
+        email: "",
+        gsDivisions: [],
+        password: "PHI@123",
+        role: "PHI",
     };
     let initialValueForUpdate = {
-        nic: eventData ? eventData.nic : "",
         name: eventData ? eventData.name : "",
-        email: eventData ? eventData.email : "",
+        address: eventData ? eventData.address : "",
+        nic: eventData ? eventData.nic : "",
         contact: eventData ? eventData.contact : "",
-        wardNo: eventData ? eventData.wardNo : "",
-        divisionNumber: eventData ? eventData.divisionNumber : "",
+        email: eventData ? eventData.email : "",
+        gsDivisions: eventData ? eventData.gsDivisions : "",
         id: eventData ? eventData._id : "",
-        role: "DR",
+        role: "PHI",
     };
 
     const formik = useFormik({
         initialValues: eventData ? initialValueForUpdate : initialValueForAdd,
         validationSchema: addModal
-            ? doctorSchema
-            : doctorUpdateSchema,
+            ? PHISchema
+            : PHIUpdateSchema,
         enableReinitialize: true,
         validateOnBlur: false,
         validateOnChange: false,
         onSubmit: async (values, onSubmitProps) => {
+            if (values.gsDivisions.length > memberCount) {
+                while (values.gsDivisions.length !== memberCount) {
+                    values.gsDivisions.pop();
+                }
+            }
             setLoading(true);
             let promise = addModal
                 ? await registerUser(values)
@@ -60,12 +66,33 @@ export default function DoctorAddAndUpdate({ addModal, updateModal, setAddModal,
                 setUpdateSuccess(true);
             } else {
                 setLoading(false);
-                setErrors(promise);//backend
+                setErrors(promise);
             }
 
             console.log(errors);
+            setLoading(false);
         },
     });
+
+    const getMemberContent = () => {
+        let content = [];
+        for (let i = 0; i < memberCount; i++) {
+            content.push(
+                <React.Fragment key={i}>
+                    <div>
+                        <input
+                            {...formik.getFieldProps(`gsDivisions[${i}]`)}
+                            type="text"
+                        />
+                        {formik.errors.gsDivisions && (
+                            <p>{formik.errors.gsDivisions}</p>
+                        )}
+                    </div>
+                </React.Fragment>
+            );
+        }
+        return content;
+    };
 
     return (
         <>
@@ -82,8 +109,8 @@ export default function DoctorAddAndUpdate({ addModal, updateModal, setAddModal,
                     />
                     <ModalContent>
                         <ModalTitle>
-                            {addModal && <div>Add new Doctor</div>}
-                            {updateModal && <div>Update Doctor</div>}
+                            {addModal && <div>Add new Gramasewaka</div>}
+                            {updateModal && <div>Update Gramasewaka</div>}
                             <i
                                 className="fa-solid fa-circle-xmark"
                                 onClick={() => {
@@ -97,33 +124,6 @@ export default function DoctorAddAndUpdate({ addModal, updateModal, setAddModal,
                         </ModalTitle>
                         <ModalFormContainer>
                             <form onSubmit={formik.handleSubmit}>
-
-                            {addModal && <FormTextInput $error={formik.errors.registrationNumber}>
-                                    <label>Registration Number*</label>
-                                    <div>
-                                        <input
-                                            {...formik.getFieldProps("registrationNumber")}
-                                            type="text"
-                                        />
-                                        {formik.errors.registrationNumber && (
-                                            <p>{formik.errors.registrationNumber}</p>
-                                        )}
-                                    </div>
-                                </FormTextInput>}
-                                <FormTextInput $error={formik.errors.nic || errors.nic}>
-                                    <label>NIC*</label>
-                                    <div>
-                                        <input
-                                            {...formik.getFieldProps("nic")}
-                                            type="text"
-                                        />
-
-                                        {(formik.errors.nic && (
-                                            <p>{formik.errors.nic}</p>
-                                        )) ||
-                                            (errors.nic && <p>{errors.nic}</p>)}
-                                    </div>
-                                </FormTextInput>
                                 <FormTextInput $error={formik.errors.name}>
                                     <label>Name*</label>
                                     <div>
@@ -136,23 +136,33 @@ export default function DoctorAddAndUpdate({ addModal, updateModal, setAddModal,
                                         )}
                                     </div>
                                 </FormTextInput>
-                                <FormTextInput $error={formik.errors.email || errors.email}>
-                                    <label>E-mail*</label>
+                                <FormTextInput $error={formik.errors.address}>
+                                    <label>Address*</label>
                                     <div>
                                         <input
-                                            {...formik.getFieldProps("email")}
+                                            {...formik.getFieldProps("address")}
                                             type="text"
                                         />
-
-                                            {(formik.errors.email && (
-                                            <p>{formik.errors.email}</p>
-                                        )) ||
-                                            (errors.email && (
-                                                <p>{errors.email}</p>
-                                            ))}
+                                        {formik.errors.address && (
+                                            <p>{formik.errors.address}</p>
+                                        )}
                                     </div>
                                 </FormTextInput>
-                                
+                                <FormTextInput
+                                    $error={formik.errors.nic || errors.nic}
+                                >
+                                    <label>NIC Number*</label>
+                                    <div>
+                                        <input
+                                            {...formik.getFieldProps("nic")}
+                                            type="text"
+                                        />
+                                        {(formik.errors.nic && (
+                                            <p>{formik.errors.nic}</p>
+                                        )) ||
+                                            (errors.nic && <p>{errors.nic}</p>)}
+                                    </div>
+                                </FormTextInput>
                                 <FormTextInput
                                     $error={
                                         formik.errors.contact || errors.contact
@@ -172,44 +182,54 @@ export default function DoctorAddAndUpdate({ addModal, updateModal, setAddModal,
                                             ))}
                                     </div>
                                 </FormTextInput>
-                                
                                 <FormTextInput
-                                    $error={formik.errors.wardNo}
+                                    $error={formik.errors.email || errors.email}
                                 >
-                                    <label>Ward No*</label>
+                                    <label>Email Address*</label>
                                     <div>
                                         <input
-                                            {...formik.getFieldProps(
-                                                "wardNo"
-                                            )}
+                                            {...formik.getFieldProps("email")}
                                             type="text"
                                         />
-                                        {formik.errors.wardNo && (
-                                            <p>{formik.errors.wardNo}</p>
-                                        )}
+                                        {(formik.errors.email && (
+                                            <p>{formik.errors.email}</p>
+                                        )) ||
+                                            (errors.email && (
+                                                <p>{errors.email}</p>
+                                            ))}
                                     </div>
                                 </FormTextInput>
-
                                 <FormTextInput
-                                    $error={formik.errors.divisionNumber}
+                                    $error={formik.errors.gsDivisions}
                                 >
-                                    <label>grama Niladhari Division*</label>
-                                    <div>
-                                        <input
-                                            {...formik.getFieldProps(
-                                                "divisionNumber"
-                                            )}
-                                            type="text"
-                                        />
-                                        {formik.errors.divisionNumber && (
-                                            <p>{formik.errors.divisionNumber}</p>
-                                        )}
-                                    </div>
-                                </FormTextInput>
-                                
+                                    <label>Gramasewa Divisions</label>
+                                    <MultyInputs>
+                                        {getMemberContent()}
 
-                               
-                                
+                                        <AddAndUndu>
+                                            {memberCount > 1 && (
+                                                <i
+                                                    className="fa-solid fa-circle-minus"
+                                                    style={{ color: "#e74646" }}
+                                                    onClick={() => {
+                                                        setMemberCount(
+                                                            memberCount - 1
+                                                        );
+                                                    }}
+                                                ></i>
+                                            )}
+                                            <i
+                                                className="fa-solid fa-circle-plus"
+                                                style={{ color: "#4cbc9a" }}
+                                                onClick={() => {
+                                                    setMemberCount(
+                                                        memberCount + 1
+                                                    );
+                                                }}
+                                            ></i>
+                                        </AddAndUndu>
+                                    </MultyInputs>
+                                </FormTextInput>
 
                                 <ButtonContainer>
                                     <AddButton type="submit">

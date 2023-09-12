@@ -21,8 +21,14 @@ export async function getUsername() {
     const token = localStorage.getItem('token');
     if (!token) return Promise.reject("Cannot find Token");
     let decode = jwt_decode(token);
-    // console.log(decode.username);
     return decode.username;
+}
+// To get userrole from Token
+export async function getUserRole() {
+    const token = localStorage.getItem('token');
+    if (!token) return Promise.reject("Cannot find Token");
+    let decode = jwt_decode(token);
+    return decode.role;
 }
 
 // Get user details function

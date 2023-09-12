@@ -81,6 +81,49 @@ export const ProfileContact = styled.div`
     }
 `;
 
+export const MultyInputs = styled.div`
+    width: 350px;
+    max-height: 150px;
+    padding: ${v.mdSpacing};
+    border: 1px solid ${({ theme }) => theme.text};
+    border-radius: ${v.borderRadius};
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow-y: scroll;
+
+    div {
+        margin-bottom: ${v.smSpacing};
+    }
+
+    input {
+        width: 145px;
+        height: 30px;
+    }
+
+    i {
+        font-size: ${v.lgSpacing}!important;
+    }
+
+    /* Define the scrollbar style */
+    &::-webkit-scrollbar {
+        width: 10px;
+        height: 15px;
+    }
+
+    /* Define the thumb style */
+    &::-webkit-scrollbar-thumb {
+        background: ${({ theme }) => theme.primary};
+        border-radius: 5px;
+    }
+
+    /* Define the track style */
+    &::-webkit-scrollbar-track:horizontal {
+        background-color: white;
+        box-shadow: inset 0 0 2px 2px gainsboro;
+    }
+`;
+
 
 
 // ====================================== Map ======================================

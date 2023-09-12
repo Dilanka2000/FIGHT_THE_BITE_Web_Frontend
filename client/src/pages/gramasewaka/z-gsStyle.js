@@ -5,7 +5,6 @@ import {
     MainContainerBG,
     ModalFormContainer,
     ModalContent,
-    ModalFormContainer,
     ModalTitle,
 } from "../../assets/styles/globalStyls";
 
@@ -174,6 +173,7 @@ export const InputScrollContainer = styled.div`
 export const FormTextInput2 = styled(FormTextInput)`
     label {
         width: 80px;
+        width: 80px;
     }
     input {
         width: 320px;
@@ -187,6 +187,7 @@ export const SpaceDiv = styled.div`
 
 export const MainContainerBG2 = styled(MainContainerBG)`
     padding: ${v.mdSpacing};
+    border: 1px solid ${({ theme }) => theme.bg3};
     border: 1px solid ${({ theme }) => theme.bg3};
 `;
 
@@ -256,7 +257,7 @@ export const ModalContentNew = styled(ModalContent)`
 `;
 
 export const AddVillagerPopUpBack = styled.div`
-    width: 34%;
+    width: 37%;
     background: ${({ theme }) => theme.primary};
     padding: 75px 0px;
     border-radius: 10px 0px 0px 10px;
@@ -281,7 +282,7 @@ export const PopUpContentHeaderNew = styled(PopUpContentHeader)`
     padding: 30px 0px;
 
     div {
-        width: 29%;
+        width: 33%;
     }
 `;
 
@@ -294,17 +295,21 @@ export const MemberDetailsTble = styled.div`
 
     table {
         width: 100%;
-        padding: 0px 60px;
+        /* padding: 0px 60px; */
     }
 
     tr {
         padding: 2.5px;
     }
+
+    td{
+        width: 50%;
+    }
 `;
 export const AddVillagerPopUpBackHouseHolderInfoNew = styled.div`
     display: flex;
-    margin: 5px;
-    justify-content: center;
+    margin: 5px 5px 5px 75px;
+    /* justify-content: center; */
 
     h5 {
         font-weight: 900;

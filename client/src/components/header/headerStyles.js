@@ -15,9 +15,8 @@ export const PageName = styled.div`
 
 export const ACC = styled.div`
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    width: 350px;
+    gap: ${v.xlSpacing};
 `;
 
 export const AccDetails = styled.div`
@@ -50,6 +49,10 @@ export const AccImage = styled.div`
     height: 50px;
     border-radius: 50%;
     background: white;
+
+    img{
+        width: 100%;
+    }
 `;
 
 export const LogoutButton = styled.button`

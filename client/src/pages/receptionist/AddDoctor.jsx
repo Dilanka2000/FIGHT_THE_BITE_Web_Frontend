@@ -11,7 +11,8 @@ import profileImg from "../../assets/images/profile.png";
 import UpdateSuccess from "../../components/popup/UpdateSuccess";
 import DeleteUser from "../../components/popup/DeleteUser";
 import DoctorAddAndUpdate from "./PopUp/DoctorAddAndUpdate";
-import { getUserByEmail } from "../../helper/helper";
+import DeleteSuccess from "../../components/popup/DeleteSuccess";
+import Loading from "../../components/popup/Loading";
 
 
 export default function AddDoctor() {
@@ -30,7 +31,9 @@ export default function AddDoctor() {
     const [deleteModal, setDeleteModal] = useState(false);
     const [registerSuccess, setRegisterSuccess] = useState(false);
     const [updateSuccess, setUpdateSuccess] = useState(false);
-    // const [deleteSuccess, setDeleteSuccess] = useState(false);
+    const [deleteSuccess, setDeleteSuccess] = useState(false);
+    const [loading, setLoading] = useState(false);
+    
     
     
     useEffect(() => {
@@ -47,9 +50,15 @@ export default function AddDoctor() {
                 setUpdateSuccess(false);
             }, 2000);
             return () => clearInterval(slideIntaval);
+        }else if (deleteSuccess) {
+            window.location.reload();
+            const slideIntaval = setInterval(() => {
+                setDeleteSuccess(false);
+            }, 2000);
+            return () => clearInterval(slideIntaval);
         }
         
-    }, [registerSuccess, updateSuccess]);
+    }, [registerSuccess, updateSuccess, deleteSuccess]);
     
     const getDataContent = data => {
         let content = [];
@@ -75,6 +84,7 @@ export default function AddDoctor() {
                         </Contact>
                     </td>
                     <td>{item.wardNo}</td>
+                    <td>{item.divisionNumber}</td>
                     <td>
                         <DeleteButton
                             onClick={() => {
@@ -129,6 +139,7 @@ export default function AddDoctor() {
                                 <th>E-mail</th>
                                 <th>Contact</th>
                                 <th>Ward No</th>
+                                <th>grama Niladhari Division</th>
                             </tr>
                         </thead>
                         <tbody>{getDataContent(apiData)}</tbody>
@@ -144,7 +155,7 @@ export default function AddDoctor() {
                 />
             </MainContainerBG>
 
-            {/* ======================= Add & Update village officer ========================= */}
+            {/* ======================= Add & Update Doctor ========================= */}
             {/* 888888888888888888888888888888888888888888888888888888888888888888888888888888 */}
             <DoctorAddAndUpdate
                 addModal={addModal}
@@ -155,6 +166,7 @@ export default function AddDoctor() {
                 setEventData={setEventData}
                 setRegisterSuccess={setRegisterSuccess}
                 setUpdateSuccess={setUpdateSuccess}
+                setLoading={setLoading}
             />
 
             {registerSuccess && (
@@ -173,20 +185,30 @@ export default function AddDoctor() {
                 </Modal>
             )}
 
-            {/* ========================== Delete village officer ============================ */}
+            {loading && (
+                <Modal>
+                    <ModalContent>
+                        <Loading />
+                    </ModalContent>
+                </Modal>
+            )}
+
+            {/* ========================== Delete doctor ============================ */}
             {/* 888888888888888888888888888888888888888888888888888888888888888888888888888888 */}
             {deleteModal && <DeleteUser
                 eventData={eventData}
                 setEventData={setEventData}
                 setDeleteModal={setDeleteModal}
+                setDeleteSuccess={setDeleteSuccess}
+
             />}
-            {/* {deleteSuccess && (
+            {deleteSuccess && (
                 <Modal>
                     <ModalContent>
-                        <UpdateSuccess />
+                        <DeleteSuccess />
                     </ModalContent>
                 </Modal>
-            )} */}
+            )}
         </ReceptionistLayout>
     );
 }

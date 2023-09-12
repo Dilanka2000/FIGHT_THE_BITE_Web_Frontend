@@ -47,6 +47,12 @@ export default function LogIn() {
                 if (loginPromise.data.role === "admin") {
                     navigate("/admin");
                 }
+                if (loginPromise.data.role === "GN") {
+                    navigate("/gramasewaka");
+                }
+                if (loginPromise.data.role === "RCEP") {
+                    navigate("/receptionist");
+                }
             }
             console.log(loginPromise);
         },

@@ -43,4 +43,20 @@ export const AuthorizeGN = ({ children }) => {
     return children;
 }
 
+export const AuthorizeRCEP = ({ children }) => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        return <Navigate to={'/login'} replace={true}></Navigate>
+    }
+    else {
+        let decode = jwt_decode(token);
+        if (decode.role !== "RCEP") {
+            return <Navigate to={'/login'} replace={true}></Navigate>
+        }
+    }
+
+    return children;
+}
+
 

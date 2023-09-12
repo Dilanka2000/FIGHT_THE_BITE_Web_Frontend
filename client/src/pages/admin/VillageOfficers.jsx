@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from "react";
 import AdminLayout from "../../components/layouts/AdminLayout";
 import EmpHeader from "../../components/header/EmpHeader";
-<<<<<<< HEAD
-import { AddButton, DeleteButton, MainContainerBG, Modal, ModalContent, SearchBar, TableContainer, TopContainer, UpdateButton } from "../../assets/styles/globalStyls";
-import { Contact, ImageAndText } from "./z-adminStyle";
-=======
 import { AddButton, Contact, DeleteButton, MainContainerBG, Modal, ModalContent, SearchBar, TableContainer, TopContainer, UpdateButton } from "../../assets/styles/globalStyls";
 import { ImageAndText } from "./z-adminStyle";
->>>>>>> fe87ebe850863319b776a2e785729f32924b69a1
 import BottomSlider from "../../components/slider/BottomSlider";
 import RegisterSuccess from "../../components/popup/RegisterSuccess";
 import useFetch from "../../hooks/fetch-hook";
 import PageNotFound from "../PageNotFound";
-<<<<<<< HEAD
-=======
 import profileImg from "../../assets/images/profile.png";
->>>>>>> fe87ebe850863319b776a2e785729f32924b69a1
 import VillageOfficerAddAndUpdate from "./popup/VillageOfficerAddAndUpdate";
 import UpdateSuccess from "../../components/popup/UpdateSuccess";
 import DeleteUser from "../../components/popup/DeleteUser";
+import Loading from "../../components/popup/Loading";
+import DeleteSuccess from "../../components/popup/DeleteSuccess";
 
 
 export default function VillageOfficers() {
@@ -35,12 +29,10 @@ export default function VillageOfficers() {
     const [addModal, setAddModal] = useState(false);
     const [updateModal, setUpdateModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [registerSuccess, setRegisterSuccess] = useState(false);
     const [updateSuccess, setUpdateSuccess] = useState(false);
-<<<<<<< HEAD
-=======
-    // const [deleteSuccess, setDeleteSuccess] = useState(false);
->>>>>>> fe87ebe850863319b776a2e785729f32924b69a1
+    const [deleteSuccess, setDeleteSuccess] = useState(false);
     
     
     useEffect(() => {
@@ -58,8 +50,15 @@ export default function VillageOfficers() {
             }, 2000);
             return () => clearInterval(slideIntaval);
         }
+        else if (deleteSuccess) {
+            window.location.reload();
+            const slideIntaval = setInterval(() => {
+                setDeleteSuccess(false);
+            }, 2000);
+            return () => clearInterval(slideIntaval);
+        }
         
-    }, [registerSuccess, updateSuccess]);
+    }, [registerSuccess, updateSuccess, deleteSuccess]);
     
     const getDataContent = data => {
         let content = [];
@@ -86,17 +85,6 @@ export default function VillageOfficers() {
                         </Contact>
                     </td>
                     <td>
-<<<<<<< HEAD
-                        <DeleteButton onClick={() => {
-                            setEventData(item);
-                            setDeleteModal(true)
-                        }}>Delete</DeleteButton>
-                        <UpdateButton onClick={() => {
-                            setEventData(item);
-                            setUpdateModal(true);
-                            setAddModal(false);
-                        }}>
-=======
                         <DeleteButton
                             onClick={() => {
                                 setEventData(item);
@@ -112,7 +100,6 @@ export default function VillageOfficers() {
                                 setAddModal(false);
                             }}
                         >
->>>>>>> fe87ebe850863319b776a2e785729f32924b69a1
                             Update
                         </UpdateButton>
                     </td>
@@ -157,13 +144,13 @@ export default function VillageOfficers() {
                     </table>
                 </TableContainer>
 
-                <BottomSlider
+                {length > 5 && <BottomSlider
                     length={length}
                     index={index}
                     setIndex={setIndex}
                     x={x}
                     sliderValue={sliderValue}
-                />
+                />}
             </MainContainerBG>
 
             {/* ======================= Add & Update village officer ========================= */}
@@ -177,7 +164,16 @@ export default function VillageOfficers() {
                 setEventData={setEventData}
                 setRegisterSuccess={setRegisterSuccess}
                 setUpdateSuccess={setUpdateSuccess}
+                setLoading={setLoading}
             />
+
+            {loading && (
+                <Modal>
+                    <ModalContent>
+                        <Loading />
+                    </ModalContent>
+                </Modal>
+            )}
 
             {registerSuccess && (
                 <Modal>
@@ -201,14 +197,15 @@ export default function VillageOfficers() {
                 eventData={eventData}
                 setEventData={setEventData}
                 setDeleteModal={setDeleteModal}
+                setDeleteSuccess={setDeleteSuccess}
             />}
-            {/* {deleteSuccess && (
+            {deleteSuccess && (
                 <Modal>
                     <ModalContent>
-                        <UpdateSuccess />
+                        <DeleteSuccess />
                     </ModalContent>
                 </Modal>
-            )} */}
+            )}
         </AdminLayout>
     );
 }
