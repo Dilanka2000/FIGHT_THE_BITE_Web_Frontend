@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import jwt_decode from "jwt-decode";
 import profileImg from "../../assets/images/profile.png";
 
@@ -13,9 +13,11 @@ import {
     LogoutButton,
     PageName,
 } from "./headerStyles";
+import UserProfile from "./popup/UserProfile";
 
 export default function EmpHeader({ pageName }) {
     const navigate = useNavigate();
+    const [profile,setProfile] = useState(false);
 
     // logout handler function
     function userLogout() {
@@ -43,12 +45,18 @@ export default function EmpHeader({ pageName }) {
                             <p>{userRole}</p>
                         </AccName>
                         <AccImage>
-                            <img src={profileImg} alt="Profile 4to" />
+                            <img onClick={() =>setProfile(true)} src={profileImg} alt="Profile 4to" />
                         </AccImage>
                     </AccProfile>
                 </AccDetails>
                 <LogoutButton onClick={userLogout}>Logout</LogoutButton>
             </ACC>
+
+            <UserProfile
+                profile = {profile}
+                setProfile = {setProfile}
+                
+            />
         </Heading>
     );
 }

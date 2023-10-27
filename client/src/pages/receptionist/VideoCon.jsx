@@ -3,11 +3,10 @@ import ReceptionistLayout from '../../components/layouts/ReceptionistLayout'
 import EmpHeader from '../../components/header/EmpHeader';
 
 
-
-export default function RcHomePage() {
+export default function VideoCon() {
     return (
         <ReceptionistLayout>
-            <EmpHeader pageName={"Home"} />
+            <EmpHeader pageName={"Connect patients with doctors"} />
 
         </ReceptionistLayout>
     );
