@@ -34,14 +34,15 @@ export default function VillagesAddAndUpdate({
     setRegisterSuccess,
     setUpdateSuccess,
     setLoading,
+    userData
 }) {
     const [errors, setErrors] = useState("");
     const [memberCount, setMemberCount] = useState(1);
 
     let initialValueForAdd = {
         address: "",
-        gsDivision: "Boralesgamuwa",
-        divisionNumber: "123AS",
+        gsDivision: userData.gsDivision,
+        divisionNumber: userData.divisionNumber,
         houseHoldNo: "",
         members: [
             {

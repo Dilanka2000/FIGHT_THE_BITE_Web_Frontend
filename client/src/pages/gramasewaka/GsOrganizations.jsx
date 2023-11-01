@@ -20,6 +20,8 @@ import RegisterSuccess from "../../components/popup/RegisterSuccess";
 import DeleteUser from "../../components/popup/DeleteUser";
 import OrganizationsAddAndUpdate from "./popup/OrganizationsAddAndUpdate";
 import UpdateSuccess from "../../components/popup/UpdateSuccess";
+import DeleteSuccess from "../../components/popup/DeleteSuccess";
+import Loading from "../../components/popup/Loading";
 
 export default function GsOrganizations() {
     const [{ apiData, serverError, isLoading }] = useFetch("getUsers/ORG");
@@ -36,8 +38,10 @@ export default function GsOrganizations() {
     const [addModal, setAddModal] = useState(false);
     const [updateModal, setUpdateModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [registerSuccess, setRegisterSuccess] = useState(false);
     const [updateSuccess, setUpdateSuccess] = useState(false);
+    const [deleteSuccess, setDeleteSuccess] = useState(false);
 
     useEffect(() => {
         if (registerSuccess) {
@@ -52,8 +56,14 @@ export default function GsOrganizations() {
                 setUpdateSuccess(false);
             }, 2000);
             return () => clearInterval(slideIntaval);
+        } else if (deleteSuccess) {
+            window.location.reload();
+            const slideIntaval = setInterval(() => {
+                setDeleteSuccess(false);
+            }, 2000);
+            return () => clearInterval(slideIntaval);
         }
-    }, [registerSuccess, updateSuccess]);
+    }, [registerSuccess, updateSuccess, deleteSuccess]);
 
     const getDataContent = (data) => {
         let content = [];
@@ -62,7 +72,7 @@ export default function GsOrganizations() {
             content.push(
                 <tr key={item._id}>
                     <td>{item.name}</td>
-                    <td>{item.boardName}</td>
+                    <td>{item.nic[2] < 5 ? "Mr. " : "Ms. " }{item.boardName}</td>
                     <td>
                         <Contact>
                             {item.contact}
@@ -119,7 +129,7 @@ export default function GsOrganizations() {
                     <table>
                         <thead>
                             <tr>
-                                <th>Organizationname</th>
+                                <th>Organization Name</th>
                                 <th>Organizer</th>
                                 <th>Contact</th>
                                 <th>Action</th>
@@ -129,13 +139,13 @@ export default function GsOrganizations() {
                     </table>
                 </TableContainer>
 
-                <BottomSlider
+                {length > 5 && <BottomSlider
                     length={length}
                     index={index}
                     setIndex={setIndex}
                     x={x}
                     sliderValue={sliderValue}
-                />
+                />}
             </MainContainerBG>
 
             {/* ======================= Add & Update organizations ========================= */}
@@ -150,7 +160,15 @@ export default function GsOrganizations() {
                 setEventData={setEventData}
                 setRegisterSuccess={setRegisterSuccess}
                 setUpdateSuccess={setUpdateSuccess}
+                setLoading={setLoading}
             />
+            {loading && (
+                <Modal>
+                    <ModalContent>
+                        <Loading />
+                    </ModalContent>
+                </Modal>
+            )}
             {registerSuccess && (
                 <Modal>
                     <ModalContent>
@@ -173,7 +191,16 @@ export default function GsOrganizations() {
                     eventData={eventData}
                     setEventData={setEventData}
                     setDeleteModal={setDeleteModal}
+                    setDeleteSuccess={setDeleteSuccess}
+                    setLoading={setLoading}
                 />
+            )}
+            {deleteSuccess && (
+                <Modal>
+                    <ModalContent>
+                        <DeleteSuccess />
+                    </ModalContent>
+                </Modal>
             )}
         </GramasewakaLayOut>
     );

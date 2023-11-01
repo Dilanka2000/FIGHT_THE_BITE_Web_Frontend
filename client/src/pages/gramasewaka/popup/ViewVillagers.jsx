@@ -3,15 +3,15 @@ import { Modal, Overlay } from "../../../assets/styles/globalStyls";
 import { AddVillagerPopUpBack, AddVillagerPopUpBackHouseHolderInfo, AddVillagerPopUpBackHouseHolderInfoNew, LineInMemberDetails, MainContainerView, MemberDetailsTble, ModalContentNew, ModalTitleNew, PopUpContainerHeaderNewContainer, PopUpContentHeaderNew } from "../z-gsStyle";
 
 export default function ViewVillagers({ setViewData, eventData, setEventData }) {
-  console.log(eventData)
+    // console.log(eventData)
     return (
-      <Modal>
-        <Overlay
-          onClick={() => {
-            setViewData(false);
-            setEventData("");
-          }}
-        />
+        <Modal>
+            <Overlay
+            onClick={() => {
+                setViewData(false);
+                setEventData("");
+            }}
+            />
 
             <ModalContentNew>
                 <MainContainerView>
@@ -42,7 +42,7 @@ export default function ViewVillagers({ setViewData, eventData, setEventData }) 
                         </AddVillagerPopUpBackHouseHolderInfo>
                         <AddVillagerPopUpBackHouseHolderInfo>
                             <h5>House Holder Gender</h5>
-                            <p>{eventData.members[0].gender}</p>
+                            <p>{eventData.members[0].gender ? eventData.members[0].gender : "male"}</p>
                         </AddVillagerPopUpBackHouseHolderInfo>
                     </AddVillagerPopUpBack>
                     <PopUpContainerHeaderNewContainer>

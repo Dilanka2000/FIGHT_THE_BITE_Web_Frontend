@@ -192,7 +192,7 @@ export const TableContainerScroll = styled.div`
     }
     tr {
         border-left: 5px solid ${({ theme }) => theme.bg};
-        border-right: 30px solid ${({ theme }) => theme.bg2};
+        border-right: ${({ $row }) => $row?"30px":"0"} solid ${({ theme, $row }) => ( $row ? theme.bg2 : theme.bg)};
     }
     tbody > tr {
         height: 100px;
@@ -234,6 +234,10 @@ export const Contact = styled.div`
     align-items: center;
     justify-content: center;
 
+    span{
+        width: 90px;
+    }
+
     div {
         width: 50px;
         height: 50px;
@@ -272,6 +276,26 @@ export const DeleteButton = styled.button`
     cursor: pointer;
 `;
 
+export const AcceptButton = styled.button`
+    width: 125px;
+    height: 40px;
+    border-radius: 20px;
+    background: #4cbc9a;
+    color: white;
+    border: none;
+    cursor: pointer;
+`;
+
+export const RejectButton = styled.button`
+    width: 125px;
+    height: 40px;
+    border-radius: 20px;
+    background: #e74646;
+    color: white;
+    border: none;
+    cursor: pointer;
+`;
+
 export const CancleButton = styled.button`
     width: 125px;
     height: 40px;
@@ -300,6 +324,31 @@ export const Button = styled.button`
     color: white;
     border: none;
     cursor: pointer;
+`;
+
+export const SendButton = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 20px 20px 0;
+
+    div {
+        display: flex;
+        align-items: center;
+        height: 50px;
+        padding: 0 ${v.lgSpacing};
+        border-radius: 25px;
+        background: ${({ theme }) => theme.primary};
+        cursor: pointer;
+    }
+    color: ${({ theme }) => theme.bg};
+    font-size: 18px;
+    font-weight: 500;
+
+    i {
+        font-size: 22px;
+        margin-left: ${v.smSpacing};
+    }
 `;
 
 // ==================== List container Stylings ====================
@@ -368,6 +417,75 @@ export const DeatailConainer = styled.div`
     /* background: ${({ theme }) => theme.bg}; */
     border-radius: ${v.borderRadius};
     /* height: 800px; */
+`;
+
+export const DCTitle = styled.div`
+    background: ${({ theme }) => theme.bg};
+    padding: ${v.lgSpacing};
+    padding-left: ${v.xlSpacing};
+    border-radius: ${v.borderRadius};
+
+    div{
+        font-size: 22px;
+        font-weight: 800;
+        padding-bottom: 4px;
+    }
+    p {
+        color: ${({ theme }) => theme.text};
+        font-size: 12px;
+        font-weight: 500;
+    }
+`;
+
+export const ScheduleCompaign = styled.div`
+    margin-top: 20px;
+    height: 155px;
+    background: ${({ theme }) => theme.bg};
+    padding: ${v.lgSpacing};
+    border-radius: 15px;
+    border-left: 20px solid ${({ $col }) => $col};
+
+    p {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: ${v.mdSpacing};
+    }
+`;
+
+export const ScheduleCompaignDeatail = styled.div`
+    color: ${({ theme }) => theme.text};
+    font-size: 14px;
+
+    i {
+        color: ${({ $col }) => $col};
+        font-size: 18px;
+        margin-right: ${v.mdSpacing};
+        margin-bottom: ${v.smSpacing};
+    }
+`;
+
+export const CampaignContainer = styled.div`
+    padding: ${v.xxlSpacing};
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`
+export const CampaignData = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: ${v.lgSpacing};
+`;
+export const CampaignDataLeft = styled.div`
+    width: 200px;
+    font-weight: 600;
+    line-height: 2;
+`
+export const CampaignDataRight = styled.div`
+    color: ${({ theme }) => theme.text};
+    font-weight: 500;
+    line-height: 2;
 `;
 
 

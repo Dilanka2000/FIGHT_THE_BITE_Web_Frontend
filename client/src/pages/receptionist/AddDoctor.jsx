@@ -11,7 +11,6 @@ import profileImg from "../../assets/images/profile.png";
 import UpdateSuccess from "../../components/popup/UpdateSuccess";
 import DeleteUser from "../../components/popup/DeleteUser";
 import DoctorAddAndUpdate from "./PopUp/DoctorAddAndUpdate";
-import { getUserByEmail } from "../../helper/helper";
 
 
 export default function AddDoctor() {

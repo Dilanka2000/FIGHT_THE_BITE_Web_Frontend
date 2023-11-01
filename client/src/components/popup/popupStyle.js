@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import { v } from "../../assets/styles/variables";
+import { ImageAndText } from "../../pages/admin/z-adminStyle";
 
 export const FlashContainer = styled.div`
     width: 600px;
@@ -70,4 +71,72 @@ export const ButtonContainer = styled.div`
     button {
         box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.12);
     }
+`;
+
+export const PopImageAndText = styled(ImageAndText)`
+    padding-left: 0;
+    height: 70px;
+    padding-bottom: 10px;
+`
+
+export const MassageContainer = styled.div`
+    padding: ${v.mdSpacing} ${v.lgSpacing};
+    border-radius: ${v.borderRadius};
+    background: ${({ theme }) => theme.bg};
+    margin-top: -10px;
+`;
+
+export const PopTital = styled.div`
+    padding-left: 20px;
+    font-size: 22px;
+    font-weight: 800;
+`
+
+export const PopInputTextArea = styled.div`
+    padding: 20px;
+
+    textarea {
+        font-size: 18px;
+        width: 45vw;
+        height: 250px;
+        padding: 20px;
+        border: 2px dashed ${({ theme }) => theme.text};
+        border-radius: ${v.borderRadius};
+
+    }
+
+    textarea:focus {
+        outline: none;
+    }
+`;
+
+// ------------------------ Announsment View Popup-----------------------------
+
+export const MainContainerViewContent = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 1150px;
+    padding: ${v.xlSpacing} ${v.xxlSpacing};
+`;
+export const ContentTop = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+`;
+export const Receivers = styled.div`
+    display: flex;
+    align-items: center;
+
+    span{
+        padding-right: ${v.mdSpacing};
+    }
+`
+export const AnnounsmentContent = styled.div`
+    width: 100%;
+    padding: ${v.mdSpacing};
+    border: 2px dashed ${({ theme }) => theme.text};
+    border-radius: ${v.borderRadius};
 `;

@@ -71,6 +71,14 @@ export const GridTableContainerScroll = styled.div`
         border-left: 5px solid ${({ theme }) => theme.primary};
     }
 
+    td:first-child{
+        text-align: left;
+        padding-left: ${v.xlSpacing};
+    }
+    td:last-child{
+        width: 200px;
+    }
+
     /* Define the scrollbar style */
     &::-webkit-scrollbar {
         width: 8px;
@@ -114,7 +122,7 @@ export const ScrollContainer = styled.div`
         border-left: 5px solid ${({ theme }) => theme.primary};
     }
     p:first-child {
-        width: 250px;
+        width: 180px;
     }
 
     /* Define the scrollbar style */
@@ -135,6 +143,21 @@ export const ScrollContainer = styled.div`
         box-shadow: inset 0 0 2px 2px gainsboro;
     }
 `;
+
+export const ScrollContainerTitle = styled.div`
+    width: calc(100% - ${v.mdSpacing});
+    border-radius: 5px;
+    background: ${({ theme }) => theme.bg};
+    padding: ${v.lgSpacing} 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-left: 5px solid ${({ theme }) => theme.bg};
+    border-right: 5px solid ${({ theme }) => theme.bg};
+    margin-bottom: ${v.lgSpacing};
+    font-weight: 800;
+`;
+
 
 // ============================= popup ==========================
 export const Grid40x60 = styled.div`
@@ -343,3 +366,5 @@ export const ModalTitleNew = styled(ModalTitle)`
     color: ${({ theme }) => theme.text};
     background: ${({ theme }) => theme.bg};
 `;
+
+

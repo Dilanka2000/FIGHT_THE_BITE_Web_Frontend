@@ -13,6 +13,7 @@ import UpdateSuccess from '../../components/popup/UpdateSuccess';
 import PHIAddAndUpdate from './popup/PHIAddAndUpdate';
 import { deleteData } from '../../helper/helper';
 import DeleteSuccess from '../../components/popup/DeleteSuccess';
+import Massage from '../../components/popup/Massage';
 
 export default function PHIs() {
 
@@ -33,10 +34,14 @@ export default function PHIs() {
     const [updateSuccess, setUpdateSuccess] = useState(false);
     const [deleteSuccess, setDeleteSuccess] = useState(false);
     const [memberCount, setMemberCount] = useState(1);
+    const [massageModel, setMassageModel] = useState(false);
 
-    async function hadelDelete(id, setDeleteSuccess) {
+
+    async function hadelDelete(id, setDeleteSuccess, setLoading) {
+        setLoading(true);
         let promise = await deleteData({ id });
         if (promise === "Delete Successfully") {
+            setLoading(false);
             setDeleteSuccess(true);
             window.location.reload();
         }
@@ -75,7 +80,7 @@ export default function PHIs() {
                             <DeleteProfileImage>
                                 <img src={profileImg} alt="Profile" />
                             </DeleteProfileImage>
-                            <DeleteProfileName>{item.name}</DeleteProfileName>
+                            <DeleteProfileName>{item.nic[2] < 5 ? "Mr. " : "Ms. " }{item.name}</DeleteProfileName>
                         </DeleteProfile>
                         <center>
                             <h4>
@@ -92,7 +97,7 @@ export default function PHIs() {
                                 setDeleteModal(false);
                             }}>Cancle</CancleButton>
                             <DeleteButton onClick={() => {
-                                hadelDelete(eventData._id, setDeleteSuccess);
+                                hadelDelete(eventData._id, setDeleteSuccess, setLoading);
                                 setEventData("");
                                 setDeleteModal(false);
                             }}>Delete</DeleteButton>
@@ -105,10 +110,18 @@ export default function PHIs() {
                         <ProfileImage>
                             <img src={profileImg} alt="Profile" />
                         </ProfileImage>
-                        <ProfileName>{item.name}</ProfileName>
+                        <ProfileName>
+                            {item.nic[2] < 5 ? "Mr. " : "Ms. "}
+                            {item.name}
+                        </ProfileName>
                         <ProfileContact>
                             {item.contact}
-                            <div>
+                            <div
+                                onClick={() => {
+                                    setMassageModel(true);
+                                    setEventData(item);
+                                }}
+                            >
                                 <i className="fa-regular fa-envelope"></i>
                             </div>
                         </ProfileContact>
@@ -123,7 +136,7 @@ export default function PHIs() {
                             </DeleteButton>
                             <UpdateButton
                                 onClick={() => {
-                                    console.log(item)
+                                    console.log(item);
                                     setEventData(item);
                                     setMemberCount(item.gsDivisions.length);
                                     setUpdateModal(true);
@@ -221,6 +234,16 @@ export default function PHIs() {
                         <DeleteSuccess />
                     </ModalContent>
                 </Modal>
+            )}
+
+            {/* ======================= Massaging to village officer ========================= */}
+            {/* 888888888888888888888888888888888888888888888888888888888888888888888888888888 */}
+            {massageModel && (
+                <Massage
+                    eventData={eventData}
+                    setEventData={setEventData}
+                    setMassageModal={setMassageModel}
+                />
             )}
         </AdminLayout>
     );

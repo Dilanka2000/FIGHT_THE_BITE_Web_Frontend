@@ -13,6 +13,7 @@ import UpdateSuccess from "../../components/popup/UpdateSuccess";
 import DeleteUser from "../../components/popup/DeleteUser";
 import Loading from "../../components/popup/Loading";
 import DeleteSuccess from "../../components/popup/DeleteSuccess";
+import Massage from "../../components/popup/Massage";
 
 
 export default function VillageOfficers() {
@@ -30,9 +31,10 @@ export default function VillageOfficers() {
     const [updateModal, setUpdateModal] = useState(false);
     const [deleteModal, setDeleteModal] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [registerSuccess, setRegisterSuccess] = useState(false);
     const [updateSuccess, setUpdateSuccess] = useState(false);
+    const [registerSuccess, setRegisterSuccess] = useState(false);
     const [deleteSuccess, setDeleteSuccess] = useState(false);
+    const [massageModel, setMassageModel] = useState(false);
     
     
     useEffect(() => {
@@ -71,15 +73,21 @@ export default function VillageOfficers() {
                             <div>
                                 <img src={profileImg} alt="Profile 4to" />
                             </div>
-                            <span>{item.name}</span>
+                            <span>
+                                {item.nic[2] < 5 ? "Mr. " : "Ms. "}
+                                {item.name}
+                            </span>
                         </ImageAndText>
                     </td>
                     <td>{item.gsDivision}</td>
                     <td>{item.divisionNumber}</td>
                     <td>
                         <Contact>
-                            {item.contact}
-                            <div>
+                            <span>{item.contact}</span>
+                            <div onClick={() => {
+                                        setMassageModel(true);
+                                        setEventData(item);
+                                    }}>
                                 <i className="fa-regular fa-envelope"></i>
                             </div>
                         </Contact>
@@ -144,13 +152,15 @@ export default function VillageOfficers() {
                     </table>
                 </TableContainer>
 
-                {length > 5 && <BottomSlider
-                    length={length}
-                    index={index}
-                    setIndex={setIndex}
-                    x={x}
-                    sliderValue={sliderValue}
-                />}
+                {length > 5 && (
+                    <BottomSlider
+                        length={length}
+                        index={index}
+                        setIndex={setIndex}
+                        x={x}
+                        sliderValue={sliderValue}
+                    />
+                )}
             </MainContainerBG>
 
             {/* ======================= Add & Update village officer ========================= */}
@@ -193,18 +203,31 @@ export default function VillageOfficers() {
 
             {/* ========================== Delete village officer ============================ */}
             {/* 888888888888888888888888888888888888888888888888888888888888888888888888888888 */}
-            {deleteModal && <DeleteUser
-                eventData={eventData}
-                setEventData={setEventData}
-                setDeleteModal={setDeleteModal}
-                setDeleteSuccess={setDeleteSuccess}
-            />}
+            {deleteModal && (
+                <DeleteUser
+                    eventData={eventData}
+                    setEventData={setEventData}
+                    setDeleteModal={setDeleteModal}
+                    setDeleteSuccess={setDeleteSuccess}
+                    setLoading={setLoading}
+                />
+            )}
             {deleteSuccess && (
                 <Modal>
                     <ModalContent>
                         <DeleteSuccess />
                     </ModalContent>
                 </Modal>
+            )}
+
+            {/* ======================= Massaging to village officer ========================= */}
+            {/* 888888888888888888888888888888888888888888888888888888888888888888888888888888 */}
+            {massageModel && (
+                <Massage
+                    eventData={eventData}
+                    setEventData={setEventData}
+                    setMassageModal={setMassageModel}
+                />
             )}
         </AdminLayout>
     );
