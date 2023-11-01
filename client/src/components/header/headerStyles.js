@@ -49,7 +49,8 @@ export const AccImage = styled.div`
     height: 50px;
     border-radius: 50%;
     background: white;
-
+    cursor: pointer;
+    
     img{
         width: 100%;
     }

@@ -31,6 +31,16 @@ export async function getUserRole() {
     return decode.role;
 }
 
+// Login user
+export async function loginUser() {
+    const token = localStorage.getItem("token");
+    if (!token) return Promise.reject("Cannot find Token");
+    let decode = jwt_decode(token).userId;
+    let user = await getUser({ id: decode });
+    // console.log(user);
+    return Promise.resolve(user.data);
+}
+
 // Get user details function
 export async function getUser({ id }) {
     try {
@@ -83,6 +93,17 @@ export async function updateUser(response) {
     try {
         const token = await localStorage.getItem('token');
         const { data: { msg } } = await axios.put('/api/updateuser', response, { headers: { "Authorization": `Bearer ${token}` } });
+        return Promise.resolve(msg);
+    } catch (error) {
+        return Promise.reject({ error: "Couldn't Update Profile" });
+    }
+}
+
+// Accept Campaign function
+export async function acceptCampaignStatus(id) {
+    try {
+        const token = await localStorage.getItem('token');
+        const { data: { msg } } = await axios.put(`/api/acceptCampaign/${id}`, { headers: { "Authorization": `Bearer ${token}` } });
         return Promise.resolve(msg);
     } catch (error) {
         return Promise.reject({ error: "Couldn't Update Profile" });
@@ -146,5 +167,17 @@ export async function addFammily(credentials) {
         return Promise.resolve(msg);
     } catch (error) {
         return (error.response.data.error);
+    }
+}
+
+// Add fammily function
+export async function addAnnouncement(credentials) {
+    try {
+        console.log(credentials);
+        const { data: { msg } } = await axios.post('/api/addannouncement', credentials);
+
+        return Promise.resolve(msg);
+    } catch (error) {
+        return (error.response);
     }
 }

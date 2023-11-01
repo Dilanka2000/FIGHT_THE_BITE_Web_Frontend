@@ -2,8 +2,16 @@ import React from "react";
 import AdminLayout from "../../components/layouts/AdminLayout";
 import EmpHeader from "../../components/header/EmpHeader";
 import { SearchBar, TopContainer, MainContainer, TableContainerScroll, Contact } from "../../assets/styles/globalStyls";
+import useFetch from "../../hooks/fetch-hook";
+import PageNotFound from "../PageNotFound";
 
 export default function Organizations() {
+
+    const [{ apiData, serverError, isLoading }] = useFetch("getUsers/ORG");
+    let length = 0;
+    if(!isLoading){length = apiData.length;}
+
+    if (serverError) return <PageNotFound />;
     return (
         <AdminLayout>
             <EmpHeader pageName={"Organizations"} />
@@ -15,20 +23,24 @@ export default function Organizations() {
             </TopContainer>
 
             <MainContainer>
-                <TableContainerScroll>
+                <TableContainerScroll $row={length > 6}>
                     <table>
                         <thead>
                             <tr>
+                                <th>GS Division No</th>
                                 <th>GS Division</th>
                                 <th>Organization Name</th>
+                                <th>Organizer</th>
                                 <th>Contact Information</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {data.map(({ divisionName, organizationName, contact }) => (
-                                <tr key={contact}>
-                                    <td>{divisionName}</td>
-                                    <td>{organizationName}</td>
+                            {!isLoading && apiData.map(({ _id, divisionNumber, nic, gsDivision, name, boardName, contact }) => (
+                                <tr key={_id}>
+                                    <td>{divisionNumber}</td>
+                                    <td>{gsDivision}</td>
+                                    <td>{name}</td>
+                                    <td>{nic[2] < 5 ? "Mr. " : "Ms. " }{boardName}</td>
                                     <td>
                                         <Contact>
                                             {contact}
@@ -46,71 +58,3 @@ export default function Organizations() {
         </AdminLayout>
     );
 }
-
-const data = [
-    {
-        divisionName: "Mampitiya",
-        organizationName: "Mampitiya - Welfare Organization",
-        contact: "0712345780"
-    },
-    {
-        divisionName: "Mampitiya",
-        organizationName: "Mampitiya - Welfare Organization",
-        contact: "0712345781"
-    },
-    {
-        divisionName: "Mampitiya",
-        organizationName: "Mampitiya - Welfare Organization",
-        contact: "0712345782"
-    },
-    {
-        divisionName: "Mampitiya",
-        organizationName: "Mampitiya - Welfare Organization",
-        contact: "0712345783"
-    },
-    {
-        divisionName: "Mampitiya",
-        organizationName: "Mampitiya - Welfare Organization",
-        contact: "0712345784"
-    },
-    {
-        divisionName: "Mampitiya",
-        organizationName: "Mampitiya - Welfare Organization",
-        contact: "0712345785"
-    },
-    {
-        divisionName: "Mampitiya",
-        organizationName: "Mampitiya - Welfare Organization",
-        contact: "0712345786"
-    },
-    {
-        divisionName: "Mampitiya",
-        organizationName: "Mampitiya - Welfare Organization",
-        contact: "0712345787"
-    },
-    {
-        divisionName: "Mampitiya",
-        organizationName: "Mampitiya - Welfare Organization",
-        contact: "0712345788"
-    },
-    {
-        divisionName: "Mampitiya",
-        organizationName: "Mampitiya - Welfare Organization",
-        contact: "0712345789"
-    },
-    {
-        divisionName: "Mampitiya",
-        organizationName: "Mampitiya - Welfare Organization",
-        contact: "0712345719"
-    },
-    {
-        divisionName: "Mampitiya",
-        organizationName: "Mampitiya - Welfare Organization",
-        contact: "0712345729"
-    },
-    {
-        divisionName: "Mampitiya",
-        organizationName: "Mampitiya - Welfare Organization",
-        contact: "0712345739"
-    },
-]

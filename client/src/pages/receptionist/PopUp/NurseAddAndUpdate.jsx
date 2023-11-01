@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useFormik } from "formik";
 import { nurseSchema, nurseUpdateSchema } from "../../../helper/validate";
-import { registerUser, updateUser } from "../../../helper/helper";
+// import { registerUser, updateUser } from "../../../helper/helper";
 import { AddButton, ButtonContainer, FormTextInput, Modal, ModalContent, ModalFormContainer, ModalTitle, Overlay } from '../../../assets/styles/globalStyls';
 
 export default function NurseAddAndUpdate({ addModal, updateModal, setAddModal, setUpdateModal, eventData, setEventData, setRegisterSuccess, setUpdateSuccess }) {

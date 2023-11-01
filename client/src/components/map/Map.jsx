@@ -3,7 +3,7 @@ import "leaflet/dist/leaflet.css";
 import { MapContainer, GeoJSON, TileLayer } from "react-leaflet";
 
 export default function SriLankaMap({ mapData }) {
-    const position = [6.9271, 79.8612];
+    const position = [6.8571, 79.8751];
 
     const mapStyle = {
         fillColor: "green",

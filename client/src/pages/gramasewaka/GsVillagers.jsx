@@ -2,24 +2,36 @@ import React, { useEffect, useState } from 'react'
 import GramasewakaLayOut from '../../components/layouts/GramasewakaLayOut'
 import EmpHeader from '../../components/header/EmpHeader';
 import { AddButton, ButtonContainer, DeleteButton, MainContainer, MainContainerBG, MainGridContainer, Modal, ModalContent, SearchBar, TopContainer, UpdateButton } from '../../assets/styles/globalStyls';
-import { GridTableContainerScroll, GridTitle, ScrollContainer } from './z-gsStyle';
+import { GridTableContainerScroll, GridTitle, ScrollContainer, ScrollContainerTitle } from './z-gsStyle';
 import ViewVillagers from './popup/ViewVillagers';
 import VillagesAddAndUpdate from './popup/VillagesAddAndUpdate';
 import RegisterSuccess from '../../components/popup/RegisterSuccess';
 import UpdateSuccess from '../../components/popup/UpdateSuccess';
-import useFetch from '../../hooks/fetch-hook';
+import useFetch, { useFetch2 } from '../../hooks/fetch-hook';
 import PageNotFound from '../PageNotFound';
 import Loading from '../../components/popup/Loading';
+import NewVillagerRequest from './popup/NewVillagerRequest';
+import { loginUser } from '../../helper/helper';
 // import BottomSlider from '../../components/slider/BottomSlider';
 
 
 
 export default function GsVillagers() {
 
-    const [{ apiData, serverError, isLoading }] = useFetch("getFammily/123AS");
+    const [userData, setUserData] = useState("");
+    const user = async function () {
+        setUserData(await loginUser());
+    };
+    if (!userData) {
+        user();
+    }
+
+    const [{ apiData, serverError, isLoading }] = useFetch("getFammily/" + userData.divisionNumber);
+    const [{ apiData2, serverError2, isLoading2 }] = useFetch2("getGuestVillagers/" + userData.divisionNumber);
 
     const [eventData, setEventData] = useState('');
-    const [viewData, setViewData] = useState(false);
+    const [viewVillagerData, setViewVillagerData] = useState(false);
+    const [viewNewRequest, setViewNewRequest] = useState(false);
     const [loading, setLoading] = useState(false);
     const [addModal, setAddModal] = useState(false);
     const [updateModal, setUpdateModal] = useState(false);
@@ -43,7 +55,7 @@ export default function GsVillagers() {
         }
     }, [registerSuccess, updateSuccess]);
 
-    if (serverError) return <PageNotFound />;
+    if (serverError && serverError2) return <PageNotFound />;
     return (
         <GramasewakaLayOut>
             <EmpHeader pageName={"Villagers"} />
@@ -65,14 +77,28 @@ export default function GsVillagers() {
             <MainGridContainer>
                 <MainContainer>
                     <GridTitle>New login requests</GridTitle>
+                    <ScrollContainerTitle>
+                        <p>Name</p>
+                        <p>Household Number</p>
+                        <p>Action</p>
+                    </ScrollContainerTitle>
                     <ScrollContainer>
-                        {data1.map(({ _id, name, gmn }) => (
-                            <div key={_id}>
-                                <p>{name}</p>
-                                <p>{gmn}</p>
-                                <UpdateButton>View</UpdateButton>
-                            </div>
-                        ))}
+                        {!isLoading2
+                            ? apiData2.map((item) => (
+                                  <div key={item._id}>
+                                      <p>{item.GuestVillager[0].name}</p>
+                                      <p>{item.gmn}</p>
+                                      <UpdateButton
+                                          onClick={() => {
+                                              setEventData(item);
+                                              setViewNewRequest(true);
+                                          }}
+                                      >
+                                          View
+                                      </UpdateButton>
+                                  </div>
+                              ))
+                            : null}
                     </ScrollContainer>
                 </MainContainer>
 
@@ -84,7 +110,7 @@ export default function GsVillagers() {
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Household No</th>
+                                        <th>Household Number</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -95,7 +121,7 @@ export default function GsVillagers() {
                                                   key={item._id}
                                                   onClick={() => {
                                                       setEventData(item);
-                                                      setViewData(true);
+                                                      setViewVillagerData(true);
                                                   }}
                                               >
                                                   <td>
@@ -109,7 +135,7 @@ export default function GsVillagers() {
                                                                   setEventData(
                                                                       item
                                                                   );
-                                                                  setViewData(
+                                                                  setViewVillagerData(
                                                                       true
                                                                   );
                                                               }}
@@ -128,9 +154,17 @@ export default function GsVillagers() {
                 </MainContainer>
             </MainGridContainer>
 
-            {viewData && (
+            {viewVillagerData && (
                 <ViewVillagers
-                    setViewData={setViewData}
+                    setViewData={setViewVillagerData}
+                    setEventData={setEventData}
+                    eventData={eventData}
+                />
+            )}
+
+            {viewNewRequest && (
+                <NewVillagerRequest
+                    setViewData={setViewNewRequest}
                     setEventData={setEventData}
                     eventData={eventData}
                 />
@@ -148,6 +182,7 @@ export default function GsVillagers() {
                 setRegisterSuccess={setRegisterSuccess}
                 setUpdateSuccess={setUpdateSuccess}
                 setLoading={setLoading}
+                userData={userData}
             />
 
             {loading && (
@@ -177,16 +212,3 @@ export default function GsVillagers() {
     );
 }
 
-
-const data1 = [
-    {
-        _id: 51,
-        name: "Sunil Perera",
-        gmn: "207/A",
-    },
-    {
-        _id: 12,
-        name: "Kalum Chandana",
-        gmn: "225/4/A",
-    }
-];

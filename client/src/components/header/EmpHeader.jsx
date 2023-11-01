@@ -30,6 +30,10 @@ export default function EmpHeader({ pageName }) {
     let userRole;
     if (decode.role === "admin") { userRole = "Admin" }
     if (decode.role === "GN") { userRole = "Grama Niladhari" }
+    if (decode.role === "RCEP") { userRole = "Receptionist" }
+    if (decode.role === "DR") { userRole = "Doctor" }
+    if (decode.role === "NR") { userRole = "Nurse" }
+
     
 
     return (
@@ -51,4 +55,5 @@ export default function EmpHeader({ pageName }) {
             </ACC>
         </Heading>
     );
+
 }
